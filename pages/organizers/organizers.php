@@ -147,7 +147,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -181,7 +182,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Above Avarage</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -214,7 +216,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -247,7 +250,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Avarage</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -282,7 +286,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -315,7 +320,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Above Avarage</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -348,7 +354,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Best Rated</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>
@@ -381,7 +388,8 @@
                                 <span class="text-muted font-weight-bold d-block font-size-sm">Avarage</span>
                               </td>
                               <td class="pr-0 ">
-                                <a href="#" class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
+                                <a href="pages/organizers/organizer_details.php"
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
                                   organizer</a>
                                 <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
                               </td>

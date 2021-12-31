@@ -90,7 +90,7 @@
               <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                 <div class="container">
                   <h1 class="text-dark">Overview</h1>
-                  <div class="row text-white mt-10 mx-0" style="height:6rem;">
+                  <div class="row text-dark mt-10 mx-0" style="height:6rem;">
                     <div class="col-2 bg-primary pl-6 rounded-left d-flex align-items-center">
                       <h2>Songs</h2>
                     </div>
@@ -99,7 +99,7 @@
                       <h2>Total Songs Added : 700</h2>
                     </div>
                   </div>
-                  <div class="row text-white mt-10 mx-0" style="height:6rem;">
+                  <div class="row text-dark mt-10 mx-0" style="height:6rem;">
                     <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #24bd76;">
                       <h2>Events</h2>
                     </div>
@@ -108,7 +108,7 @@
                       <h2>Total Events Performed : 100</h2>
                     </div>
                   </div>
-                  <div class="row text-white mt-10 mx-0" style="height:6rem;">
+                  <div class="row text-dark mt-10 mx-0" style="height:6rem;">
                     <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #d18f21;">
                       <h2>Earnings</h2>
                     </div>
@@ -133,7 +133,7 @@
                       <!--begin::Table-->
                       <div class="table-responsive table-bordered table-hover">
                         <table class="table table-vertical-center mb-0">
-                          <thead class="bg-primary text-white">
+                          <thead class="bg-primary text-dark">
                             <tr>
                               <th class=" min-w-100px">Paid By</th>
                               <th class=" min-w-100px">Amount</th>
@@ -1230,7 +1230,7 @@
               <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                 <div class="container">
                   <h1 class="text-dark">Events history</h1>
-                  <div class="row text-white mt-10 mx-0" style="height:6rem;">
+                  <div class="row text-dark mt-10 mx-0" style="height:6rem;">
                     <div class="col-2 bg-primary pl-6 rounded-left d-flex align-items-center">
                       <h2>Last Month</h2>
                     </div>
@@ -1239,7 +1239,7 @@
                       <h2>Events Performed in last Month: 10</h2>
                     </div>
                   </div>
-                  <div class="row text-white mt-10 mx-0" style="height:6rem;">
+                  <div class="row text-dark mt-10 mx-0" style="height:6rem;">
                     <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #24bd76;">
                       <h2>Last Year</h2>
                     </div>
