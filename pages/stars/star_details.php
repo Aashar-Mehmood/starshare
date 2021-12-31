@@ -36,52 +36,9 @@
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-        <div id="kt_header" class="header header-fixed">
-
-          <!--begin::Container-->
-          <div class="container-fluid d-flex align-items-stretch justify-content-between">
-
-            <!--begin::Header Menu Wrapper-->
-            <!--begin::Header Menu-->
-
-            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-8"
-              style="border: none; font-size: 1.12rem;">
-              <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Songs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Events Performed</a>
-              </li>
-            </ul>
-            <!--end::Header Menu-->
-
-            <!--end::Header Menu Wrapper-->
-
-            <!--begin::Topbar-->
-            <div class="topbar">
-              <!--begin::User-->
-              <div class="topbar-item">
-                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                  id="kt_quick_user_toggle">
-                  <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
-                  <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                    <span class="symbol-label font-size-h5 font-weight-bold">S</span>
-                  </span>
-                </div>
-              </div>
-
-              <!--end::User-->
-            </div>
-
-            <!--end::Topbar-->
-          </div>
-
-          <!--end::Container-->
-        </div>
+        <?php 
+          include_once("../../partials/_header.php");
+        ?>
 
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
