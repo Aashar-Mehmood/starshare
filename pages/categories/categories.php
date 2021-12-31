@@ -1,10 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION["email"])) {
-  header("location: pages/login_signup/login_signup.php");
-}
+  include_once("../login_signup/check_session.php");
 ?>
-
 <!DOCTYPE html>
 
 <html lang="en">
