@@ -14,7 +14,15 @@
   <?php
   include("../../partials/csslinks.php");
   ?>
+  <style>
+  @media screen and (max-width:1024px) {
+    a.btn-light-success {
+      margin-left: 2rem;
+      margin-bottom: 0.75rem;
+    }
+  }
 
+  </style>
 </head>
 
 <!--end::Head-->
@@ -94,7 +102,7 @@
                     <div class="tab-content">
                       <!--begin::Table-->
                       <div class="table-responsive">
-                        <table class="table table-head-bg table-borderless table-vertical-center">
+                        <table class="table table-head-bg table-vertical-center">
                           <thead>
                             <tr class="text-left">
                               <th style="min-width: 200px" class="pl-7">Stars</th>
@@ -139,8 +147,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -175,8 +183,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -211,8 +219,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -247,8 +255,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -284,8 +292,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -320,8 +328,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -356,8 +364,8 @@
                               </td>
                               <td class="pr-0 justify-content-between">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -392,8 +400,8 @@
                               </td>
                               <td class="pr-0">
                                 <a href="pages/stars/star_details.php"
-                                  class="btn btn-light-success font-weight-bolder font-size-sm">view star</a>
-                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove star</a>
+                                  class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
+                                <a href="#" class="btn btn-danger ml-8 font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                           </tbody>

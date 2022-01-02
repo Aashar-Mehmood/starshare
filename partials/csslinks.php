@@ -22,4 +22,4 @@
 <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 
 <!-- my css links -->
-<link rel="stylesheet" href="assets/css/myCSS/_content_dashboard.css">
+<link rel="stylesheet" href="assets/css/custom/_content_dashboard.css">

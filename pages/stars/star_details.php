@@ -1,6 +1,7 @@
 <?php
   include_once("../login_signup/check_session.php");
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -14,7 +15,14 @@
   <?php
   include("../../partials/csslinks.php");
   ?>
+  <style>
+  @media screen and (max-width:360px) {
+    ul.ml-8 {
+      margin-left: 0rem !important;
+    }
+  }
 
+  </style>
 </head>
 
 <!--end::Head-->
@@ -36,46 +44,91 @@
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-        <?php 
-          include_once("../../partials/_header.php");
-        ?>
+        <div id="kt_header" class="header header-fixed">
+
+          <!--begin::Container-->
+          <div class="container-fluid d-flex align-items-stretch justify-content-between">
+
+            <!--begin::Header Menu Wrapper-->
+            <!--begin::Header Menu-->
+
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-8"
+              style="border: none; font-size: 1.12rem;">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Songs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Events Performed</a>
+              </li>
+            </ul>
+            <!--end::Header Menu-->
+
+            <!--end::Header Menu Wrapper-->
+
+            <!--begin::Topbar-->
+            <div class="topbar">
+              <!--begin::User-->
+              <div class="topbar-item">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
+                  id="kt_quick_user_toggle">
+                  <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+                  <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+                    <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                  </span>
+                </div>
+              </div>
+
+              <!--end::User-->
+            </div>
+
+            <!--end::Topbar-->
+          </div>
+
+          <!--end::Container-->
+        </div>
 
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
           <div class="container">
             <div class="tab-content mt-5" id="myTabContent">
-              <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+              <div class="tab-pane fade" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                 <div class="container">
                   <h1 class="text-dark">Overview</h1>
                   <div class="row text-dark mt-10 mx-0" style="height:6rem;">
-                    <div class="col-2 bg-primary pl-6 rounded-left d-flex align-items-center">
+                    <div class="col-4 col-md-3 bg-primary pl-6 rounded-left d-flex align-items-center">
                       <h2>Songs</h2>
                     </div>
-                    <div class="col-7 rounded-right pl-6 d-flex flex-column justify-content-center"
+                    <div class="col-8 col-md-7 rounded-right pl-6 d-flex flex-column justify-content-center"
                       style="background-color:#3699ffc2">
                       <h2>Total Songs Added : 700</h2>
                     </div>
                   </div>
                   <div class="row text-dark mt-10 mx-0" style="height:6rem;">
-                    <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #24bd76;">
+                    <div class="col-4 col-md-3 pl-6 rounded-left d-flex align-items-center"
+                      style="background-color: #24bd76;">
                       <h2>Events</h2>
                     </div>
-                    <div class="col-7 rounded-right pl-6 d-flex flex-column justify-content-center"
+                    <div class="col-8 col-md-7 rounded-right pl-6 d-flex flex-column justify-content-center"
                       style="background-color:#24bd76bf">
                       <h2>Total Events Performed : 100</h2>
                     </div>
                   </div>
                   <div class="row text-dark mt-10 mx-0" style="height:6rem;">
-                    <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #d18f21;">
+                    <div class="col-4 col-md-3 pl-6 rounded-left d-flex align-items-center"
+                      style="background-color: #d18f21;">
                       <h2>Earnings</h2>
                     </div>
-                    <div class="col-7 rounded-right pl-6 d-flex flex-column justify-content-center"
+                    <div class="col-8 col-md-7 rounded-right pl-6 d-flex flex-column justify-content-center"
                       style="background-color:#d18f21bf">
                       <h2>Total Earnings : 2000$</h2>
                     </div>
                   </div>
                   <h1 class="text-dark mt-26 mb-10">Recent Transactions</h1>
-                  <div class="card card-custom card-stretch gutter-b w-75">
+                  <div class="card card-custom card-stretch gutter-b w-md-75">
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
                       <h3 class="card-title align-items-start flex-column">
@@ -229,7 +282,7 @@
               <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                 <div class="container">
                   <div class="row mt-12">
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -387,7 +440,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -545,7 +598,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -703,9 +756,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                  </div>
-                  <div class="row mt-12">
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -863,7 +914,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -1021,7 +1072,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -1184,30 +1235,31 @@
                 </div>
               </div>
 
-              <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+              <div class="tab-pane fade show active" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                 <div class="container">
                   <h1 class="text-dark">Events history</h1>
                   <div class="row text-dark mt-10 mx-0" style="height:6rem;">
-                    <div class="col-2 bg-primary pl-6 rounded-left d-flex align-items-center">
+                    <div class="col-4 col-md-3 bg-primary pl-6 rounded-left d-flex align-items-center">
                       <h2>Last Month</h2>
                     </div>
-                    <div class="col-7 rounded-right pl-6 d-flex flex-column justify-content-center"
+                    <div class="col-8 col-md-7 rounded-right pl-6 d-flex flex-column justify-content-center"
                       style="background-color:#3699ffc2">
                       <h2>Events Performed in last Month: 10</h2>
                     </div>
                   </div>
                   <div class="row text-dark mt-10 mx-0" style="height:6rem;">
-                    <div class="col-2 pl-6 rounded-left d-flex align-items-center" style="background-color: #24bd76;">
+                    <div class="col-4 col-md-3 pl-6 rounded-left d-flex align-items-center"
+                      style="background-color: #24bd76;">
                       <h2>Last Year</h2>
                     </div>
-                    <div class="col-7 rounded-right pl-6 d-flex flex-column justify-content-center"
+                    <div class="col-8 col-md-7 rounded-right pl-6 d-flex flex-column justify-content-center"
                       style="background-color:#24bd76bf">
                       <h2>Events Performed in last year : 140</h2>
                     </div>
                   </div>
                   <h1 class="text-dark mt-26">Upcoming Events</h1>
                   <div class="row mt-12">
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -1368,7 +1420,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">
@@ -1529,7 +1581,7 @@
                         <!--end::Body-->
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-6 col-xl-4">
                       <div class="card card-custom gutter-b">
                         <!--begin::Body-->
                         <div class="card-body">

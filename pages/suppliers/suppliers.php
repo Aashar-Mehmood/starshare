@@ -23,9 +23,9 @@
     padding-top: 0;
   }
 
-  div.table-responsive {
+  /* div.table-responsive {
     overflow-x: hidden;
-  }
+  } */
 
   </style>
 </head>
@@ -105,7 +105,7 @@
                     <div class="tab-content">
                       <!--begin::Table-->
                       <div class="table-responsive">
-                        <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
+                        <table class="table table-head-custom table-head-bg table-vertical-center">
                           <thead>
                             <tr class="text-left text-uppercase">
                               <th style="min-width: 200px" class="pl-7">
@@ -150,8 +150,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -185,8 +186,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -219,8 +221,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -253,8 +256,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -289,8 +293,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -323,8 +328,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -357,8 +363,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                             <tr>
@@ -391,8 +398,9 @@
                               <td class="pr-0">
                                 <a href="pages/suppliers/supplier_details.php"
                                   class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  supplier</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove supplier</a>
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm mt-4 mt-xl-0">remove
+                                </a>
                               </td>
                             </tr>
                           </tbody>
@@ -426,7 +434,6 @@
     include("../../partials/jslinks.php");
     include("../../partials/_extras/offcanvas/quick-user.php");
   ?>
-  <script src="../../assets/js/myJs/dynamic_content.js"></script>
 
 
 </body>

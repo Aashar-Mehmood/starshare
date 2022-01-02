@@ -9,6 +9,19 @@
   <meta charset="utf-8" />
   <title>Dashboard</title>
   <?php include("partials/csslinks.php"); ?>
+  <style>
+  @media screen and (max-width:375px) {
+    div.customCSS {
+      min-width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    div.mr-7 {
+      margin-right: 0 !important;
+    }
+  }
+
+  </style>
 </head>
 
 <!--end::Head-->
@@ -76,7 +89,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
+                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
@@ -97,7 +110,7 @@
                             <br>
                             <h2 class="pt-5">1000</h2>
                           </div>
-                          <div class="col bg-light-success px-6 py-8 rounded-xl mb-7">
+                          <div class="col bg-light-success px-6 py-8 rounded-xl mb-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
@@ -125,7 +138,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7">
+                          <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -147,7 +160,7 @@
                             <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">Inactive Users</a>
                             <h2 class="pt-5">200</h2>
                           </div>
-                          <div class="col bg-light-primary px-6 py-8 rounded-xl">
+                          <div class="col bg-light-primary px-6 py-8 rounded-xl customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
@@ -239,7 +252,7 @@
                             <br>
                             <h2 class="pt-5">1050</h2>
                           </div>
-                          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                          <div class="col bg-light-primary px-6 py-8 rounded-xl customCSS mb-7">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
@@ -267,7 +280,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7">
+                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -289,7 +302,7 @@
                             <a href="#" class="text-warning font-weight-bold font-size-h6 mt-2">Inactive Stars</a>
                             <h2 class="pt-5">300</h2>
                           </div>
-                          <div class="col bg-light-success px-6 py-8 rounded-xl">
+                          <div class="col bg-light-success px-6 py-8 rounded-xl customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
@@ -357,7 +370,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
+                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
@@ -406,7 +419,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-primary px-6 py-8 rounded-xl mr-7">
+                          <div class="col bg-light-primary px-6 py-8 rounded-xl customCSS mr-7">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -428,7 +441,7 @@
                             <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">Inactive organizers</a>
                             <h2 class="pt-5">100</h2>
                           </div>
-                          <div class="col bg-light-success px-6 py-8 rounded-xl">
+                          <div class="col bg-light-success px-6 py-8 rounded-xl customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
@@ -518,7 +531,7 @@
                             <br>
                             <h2 class="pt-5">1050</h2>
                           </div>
-                          <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                          <div class="col bg-light-primary px-6 py-8 rounded-xl customCSS mb-7">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
@@ -546,7 +559,7 @@
 
                         <!--begin::Row-->
                         <div class="row m-0">
-                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7">
+                          <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -568,7 +581,7 @@
                             <a href="#" class="text-warning font-weight-bold font-size-h6 mt-2">Inactive suppliers</a>
                             <h2 class="pt-5">300</h2>
                           </div>
-                          <div class="col bg-light-success px-6 py-8 rounded-xl">
+                          <div class="col bg-light-success px-6 py-8 rounded-xl customCSS">
                             <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
 
                               <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Urgent-mail.svg-->
