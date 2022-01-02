@@ -1,10 +1,14 @@
 /* stats cards styling */
 div.col-lg-6,
-div.col-lg-4 {
-  padding: 5rem 3rem;
+div.col-lg-4,
+div.col-md-6.col-xl-4 {
+  padding: 2rem 2.5rem 0 2.5rem;
 }
-div.col-lg-6:nth-child(3),
-div.col-lg-6:nth-child(4),
-div.col-lg-4 {
-  padding-top: 0;
+
+@media screen and (max-width: 360px) {
+  div.col-lg-6,
+  div.col-lg-4,
+  div.col-md-6.col-xl-4 {
+    padding: 2rem 1rem;
+  }
 }

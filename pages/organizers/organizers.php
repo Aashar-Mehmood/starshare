@@ -28,6 +28,10 @@
     overflow-x: hidden;
   }
 
+  table tr td:nth-child(3) {
+    padding-left: 3rem;
+  }
+
   </style>
 </head>
 
@@ -111,7 +115,7 @@
                                 Event Organizers
                               </th>
                               <th style="min-width: 100px">Earnings</th>
-                              <th style="min-width: 100px">Events Organized</th>
+                              <th style="min-width: 80px; padding-left:2rem">Events Organized</th>
                               <th style="min-width: 100px">Rating</th>
                               <th style="min-width: 200px">Action</th>
                             </tr>
@@ -148,9 +152,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -183,9 +188,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -217,9 +223,9 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -251,9 +257,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -287,9 +294,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -321,9 +329,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -355,9 +364,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                             <tr>
@@ -389,9 +399,10 @@
                               </td>
                               <td class="pr-0 ">
                                 <a href="pages/organizers/organizer_details.php"
-                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">view
-                                  organizer</a>
-                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove organizer</a>
+                                  class="mr-8 btn btn-light-success font-weight-bolder font-size-sm">
+                                  View
+                                </a>
+                                <a href="#" class="btn btn-danger font-weight-bolder font-size-sm">Remove</a>
                               </td>
                             </tr>
                           </tbody>
