@@ -9,7 +9,6 @@
   <title>Login | StarShare</title>
   <meta name="description" content="Login page example" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="canonical" href="https://keenthemes.com/metronic" />
   <!--begin::Fonts-->
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
@@ -27,7 +26,6 @@
   <!--end::Global Theme Styles-->
   <!--begin::Layout Themes(used by all pages)-->
   <!--end::Layout Themes-->
-  <link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->

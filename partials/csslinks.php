@@ -19,7 +19,6 @@
 <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 
 <!--end::Layout Themes-->
-<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 
 <!-- my css links -->
 <link rel="stylesheet" href="assets/css/custom/_content_dashboard.css">

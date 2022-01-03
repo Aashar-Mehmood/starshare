@@ -46,11 +46,11 @@
         <?php include("../../partials/_header.php"); ?>
 
         <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="content d-flex flex-column flex-column-fluid px-8 py-12" id="kt_content">
 
           <!--Content area here-->
 
-          <div class="container" id="dynamicContent">
+          <div class="container">
             <div class="row">
               <div class="col-lg-12">
                 <!--begin::Advance Table Widget 4-->

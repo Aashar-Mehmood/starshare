@@ -35,7 +35,7 @@
 <!--begin::Body-->
 
 <body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php 
   include("../../partials/_header-mobile.php"); 
 ?>
@@ -52,13 +52,12 @@
         <?php include("../../partials/_header.php"); ?>
 
         <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="content d-flex flex-column flex-column-fluid px-8 py-12" id="kt_content">
 
-          <?php include("../../partials/_subheader/subheader-v1.php"); ?>
 
           <!--Content area here-->
 
-          <div class="container" id="dynamicContent">
+          <div class="container">
             <div class="row">
               <div class="col-lg-12">
                 <!--begin::Advance Table Widget 4-->

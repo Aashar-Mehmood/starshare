@@ -23,8 +23,10 @@
     padding-top: 0;
   }
 
-  div.table-responsive {
-    overflow-x: hidden;
+  @media screen and (min-width:700px) {
+    div.table-responsive {
+      overflow-x: hidden;
+    }
   }
 
   </style>
@@ -35,7 +37,7 @@
 <!--begin::Body-->
 
 <body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php 
     include("./../../partials/_header-mobile.php"); 
   ?>
@@ -52,7 +54,7 @@
         <?php include("../../partials/_header.php"); ?>
 
         <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="content d-flex flex-column flex-column-fluid px-8 py-12" id="kt_content">
 
           <!--Content area here-->
 
@@ -68,9 +70,7 @@
                     <span class="card-label font-weight-bolder text-dark">Transactions</span>
                     <span class="text-muted mt-3 font-weight-bold font-size-sm">Lastest transactions performed</span>
                   </h3>
-                  <div class="card-toolbar">
-                    <a href="#" class="btn btn-info font-weight-bolder font-size-sm">Download Report</a>
-                  </div>
+
                 </div>
                 <!--end::Header-->
                 <!--begin::Body-->
@@ -84,25 +84,9 @@
                           <th style="min-width: 110px">Agent</th>
                           <th style="min-width: 110px">
                             <span class="text-info">Date</span>
-                            <span class="svg-icon svg-icon-sm svg-icon-primary">
-                              <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Down-2.svg-->
-                              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                  <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                  <rect fill="#000000" opacity="0.3" x="11" y="4" width="2" height="10" rx="1"></rect>
-                                  <path
-                                    d="M6.70710678,19.7071068 C6.31658249,20.0976311 5.68341751,20.0976311 5.29289322,19.7071068 C4.90236893,19.3165825 4.90236893,18.6834175 5.29289322,18.2928932 L11.2928932,12.2928932 C11.6714722,11.9143143 12.2810586,11.9010687 12.6757246,12.2628459 L18.6757246,17.7628459 C19.0828436,18.1360383 19.1103465,18.7686056 18.7371541,19.1757246 C18.3639617,19.5828436 17.7313944,19.6103465 17.3242754,19.2371541 L12.0300757,14.3841378 L6.70710678,19.7071068 Z"
-                                    fill="#000000" fill-rule="nonzero"
-                                    transform="translate(12.000003, 15.999999) scale(1, -1) translate(-12.000003, -15.999999)">
-                                  </path>
-                                </g>
-                              </svg>
-                              <!--end::Svg Icon-->
-                            </span>
+
                           </th>
                           <th style="min-width: 120px">Amount withdraw Req</th>
-                          <th style="min-width: 120px">Status</th>
                           <th class="pr-0 " style="min-width: 160px">Action</th>
                         </tr>
                       </thead>
@@ -122,9 +106,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$900</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-primary label-inline">Approved</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -182,9 +164,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$560</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-warning label-inline">In Progress</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -241,9 +221,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$155</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-success label-inline">Success</span>
-                          </td>
+
                           <td class="pr-0 ">
 
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
@@ -302,9 +280,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$200</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-danger label-inline">Rejected</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -362,9 +338,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$900</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-primary label-inline">Approved</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -422,9 +396,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$560</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-warning label-inline">In Progress</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">
@@ -481,9 +453,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$155</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-success label-inline">Success</span>
-                          </td>
+
                           <td class="pr-0 ">
 
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
@@ -542,9 +512,7 @@
                           <td>
                             <span class="text-dark-75 font-weight-bolder d-block font-size-lg">$200</span>
                           </td>
-                          <td>
-                            <span class="label label-lg label-light-danger label-inline">Rejected</span>
-                          </td>
+
                           <td class="pr-0 ">
                             <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                               <span class="svg-icon svg-icon-md svg-icon-primary">

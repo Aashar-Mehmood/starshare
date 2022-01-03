@@ -16,16 +16,18 @@
   include("../../partials/csslinks.php");
   ?>
   <style>
+  @media screen and (min-width:820px) {
+    div.table-responsive {
+      overflow-x: hidden;
+    }
+  }
+
   div.col-xl-6 {
     padding: 5rem 3rem;
   }
 
   div.col-xl-6:nth-child(3) {
     padding-top: 0;
-  }
-
-  div.table-responsive {
-    overflow-x: hidden;
   }
 
   table tr td:nth-child(3) {
@@ -40,7 +42,7 @@
 <!--begin::Body-->
 
 <body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php 
   include("../../partials/_header-mobile.php"); 
 ?>
@@ -57,12 +59,12 @@
         <?php include("../../partials/_header.php"); ?>
 
         <!--begin::Content-->
-        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="content d-flex flex-column flex-column-fluid px-8 py-12" id="kt_content">
 
 
           <!--Content area here-->
 
-          <div class="container" id="dynamicContent">
+          <div class="container">
             <div class="row">
               <div class="col-lg-12">
                 <!--begin::Advance Table Widget 4-->
@@ -79,7 +81,6 @@
                         <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">Sort by</button>
                         <div class="dropdown-menu">
-
                           <ul class="navi navi-accent navi-hover navi-bold">
                             <li class="navi-item">
                               <a class="navi-link" href="#">
@@ -436,7 +437,6 @@
     include("../../partials/_extras/offcanvas/quick-user.php");
     include("../../partials/jslinks.php");
   ?>
-  <script src="../../assets/js/myJs/dynamic_content.js"></script>
 
 
 </body>
