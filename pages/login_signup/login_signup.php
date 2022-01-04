@@ -18,14 +18,16 @@
   <!--end::Fonts-->
   <!--begin::Page Custom Styles(used by this page)-->
   <link href="assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css" />
-  <!--end::Page Custom Styles-->
   <!--begin::Global Theme Styles(used by all pages)-->
   <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
   <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-  <!--end::Global Theme Styles-->
-  <!--begin::Layout Themes(used by all pages)-->
-  <!--end::Layout Themes-->
+  <style>
+  .form-control.form-control-solid {
+    border: 0.2px solid black;
+  }
+
+  </style>
 </head>
 <!--end::Head-->
 <!--begin::Body-->

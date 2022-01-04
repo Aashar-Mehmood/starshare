@@ -29,7 +29,7 @@
 <!--begin::Body-->
 
 <body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <!--begin::Main-->
 
   <?php include("partials/_header-mobile.php"); ?>
@@ -59,7 +59,7 @@
                 <div class="col-lg-6">
 
                   <!--begin::Mixed Widget 1-->
-                  <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="card card-custom bg-white card-stretch gutter-b">
 
                     <!--begin::Header-->
                     <div class="card-header border-0 bg-danger py-5">
@@ -202,7 +202,7 @@
                   <!--[html-partial:begin:{"id":"demo1/dist/inc/view/partials/content/widgets/mixed/widget-1","page":"index"}]/-->
 
                   <!--begin::Mixed Widget 1-->
-                  <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="card card-custom bg-white card-stretch gutter-b">
 
                     <!--begin::Header-->
                     <div class="card-header border-0 bg-warning py-5">
@@ -341,7 +341,7 @@
 
 
                   <!--begin::Mixed Widget 1-->
-                  <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="card card-custom bg-white card-stretch gutter-b">
 
                     <!--begin::Header-->
                     <div class="card-header border-0 bg-success py-5">
@@ -481,7 +481,7 @@
 
 
                   <!--begin::Mixed Widget 1-->
-                  <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="card card-custom bg-white card-stretch gutter-b">
 
                     <!--begin::Header-->
                     <div class="card-header border-0 bg-dark py-5">
