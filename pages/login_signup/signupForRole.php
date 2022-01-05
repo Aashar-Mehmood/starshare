@@ -3,7 +3,7 @@
     $role = $_GET["role"];
   }
   else{
-    $role = "role";
+    $role = "star";
   }
 ?>
 <!DOCTYPE html>

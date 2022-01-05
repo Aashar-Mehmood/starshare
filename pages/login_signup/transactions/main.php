@@ -1,6 +1,7 @@
 <?php
   if(isset($_GET["roleTransaction"])){
     $roleTransaction = $_GET["roleTransaction"];
+    $title = substr($roleTransaction, 0,  strpos($roleTransaction, "Transaction") );
   }
   else{
     $roleTransaction = "starTransactions";
@@ -15,7 +16,7 @@
 <head>
   <base href="../../../">
   <meta charset="utf-8" />
-  <title>Transactions</title>
+  <title><?php echo "$title transactions"?></title>
   <?php
   include("../../../partials/csslinks.php");
   ?>

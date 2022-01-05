@@ -6,7 +6,7 @@
   <div class="brand flex-column-auto" id="kt_brand">
 
     <!--begin::Logo-->
-    <a href="index.php" target="_" class="brand-logo">
+    <a href="pages/login_signup/dashboard.php" target="_" class="brand-logo">
       <img alt="Logo" src="assets/media/myImages/starshare.png" style="max-width:100%;" />
     </a>
 
@@ -48,13 +48,13 @@
       data-menu-dropdown-timeout="500" style="overflow: hidden;">
       <!--begin::Menu Nav-->
       <ul class="menu-nav">
-        <li class="menu-item" aria-haspopup="true">
-          <a href="index.php" class="menu-link">
+        <li id="dashboard" class="menu-item" aria-haspopup="true">
+          <a href="pages/login_signup/dashboard.php?parentId=dashboard" class="menu-link">
             <i class="menu-icon flaticon2-architecture-and-city"></i>
             <span class="menu-text">Dashboard</span>
           </a>
         </li>
-        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+        <li id="star" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fas fa-music menu-icon"></i>
             <span class="menu-text">Star</span>
@@ -69,7 +69,7 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=star" class="menu-link">
+                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=star&parentId=star" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -77,7 +77,7 @@
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/signupForRole.php?role=star" class="menu-link">
+                <a href="pages/login_signup/signupForRole.php?role=star&parentId=star" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -87,7 +87,7 @@
             </ul>
           </div>
         </li>
-        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
+        <li id="organizer" class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fab fa-elementor menu-icon"></i>
             <span class="menu-text">Organizers</span>
@@ -102,7 +102,8 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=organizer" class="menu-link">
+                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=organizer&parentId=organizer"
+                  class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -110,7 +111,7 @@
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/signupForRole.php?role=organizer" class="menu-link">
+                <a href="pages/login_signup/signupForRole.php?role=organizer&parentId=organizer" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -120,7 +121,7 @@
             </ul>
           </div>
         </li>
-        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
+        <li id="supplier" class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fa fa-fill-drip menu-icon"></i>
             <span class="menu-text">Supplier</span>
@@ -135,7 +136,8 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=supplier" class="menu-link">
+                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=supplier&parentId=supplier"
+                  class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -143,7 +145,7 @@
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/signupForRole.php?role=supplier" class="menu-link">
+                <a href="pages/login_signup/signupForRole.php?role=supplier&parentId=supplier" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -153,7 +155,7 @@
             </ul>
           </div>
         </li>
-        <li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
+        <li id="transactions" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fas fa-th-list menu-icon"></i>
             <span class="menu-text">Transactions</span>
@@ -168,33 +170,46 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/transactions/main.php?roleTransaction=starTransactions" class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">Star's Transactions</span>
-                </a>
-              </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/transactions/main.php?roleTransaction=organizerTransactions"
+                <a href="pages/login_signup/transactions/main.php?roleTransaction=starTransactions&parentId=transactions"
                   class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
-                  <span class="menu-text">Organizer's Transactions</span>
+                  <span class="menu-text">As a Star</span>
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/transactions/main.php?roleTransaction=supplierTransactions"
+                <a href="pages/login_signup/transactions/main.php?roleTransaction=organizerTransactions&parentId=transactions"
                   class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
-                  <span class="menu-text">Supplier's Transactions</span>
+                  <span class="menu-text">As an Organizer</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true">
+                <a href="pages/login_signup/transactions/main.php?roleTransaction=supplierTransactions&parentId=transactions"
+                  class="menu-link">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">As a Supplier</span>
                 </a>
               </li>
             </ul>
           </div>
+        </li>
+        <li id="settings" class="menu-item" aria-haspopup="true">
+          <a href="pages/login_signup/settings/settings.php?parentId=settings" class="menu-link">
+            <i class="fas fa-cogs menu-icon"></i>
+            <span class="menu-text">Settings</span>
+          </a>
+        </li>
+        <li id="logout" class="menu-item" aria-haspopup="true">
+          <a href="pages/login_signup/logout.php?parentId=logout" class="menu-link">
+            <i class="far fa-user-circle menu-icon"></i>
+            <span class="menu-text">Logout</span>
+          </a>
         </li>
       </ul>
       <!--end::Menu Nav-->
@@ -207,3 +222,16 @@
 </div>
 
 <!--end::Aside-->
+<script>
+window.addEventListener('load', () => {
+  var activeLink = document.URL.split("starshare/")[1];
+  var parentId = document.URL.split('parentId=')[1];
+  var activeItem = document.querySelector(String('a[href="' + `${activeLink}` + '"]'));
+  var parentItem = document.getElementById(`${parentId}`);
+  parentItem.classList.add("menu-item-active");
+  activeItem.parentElement.classList.add("menu-item-active");
+  if (parentItem.classList.contains("menu-item-submenu")) {
+    parentItem.classList.add("menu-item-open");
+  }
+});
+</script>
