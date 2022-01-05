@@ -1,0 +1,11 @@
+.form-group input,
+.form-group textarea,
+.form-group .custom-file label,
+.input-group.input-group-solid.input-group-lg {
+  border: 0.2px solid black !important;
+}
+
+.form-group .custom-file input,
+.form-group .input-group input {
+  border: none !important;
+}

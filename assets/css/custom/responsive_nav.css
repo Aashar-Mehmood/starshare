@@ -8,3 +8,8 @@
     margin-top: 1rem !important;
   }
 }
+@media screen and (max-width: 360px) {
+  ul.ml-8 {
+    margin-left: 0rem !important;
+  }
+}

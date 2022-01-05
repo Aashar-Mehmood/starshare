@@ -1,9 +1,9 @@
 <?php
-  if(isset($_GET["role"])){
-    $role = $_GET["role"];
+  if(isset($_GET["loginRole"])){
+    $role = $_GET["loginRole"];
   }
   else{
-    $role = "role";
+    $role = "star";
   }
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 <head>
   <base href="../../">
   <meta charset="utf-8" />
-  <title>Signup As a <?php echo $role ?></title>
+  <title>Login As a <?php echo $role ?></title>
   <?php include("../../partials/csslinks.php"); ?>
 
 </head>
@@ -61,47 +61,26 @@
                 <div class="card card-custom">
                   <div class="card-header">
                     <h3 class="card-title">
-                      Signup As a <?php echo $role ?>
+                      Login to your private profile
                     </h3>
                   </div>
                   <!--begin::Form-->
                   <form>
                     <div class="card-body">
                       <div class="form-group">
-                        <label>Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Enter Name" />
-                        <span class="form-text text-muted">Enter your full name</span>
-                      </div>
-                      <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" placeholder="Enter email" />
-                        <span class="form-text text-muted">We'll never share your email with anyone else.</span>
                       </div>
                       <div class="form-group">
                         <label for="password">Password <span class="text-danger">*</span></label>
                         <input type="password" class="form-control" id="password" placeholder="Password" />
                       </div>
-                      <div class="form-group">
-                        <label>Address:</label>
-                        <input type="text" class="form-control" placeholder="Enter your address" />
-                        <span class="form-text text-muted">Please enter your address</span>
-                      </div>
-                      <div class="form-group">
-                        <label for="description">Description <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="description" rows="3"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label>Banner Image</label>
-                        <div></div>
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="customFile" />
-                          <label class="custom-file-label" for="customFile">Choose Image</label>
-                        </div>
-                      </div>
                     </div>
                   </form>
                   <div class="card-footer">
-                    <button type="reset" class="btn btn-primary mr-2">Submit</button>
+                    <a href="pages/login_signup/<?php echo $role?>/details.php">
+                      <button class="btn btn-primary mr-2">Submit</button>
+                    </a>
                     <button type="reset" class="btn btn-secondary">Cancel</button>
                   </div>
                   </form>
