@@ -67,23 +67,10 @@
                       <label>Name :</label>
                       <input type="text" class="form-control form-control-solid" placeholder="Star" />
                     </div>
-                    <div class="form-group">
-                      <div class="radio-inline">
-                        <label class="radio radio-success">
-                          <input type="radio" name="radios5" id="parentRadioBtn" />
-                          <span></span>
-                          Parent
-                        </label>
-                        <label class="radio radio-success">
-                          <input type="radio" name="radios5" id="childRadioBtn" />
-                          <span></span>
-                          Child
-                        </label>
-                      </div>
-                    </div>
+
                     <div class="form-group">
                       <label>Select Parent :</label>
-                      <select id="parentCategory" disabled class="form-control form-control-solid">
+                      <select id="parentCategory" class="form-control form-control-solid">
                         <option>Star</option>
                         <option>Organizer</option>
                         <option>Supplier</option>
@@ -159,8 +146,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -209,8 +196,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -259,8 +246,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -311,8 +298,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -363,8 +350,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -413,8 +400,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -463,8 +450,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -513,8 +500,8 @@
                                     <!--end::Svg Icon-->
                                   </span>
                                 </a>
-                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                                  <span class="svg-icon svg-icon-md svg-icon-primary">
+                                <a href="#" title="Delete" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                                  <span class="svg-icon svg-icon-md svg-icon-danger">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                       width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -562,17 +549,7 @@
   <!--end::Main-->
   <?php include("../../partials/_extras/offcanvas/quick-user.php") ?>
   <?php include("../../partials/jslinks.php"); ?>
-  <script>
-  const childRadionBtn = document.getElementById("childRadioBtn");
-  const parentRadioBtn = document.getElementById("parentRadioBtn");
-  const dropdown = document.getElementById("parentCategory");
-  childRadionBtn.addEventListener('click', () => {
-    dropdown.removeAttribute("disabled");
-  });
-  parentRadioBtn.addEventListener('click', () => {
-    dropdown.setAttribute("disabled", "true");
-  });
-  </script>
+
 </body>
 
 <!--end::Body-->

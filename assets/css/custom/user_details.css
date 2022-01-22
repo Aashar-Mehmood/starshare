@@ -1,0 +1,24 @@
+div.card-rounded-bottom {
+  height: 160px;
+  min-height: 160px;
+}
+
+@media screen and (max-width: 1024px) {
+  div.card-rounded-bottom {
+    height: 156px;
+    min-height: 156px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  div.card-rounded-bottom {
+    height: 146px;
+    min-height: 146px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  div.col-md-6.col-xl-4 {
+    padding: 0 1rem;
+  }
+}

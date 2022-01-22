@@ -135,8 +135,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -191,8 +191,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -248,8 +248,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -305,8 +305,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -362,8 +362,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -419,8 +419,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -476,8 +476,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -533,8 +533,8 @@
                                 <!--end::Svg Icon-->
                               </span>
                             </a>
-                            <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
-                              <span class="svg-icon svg-icon-md svg-icon-primary">
+                            <a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm">
+                              <span class="svg-icon svg-icon-md svg-icon-danger">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                   width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

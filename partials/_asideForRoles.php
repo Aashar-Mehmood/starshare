@@ -69,7 +69,7 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=star&parentId=star" class="menu-link">
+                <a href="pages/login_signup/star/details.php?parentId=star" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -102,8 +102,7 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=organizer&parentId=organizer"
-                  class="menu-link">
+                <a href="pages/login_signup/organizer/details.php?parentId=organizer" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
@@ -136,8 +135,7 @@
                 </span>
               </li>
               <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/loginPrivateProfile.php?loginRole=supplier&parentId=supplier"
-                  class="menu-link">
+                <a href="pages/login_signup/supplier/details.php?parentId=supplier" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>

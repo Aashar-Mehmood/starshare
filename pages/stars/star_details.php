@@ -15,13 +15,14 @@
   <?php
   include("../../partials/csslinks.php");
   ?>
-  <link rel="stylesheet" href="assets/css/custom/responsive_nav.css">
+  <link rel="stylesheet" href="assets/css/custom/user_details.css">
   <style>
-  @media screen and (max-width:360px) {
-    ul.ml-8 {
-      margin-left: 0rem !important;
-    }
+  @media screen and (max-width: 355px) {
 
+    ul.nav li:nth-child(4),
+    ul.nav li:nth-child(4) a {
+      margin-left: 0 !important;
+    }
   }
 
   </style>
@@ -54,7 +55,7 @@
             <!--begin::Header Menu Wrapper-->
             <!--begin::Header Menu-->
 
-            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-8"
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
               style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
@@ -101,8 +102,8 @@
           <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
             <div class="tab-pane fade show active " id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
               <div class="container">
-                <div class="row">
-                  <div class="col-lg-6 col-xl-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6 col-xl-4">
                     <div class="card card-custom gutter-b">
                       <!--begin::Body-->
                       <div class="card-body">
@@ -195,88 +196,43 @@
                       <!--end::Body-->
                     </div>
                   </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                  <div class="col-md-6 col-xl-4">
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 bg-danger py-5">
-                        <h2 class="font-weight-bolder text-dark">Total Songs</h2>
+                        <h2 class="font-weight-bolder text-dark">Total Songs Uploaded</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8"
-                          style="height:100%; min-height:300px; background-color: #f64e6080;">
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #f64e6080;">
                           <h2>100</h2>
-                          <h2>Songs uploaded</h2>
                         </div>
                         <!--end::Chart-->
                       </div>
                       <!--end::Body-->
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 bg-warning py-5">
-                        <h2 class="font-weight-bolder text-dark">Events Attended</h2>
+                        <h2 class="font-weight-bolder text-dark">Events Performed</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8"
-                          style="height:100%; min-height:300px; background-color:#ffa80080">
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#ffa80080;">
                           <h2>300</h2>
-                          <h2>Total Events Attended</h2>
                         </div>
                         <!--end::Chart-->
                       </div>
                       <!--end::Body-->
                     </div>
                   </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-                      <!--begin::Header-->
-                      <div class="card-header border-0 bg-success py-5">
-                        <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
-                      </div>
-                      <!--end::Header-->
-                      <!--begin::Body-->
-                      <div class="card-body p-0 position-relative overflow-hidden">
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8"
-                          style="height:100%; height:100%; min-height:300px; background-color: #1bc5bd80;">
-                          <h2>1000$</h2>
-                          <h2>Earned in Last month </h2>
-                        </div>
-                        <!--end::Chart-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-                      <!--begin::Header-->
-                      <div class="card-header border-0 bg-primary py-5">
-                        <h2 class="font-weight-bolder text-dark">Last Year Earning</h2>
-                      </div>
-                      <!--end::Header-->
-                      <!--begin::Body-->
-                      <div class="card-body p-0 position-relative overflow-hidden">
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8"
-                          style="height: 100%; min-height:300px; background-color:#3699ff80 ">
-                          <h2>1000$</h2>
-                          <h2>Earned in Last year</h2>
-                        </div>
-                        <!--end::Chart-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+
+                  <div class="col-md-6 col-xl-4">
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 py-5" style="background-color: #3699ff;">
                         <h2 class="font-weight-bolder text-dark">Today Earning</h2>
@@ -285,10 +241,46 @@
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8"
-                          style="height: 100%; min-height:300px; background-color:#3699ff80 ">
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#3699ff80 ">
                           <h2>100$</h2>
-                          <h2>Earned today</h2>
+                        </div>
+                        <!--end::Chart-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
+                      <!--begin::Header-->
+                      <div class="card-header border-0 bg-success py-5">
+                        <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
+                      </div>
+                      <!--end::Header-->
+                      <!--begin::Body-->
+                      <div class="card-body p-0 position-relative overflow-hidden">
+                        <!--begin::Chart-->
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #1bc5bd80;">
+                          <h2>1000$</h2>
+                        </div>
+                        <!--end::Chart-->
+                      </div>
+                      <!--end::Body-->
+                    </div>
+
+                  </div>
+                  <!-- <div class="col-md-6 col-xl-4">
+                    
+                  </div> -->
+                  <div class="col-md-6 col-xl-4">
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
+                      <!--begin::Header-->
+                      <div class="card-header border-0 py-5" style="background-color: #7f4ac8;">
+                        <h2 class="font-weight-bolder text-dark">Last Year Earning</h2>
+                      </div>
+                      <!--end::Header-->
+                      <!--begin::Body-->
+                      <div class="card-body p-0 position-relative overflow-hidden">
+                        <!--begin::Chart-->
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#7f4ac880 ">
+                          <h2>1000$</h2>
                         </div>
                         <!--end::Chart-->
                       </div>
@@ -1386,86 +1378,40 @@
               <div class="container">
                 <h2 class="text-dark pl-md-8">Events History</h2>
                 <div class="row">
-                  <div class="col-lg-6 col-xl-4">
+                  <div class="col-md-6 col-xl-4">
                     <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-
-                      <!--begin::Header-->
                       <div class="card-header border-0 bg-warning py-5">
-                        <h2 class="font-weight-bolder text-dark">Total Events Performed</h2>
+                        <h2 class="font-weight-bolder text-dark">Total Events</h2>
                       </div>
-
-                      <!--end::Header-->
-
-                      <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
-
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 px-8"
-                          style="min-height:300px; background-color:#ffa80080">
+                        <div class="card-rounded-bottom pt-10 px-8" style="background-color:#ffa80080">
                           <h2>300</h2>
-                          <h2>Total Events Performed</h2>
                         </div>
-
-                        <!--end::Chart-->
-
                       </div>
-
-                      <!--end::Body-->
                     </div>
                   </div>
-                  <div class="col-lg-6 col-xl-4">
+                  <div class="col-md-6 col-xl-4">
                     <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-
-                      <!--begin::Header-->
-                      <div class="card-header border-0 bg-success py-5">
+                      <div class="card-header border-0 py-5" style="background-color: #1bc5bd;">
                         <h2 class="font-weight-bolder text-dark">Last Month</h2>
-
                       </div>
-
-                      <!--end::Header-->
-
-                      <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
-
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 px-8"
-                          style="height:100%; min-height:300px; background-color: #1bc5bd80;">
+                        <div class="card-rounded-bottom pt-10 px-8" style="background-color:#1bc5bd80">
                           <h2>10</h2>
-                          <h2>Events Peformed last month</h2>
                         </div>
-
-                        <!--end::Chart-->
-
                       </div>
-
-                      <!--end::Body-->
                     </div>
                   </div>
-                  <div class="col-lg-6 col-xl-4">
+                  <div class="col-md-6 col-xl-4">
                     <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-
-                      <!--begin::Header-->
-                      <div class="card-header border-0 bg-primary py-5">
+                      <div class="card-header border-0 py-5" style="background-color: #3699ff;">
                         <h2 class="font-weight-bolder text-dark">Last Year</h2>
-
                       </div>
-
-                      <!--end::Header-->
-
-                      <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
-
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 px-8"
-                          style="height: 100%; min-height:300px; background-color:#3699ff80 ">
+                        <div class="card-rounded-bottom pt-10 px-8" style="background-color:#3699ff80">
                           <h2>100</h2>
-                          <h2>Events perfomed in last year</h2>
                         </div>
-
-                        <!--end::Chart-->
                       </div>
-
-                      <!--end::Body-->
                     </div>
                   </div>
                 </div>
@@ -1923,7 +1869,7 @@
             </div>
             <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_4">
               <div class="container">
-                <div class="col-lg-10 col-xl-8 px-md-10 pt-md-8">
+                <div class="col-lg-10 col-xl-12 px-md-10 pt-md-8">
                   <div class="card card-custom card-stretch gutter-b w-md-75">
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
