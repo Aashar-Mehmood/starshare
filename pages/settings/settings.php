@@ -1,3 +1,5 @@
+<?php include_once("../login_signup/check_session.php");?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -102,34 +104,7 @@
                       </a>
                     </li>
                     <!--end::Item-->
-                    <!--begin::Item-->
-                    <li class="nav-item mr-3">
-                      <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_3">
-                        <span class="nav-icon">
-                          <span class="svg-icon">
-                            <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect x="0" y="0" width="24" height="24"></rect>
-                                <path
-                                  d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z"
-                                  fill="#000000" opacity="0.3"></path>
-                                <path
-                                  d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z"
-                                  fill="#000000" opacity="0.3"></path>
-                                <path
-                                  d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z"
-                                  fill="#000000" opacity="0.3"></path>
-                              </g>
-                            </svg>
-                            <!--end::Svg Icon-->
-                          </span>
-                        </span>
-                        <span class="nav-text font-size-lg">Change Password</span>
-                      </a>
-                    </li>
-                    <!--end::Item-->
+
                   </ul>
                 </div>
                 <div class="d-flex align-items-center">
@@ -142,7 +117,7 @@
                   <!--end::Button-->
                   <!--begin::Dropdown-->
                   <div class="btn-group ml-2">
-                    <button type="button" class="btn btn-primary font-weight-bold
+                    <button type="submit" id="saveBtn" class="btn btn-primary font-weight-bold
                       btn-sm px-3 font-size-base
                       ml-14 ml-md-0 mb-6 mb-md-0">
                       Save Changes
@@ -155,7 +130,8 @@
               <!--end::Card header-->
               <!--begin::Card body-->
               <div class="card-body">
-                <form class="form" id="kt_form">
+                <form class="form" id="kt_form" action="pages/settings/updateSettings.php" method="POST"
+                  enctype="multipart/form-data">
                   <div class="tab-content">
                     <!--begin::Tab-->
                     <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
@@ -172,10 +148,10 @@
                           <!--end::Row-->
                           <!--begin::Group-->
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3  ">Avatar</label>
+                            <label class="col-form-label col-md-3  ">Profile Picture</label>
                             <div class="col-md-9">
                               <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar"
-                                style="background-image: url(assets/media/users/blank.png)">
+                                style="background-image: url('<?php echo $_SESSION['profile']?>')">
                                 <div class="image-input-wrapper"></div>
                                 <label
                                   class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -201,40 +177,16 @@
                           <!--end::Group-->
                           <!--begin::Group-->
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3  ">First Name</label>
+                            <label class="col-form-label col-md-3  ">Full Name</label>
                             <div class="col-md-9">
-                              <input class="form-control form-control-lg form-control-solid" type="text" value="Anna">
+                              <input name="fullName" class="form-control form-control-lg form-control-solid" type="text"
+                                value="<?php echo $_SESSION["name"]?>">
                             </div>
                           </div>
                           <!--end::Group-->
                           <!--begin::Group-->
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3  ">Last Name</label>
-                            <div class="col-md-9">
-                              <input class="form-control form-control-lg form-control-solid" type="text" value="Krox">
-                            </div>
-                          </div>
-                          <!--end::Group-->
-                          <!--begin::Group-->
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3">Contact Phone</label>
-                            <div class="col-md-9">
-                              <div class="input-group input-group-lg input-group-solid">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <i class="la la-phone"></i>
-                                  </span>
-                                </div>
-                                <input type="text" class="form-control form-control-lg form-control-solid"
-                                  value="+45678967456" placeholder="Phone">
-                              </div>
-                              <span class="form-text text-muted">We'll never share your email with anyone else.</span>
-                            </div>
-                          </div>
-                          <!--end::Group-->
-                          <!--begin::Group-->
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3  ">Email Address</label>
+                            <label class="col-form-label col-md-3">Email </label>
                             <div class="col-md-9">
                               <div class="input-group input-group-lg input-group-solid">
                                 <div class="input-group-prepend">
@@ -242,69 +194,50 @@
                                     <i class="la la-at"></i>
                                   </span>
                                 </div>
-                                <input type="text" class="form-control form-control-lg form-control-solid"
-                                  value="anna.krox@loop.com" placeholder="Email">
+                                <input name="email" type="email" class="form-control form-control-lg form-control-solid"
+                                  placeholder="Email" value="<?php echo $_SESSION["email"]?>">
                               </div>
                             </div>
                           </div>
                           <!--end::Group-->
+                          <!--begin::Group-->
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3">Contact </label>
+                            <div class="col-md-9">
+                              <div class="input-group input-group-lg input-group-solid">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="la la-phone"></i>
+                                  </span>
+                                </div>
+                                <input name="contact" type="text"
+                                  class="form-control form-control-lg form-control-solid" placeholder="Phone">
+                              </div>
+                            </div>
+                          </div>
+                          <!--end::Group-->
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3">Address</label>
+                            <div class="col-md-9">
+                              <div class="input-group input-group-lg input-group-solid">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                    <i class="fa fa-map-marker-alt"></i>
+                                  </span>
+                                </div>
+                                <input name="address" type="text"
+                                  class="form-control form-control-lg form-control-solid" placeholder="Address">
+                              </div>
+                            </div>
+                          </div>
+
                         </div>
                       </div>
                       <!--end::Row-->
                     </div>
                     <!--end::Tab-->
-                    <!--begin::Tab-->
-                    <div class="tab-pane px-md-7" id="kt_user_edit_tab_3" role="tabpanel">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Row-->
-                        <div class="row">
-                          <div class="col-xl-7">
-                            <!--begin::Row-->
-                            <!--end::Row-->
-                            <!--begin::Row-->
-                            <div class="row">
-                              <label class="col-md-3"></label>
-                              <div class="col-md-9">
-                                <h6 class="text-dark font-weight-bold mb-10">Change Or Recover Your Password:</h6>
-                              </div>
-                            </div>
-                            <!--end::Row-->
-                            <!--begin::Group-->
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3  ">Current Password</label>
-                              <div class="col-md-9">
-                                <input class="form-control form-control-lg form-control-solid mb-1" type="text"
-                                  value="Current password">
-                                <a href="#" class="font-weight-bold font-size-sm">Forgot password ?</a>
-                              </div>
-                            </div>
-                            <!--end::Group-->
-                            <!--begin::Group-->
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3  ">New Password</label>
-                              <div class="col-md-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                  value="New password">
-                              </div>
-                            </div>
-                            <!--end::Group-->
-                            <!--begin::Group-->
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3  ">Verify Password</label>
-                              <div class="col-md-9">
-                                <input class="form-control form-control-lg form-control-solid" type="text"
-                                  value="Verify password">
-                              </div>
-                            </div>
-                            <!--end::Group-->
-                          </div>
-                        </div>
-                        <!--end::Row-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                    <!--end::Tab-->
+
                   </div>
                 </form>
               </div>
@@ -325,7 +258,13 @@
   	  include("../../partials/jslinks.php");
 		?>
 
-
+    <script>
+    const saveBtn = document.getElementById("saveBtn");
+    const form = document.getElementById("kt_form");
+    saveBtn.addEventListener('click', () => {
+      form.submit();
+    });
+    </script>
 </body>
 
 <!--end::Body-->

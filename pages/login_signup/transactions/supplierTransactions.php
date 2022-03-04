@@ -22,7 +22,7 @@
                 <span class="text-dark">Transaction id</span>
               </th>
               <th style="min-width: 110px">
-                <span class="text-dark">Paid By</span>
+                <span class="text-dark">Type</span>
               </th>
               <th style="min-width: 110px">
                 <span class="text-dark">Date</span>
@@ -38,7 +38,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">56037-XDER</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed Khan</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">05/28/2020</span>
@@ -55,7 +55,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">05822-FXSP</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">John</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">02/04/2020</span>
@@ -71,7 +71,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">00347-BCLQ</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Anna</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">23/12/2020</span>
@@ -85,7 +85,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">4472-QREX</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Alice</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">17/09/2021</span>
@@ -102,7 +102,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">56037-XDER</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed Khan</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">05/28/2020</span>
@@ -118,7 +118,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">05822-FXSP</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">John</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">02/04/2020</span>
@@ -132,7 +132,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">00347-BCLQ</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Anna</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">23/12/2020</span>
@@ -148,7 +148,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">4472-QREX</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Alice</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-info font-weight-bolder d-block font-size-lg">17/09/2021</span>

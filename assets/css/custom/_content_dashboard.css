@@ -1,7 +1,10 @@
 /* stats cards styling */
 div.col-lg-6,
 div.col-lg-4,
-div.col-md-6.col-xl-4 {
+div.col-md-6.col-xl-4,
+div.col-12,
+div.col-xl-10,
+div.col-lg-10.col-xl-8 {
   padding: 2rem 2.5rem 0 2.5rem;
 }
 

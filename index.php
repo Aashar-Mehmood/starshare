@@ -1,4 +1,14 @@
-<?php include("pages/login_signup/check_session.php");?>
+<?php
+  session_start();
+  if (
+    !isset($_SESSION["id"]) || 
+    !isset($_SESSION["name"]) ||
+    $_SESSION["role"]!=="Admin"
+    ) {
+    header("location: pages/login_signup/login_signup.php");
+  }
+  
+?>
 <!DOCTYPE html>
 
 <html lang="en">

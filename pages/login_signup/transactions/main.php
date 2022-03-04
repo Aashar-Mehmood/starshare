@@ -1,4 +1,6 @@
 <?php
+  include_once('../checkUsersSession.php');
+
   if(isset($_GET["roleTransaction"])){
     $roleTransaction = $_GET["roleTransaction"];
     $title = substr($roleTransaction, 0,  strpos($roleTransaction, "Transaction") );

@@ -15,7 +15,7 @@
 <head>
   <base href="../../">
   <meta charset="utf-8" />
-  <title>Signup As a <?php echo $role ?></title>
+  <title>Become <?php echo $role ?></title>
   <?php include("../../partials/csslinks.php"); ?>
 
 </head>
@@ -61,7 +61,7 @@
                 <div class="card card-custom">
                   <div class="card-header">
                     <h3 class="card-title">
-                      Signup As a <?php echo $role ?>
+                      Become <?php echo $role ?>
                     </h3>
                   </div>
                   <!--begin::Form-->
@@ -69,29 +69,27 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Enter Name" />
-                        <span class="form-text text-muted">Enter your full name</span>
+                        <input type="text" class="form-control" placeholder="Enter full name" />
                       </div>
                       <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" placeholder="Enter email" />
-                        <span class="form-text text-muted">We'll never share your email with anyone else.</span>
                       </div>
                       <div class="form-group">
-                        <label for="password">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" />
+                        <label>Contact <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" placeholder="Enter phone number" />
                       </div>
+
                       <div class="form-group">
-                        <label>Address:</label>
+                        <label>Address <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" placeholder="Enter your address" />
-                        <span class="form-text text-muted">Please enter your address</span>
                       </div>
                       <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="description" rows="3"></textarea>
                       </div>
                       <div class="form-group">
-                        <label>Banner Image</label>
+                        <label>Profile Image <span class="text-danger">*</span></label>
                         <div></div>
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" id="customFile" />

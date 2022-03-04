@@ -28,11 +28,11 @@
           id="kt_quick_user_toggle">
           <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
           <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-            <?php echo "aashar"; ?>
+            <?php echo $_SESSION["name"]; ?>
           </span>
           <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
             <span class="symbol-label font-size-h5 font-weight-bold">
-              <?php echo "a" ?>
+              <?php echo $_SESSION["name"][0] ?>
             </span>
           </span>
         </div>

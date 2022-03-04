@@ -1,7 +1,8 @@
 .form-group input,
 .form-group textarea,
 .form-group .custom-file label,
-.input-group.input-group-solid.input-group-lg {
+.input-group.input-group-solid.input-group-lg,
+.form-group select#selectArtists {
   border: 0.2px solid black !important;
 }
 

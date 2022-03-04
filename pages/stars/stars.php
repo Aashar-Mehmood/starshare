@@ -1,6 +1,7 @@
 <?php
   include_once("../login_signup/check_session.php");
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -24,6 +25,10 @@
 
   </style>
 </head>
+
+<?php
+  include_once("../login_signup/check_session.php");
+?>
 
 <!--end::Head-->
 

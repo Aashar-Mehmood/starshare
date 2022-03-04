@@ -22,7 +22,7 @@
                 <span class="text-dark">Transaction id</span>
               </th>
               <th style="min-width: 110px">
-                <span class="text-dark">Paid By</span>
+                <span class="text-dark">Type</span>
               </th>
               <th style="min-width: 110px">
                 <span class="text-dark">Event Name</span>
@@ -41,7 +41,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">56037-XDER</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed Khan</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 1</span>
@@ -61,7 +61,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">05822-FXSP</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">John</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 2</span>
@@ -79,7 +79,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">00347-BCLQ</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Anna</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 3</span>
@@ -96,7 +96,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">4472-QREX</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Alice</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 4</span>
@@ -116,7 +116,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">56037-XDER</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed Khan</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 5</span>
@@ -135,7 +135,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">05822-FXSP</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">John</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Received</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 6</span>
@@ -152,7 +152,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">00347-BCLQ</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Anna</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 7</span>
@@ -171,7 +171,7 @@
                 <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">4472-QREX</a>
               </td>
               <td>
-                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Alice</span>
+                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Paid</span>
               </td>
               <td>
                 <span class="text-dark-75 font-weight-bolder d-block font-size-lg">Event 8</span>

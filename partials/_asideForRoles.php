@@ -77,6 +77,14 @@
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
+                <a href="pages/login_signup/star/allStars.php?parentId=star" class="menu-link">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">View Stars</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/signupForRole.php?role=star&parentId=star" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
@@ -110,6 +118,14 @@
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
+                <a href="pages/login_signup/organizer/allOrganizers.php?parentId=organizer" class="menu-link">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">Search Organizers</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/signupForRole.php?role=organizer&parentId=organizer" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
@@ -140,6 +156,14 @@
                     <span></span>
                   </i>
                   <span class="menu-text">Private Profile</span>
+                </a>
+              </li>
+              <li class="menu-item" aria-haspopup="true">
+                <a href="pages/login_signup/supplier/allSuppliers.php?parentId=supplier" class="menu-link">
+                  <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                  </i>
+                  <span class="menu-text">Search Suppliers</span>
                 </a>
               </li>
               <li class="menu-item" aria-haspopup="true">
@@ -196,6 +220,18 @@
               </li>
             </ul>
           </div>
+        </li>
+        <li id="library" class="menu-item" aria-haspopup="true">
+          <a href="pages/login_signup/library/library.php?parentId=library" class="menu-link">
+            <i class="far fa-folder-open menu-icon"></i>
+            <span class="menu-text">Music Library</span>
+          </a>
+        </li>
+        <li id="events" class="menu-item" aria-haspopup="true">
+          <a href="pages/login_signup/events/events.php?parentId=events" class="menu-link">
+            <i class="fa fa-calendar menu-icon"></i>
+            <span class="menu-text">My Events</span>
+          </a>
         </li>
         <li id="settings" class="menu-item" aria-haspopup="true">
           <a href="pages/login_signup/settings/settings.php?parentId=settings" class="menu-link">
