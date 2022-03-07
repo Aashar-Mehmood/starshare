@@ -1,17 +1,17 @@
 <?php
 session_start();
-include_once("../login_signup/db_connection.php");
+include_once("../db_connection.php");
+
 
 $name = $_POST['fullName'];
 $email = $_POST['email'];
 $contact = $_POST['contact'];
 $address = $_POST['address'];
+$description = $_POST['description'];
 
 if (isset($_FILES['profile_avatar'])) {
-  $random = rand(10, 100);
-  $profileImg = $random . $_FILES['profile_avatar']['name'];
-
-  $destination = '../../assets/media/profiles/' . $profileImg;
+  $profileImg = $_FILES['profile_avatar']['name'];
+  $destination = '../../../assets/media/profiles/' . $profileImg;
   if (file_exists($destination)) {
     echo "This file already exists, rename before uploading" . "<br>";
   } else {
@@ -26,16 +26,10 @@ if (isset($_FILES['profile_avatar'])) {
 }
 
 if ($name !== "") {
-  $udated = updateField($conn, 'name', $name);
-  if ($udated) {
-    $_SESSION["name"] = $name;
-  }
+  updateField($conn, 'name', $name);
 }
 if ($email !== "") {
-  $udated = updateField($conn, 'email', $email);
-  if ($udated) {
-    $_SESSION["email"] = $email;
-  }
+  updateField($conn, 'email', $email);
 }
 if ($contact !== "") {
 
@@ -45,14 +39,19 @@ if ($address !== "") {
 
   updateField($conn, 'address', $address);
 }
+if ($description !== "") {
+
+  updateField($conn, 'description', $description);
+}
 
 function updateField($conn, $column, $val)
 {
+  $tableName = $_GET['role'] . "s";
   $uId = $_SESSION['id'];
-  $query = "UPDATE `users` SET `$column`= ? WHERE `id`= ? ; ";
+  $query = "UPDATE `$tableName` SET `$column`= ? WHERE `u_id`= ? ; ";
   $statement = mysqli_stmt_init($conn);
   mysqli_stmt_prepare($statement, $query);
-  mysqli_stmt_bind_param($statement, "si", $val, $uId);
+  mysqli_stmt_bind_param($statement, "ss", $val, $uId);
   $executed = mysqli_stmt_execute($statement);
   if (!$executed) {
     echo "Update Failed";

@@ -1,6 +1,6 @@
 <?php
-  include_once("../login_signup/check_session.php");
-  include_once("../login_signup/db_connection.php");
+include_once("../login_signup/check_session.php");
+include_once("../login_signup/db_connection.php");
 ?>
 <!DOCTYPE html>
 
@@ -63,23 +63,24 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="form" action="pages/categories/addCategory.php" method="POST">
+                  <form class="form" action="pages/categories/addCategory.php" method="POST"
+                    enctype="multipart/form-data">
                     <div class="form-group">
                       <label>Name :</label>
-                      <input type="text" name="child" class="form-control form-control-solid" placeholder="Star" />
+                      <input type="text" name="child" class="form-control form-control-solid" />
                     </div>
 
                     <div class="form-group">
                       <label>Select Parent :</label>
-                      <select id="parentCategory" name="parent" class="form-control form-control-solid">
-                        <option value="Star">Star</option>
-                        <option value="Organizer">Organizer</option>
-                        <option value="Supplier">Supplier</option>
+                      <select name="parent" class="form-control form-control-solid">
+                        <option>Star</option>
+                        <option>Organizer</option>
+                        <option>Supplier</option>
                       </select>
                     </div>
                     <div class="d-flex w-50 justify-content-between mt-12">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" name="addNew" class="btn btn-primary" data->Add New</button>
+                      <input type="submit" name="addNew" class="btn btn-primary" />
                     </div>
 
                   </form>
@@ -117,24 +118,25 @@
                           </thead>
                           <tbody>
                             <?php
-                              $query = "SELECT * FROM `categories`;";
-                              $result = mysqli_query($conn, $query);
-                              while($row = mysqli_fetch_assoc($result)){
-                                $categoryId = $row['id'];
-                                echo "
+                            $query = "SELECT * FROM `ss_categories`;";
+                            $result = mysqli_query($conn, $query);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $categoryId = $row['id'];
+                              echo "
                                 <tr>
                                   <td>
                                     <a href='#'
-                                      class='text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg'>".
-                                        $row['parent'].
-                                      "</a>
+                                      class='text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg'>" .
+                                $row['parent_category'] .
+                                "</a>
                                   </td>
                                   <td>
-                                    <span class='text-dark-75 font-weight-bolder d-block font-size-lg'>".
-                                      $row['child'].
-                                    "</span>
-                                  </td>". 
-                                  "<td>
+                                    <span class='text-dark-75 font-weight-bolder d-block font-size-lg'>" .
+                                $row['child'] .
+                                "</span>
+                                  </td>" .
+                                "<td>
                                     <a href='pages/categories/editCategory.php?id=$categoryId' title='Edit'
                                       class='btn btn-icon btn-light btn-hover-primary btn-sm ml-5 mr-10'>
                                       <i class='
@@ -147,7 +149,8 @@
                                   </td>
                                 </tr>
                                 ";
-                              }
+                            }
+
                             ?>
 
                           </tbody>
@@ -177,9 +180,14 @@
   </div>
 
   <!--end::Main-->
-  <?php include("../../partials/_extras/offcanvas/quick-user.php") ?>
-  <?php include("../../partials/jslinks.php"); ?>
-
+  <?php
+  include("../../partials/_extras/offcanvas/quick-user.php");
+  include("../../partials/jslinks.php");
+  if (isset($_GET['message'])) {
+    $alert = $_GET['message'];
+    echo "<script>alert('$alert')</script>";
+  }
+  ?>
 </body>
 
 <!--end::Body-->

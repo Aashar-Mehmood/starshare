@@ -26,27 +26,25 @@ if (!$row) {
     $_SESSION['email']=$row['email'];
     $_SESSION['profile'] = $row['profile_img'];
     if($row['is_admin']){
-      $_SESSION['role'] = "Admin";
+      $_SESSION['is_admin'] = true;
+      $_SESSION['is_fan'] = false;
       header("location: ../../index.php");
     }
     else if($row['is_fan']){
-      $userRoles.="fan";
-      $_SESSION['role'] = "Fan";
+      $_SESSION['is_admin'] = false;
+      $_SESSION['is_fan'] = true;
       if($row['is_star']){
-        $userRoles.="_star";
+        $_SESSION['is_star'] = true; 
       } 
       if($row['is_organizer']){
-        $userRoles.="_organizer";
+        $_SESSION['is_organizer'] = true;
       }
       if($row['is_supplier']){
-        $userRoles.="_supplier";
+        $_SESSION['is_supplier'] = true;
       }
       
-      header("location:  ./dashboard.php?userRoles=$userRoles");
+      header("location:  ./dashboard.php");
     }
     
   }
 }
-
-
-?>

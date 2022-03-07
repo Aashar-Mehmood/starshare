@@ -1,9 +1,9 @@
 <?php
-  include_once("../login_signup/check_session.php");
-  include_once("../login_signup/db_connection.php");
-  $id = $_GET['id'];
-  $result = mysqli_query($conn, "SELECT * FROM `categories` WHERE `id` = '$id';");
-  $row = mysqli_fetch_assoc($result);
+include_once("../login_signup/check_session.php");
+include_once("../login_signup/db_connection.php");
+$id = $_GET['id'];
+$result = mysqli_query($conn, "SELECT * FROM `ss_categories` WHERE `id` = '$id';");
+$row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
 
@@ -65,30 +65,30 @@
                     </h3>
                   </div>
                   <!--begin::Form-->
-                  <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']);?>">
+                  <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name :</label>
                         <input name="newName" type="text" class="form-control form-control-solid" placeholder="Star"
-                          value="<?php echo $row['child']?>" />
+                          value="<?php echo $row['child'] ?>" />
                       </div>
 
                       <div class="form-group">
                         <label>Select Parent :</label>
                         <select name="parentCategory" id="parentCategory" class="form-control form-control-solid">
-                          <option <?php 
-                              if($row['parent']=="Star") echo 'selected'; 
-                            ?>>
+                          <option <?php
+                                  if ($row['parent_category'] == "Star") echo 'selected';
+                                  ?>>
                             Star
                           </option>
-                          <option <?php 
-                              if($row['parent']=="Organizer") echo 'selected'; 
-                            ?>>
+                          <option <?php
+                                  if ($row['parent_category'] == "Organizer") echo 'selected';
+                                  ?>>
                             Organizer
                           </option>
-                          <option <?php 
-                              if($row['parent']=="Supplier") echo 'selected'; 
-                            ?>>
+                          <option <?php
+                                  if ($row['parent_category'] == "Supplier") echo 'selected';
+                                  ?>>
                             Supplier
                           </option>
                         </select>
@@ -128,17 +128,19 @@
 
 </html>
 
-<?php 
-  if(isset($_POST["submit"])){
-    $newName = $_POST["newName"];
-    $parent = $_POST["parentCategory"];
-    $res = mysqli_query($conn, 
-    "UPDATE `categories` SET `parent`='$parent', `child`='$newName' WHERE `id` = '$id' ;");
-    if(!$res){
-      echo "<script>alert('Unable to Edit')</script>";
-    }
-    else{
-      echo "<script>alert('Edited Successfully')</script>";
-    }
+<?php
+if (isset($_POST["submit"])) {
+  $newName = $_POST["newName"];
+  $parent = $_POST["parentCategory"];
+  $res = mysqli_query(
+    $conn,
+    "UPDATE `ss_categories` SET `parent_category`='$parent', `child`='$newName' WHERE `id` = '$id' ;"
+  );
+  if (!$res) {
+    echo "<script>alert('Unable to Edit')</script>";
+  } else {
+    echo "<script>alert('Edited Successfully')</script>";
   }
+  header("location:./categories.php");
+}
 ?>

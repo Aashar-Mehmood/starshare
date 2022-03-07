@@ -4,7 +4,15 @@
   <!--begin::Header-->
   <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
     <h3 class="font-weight-bold m-0">
-      <?php echo $_SESSION['role'] . " Profile"?>
+      <?php  
+        if($_SESSION['is_admin']){
+          echo "Admin Profile";
+        }
+        else{
+          echo "Fan Profile";
+        }
+        
+      ?>
     </h3>
     <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
       <i class="ki ki-close icon-xs text-muted"></i>
@@ -28,7 +36,15 @@
           <?php echo $_SESSION['name']?>
         </a>
         <div class="text-muted mt-1">
-          <?php echo $_SESSION['role']?>
+          <?php  
+          if($_SESSION['is_admin']){
+            echo "Admin";
+          }
+          else{
+            echo "Fan";
+          }
+        
+        ?>
         </div>
         <div class="navi mt-2">
           <a href="#" class="navi-item">

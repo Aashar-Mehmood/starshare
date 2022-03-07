@@ -1,10 +1,13 @@
 <?php
+  include_once('./checkUsersSession.php');
+
   if(isset($_GET["role"])){
     $role = $_GET["role"];
   }
   else{
     $role = "star";
   }
+  $actionPath = "pages/login_signup/addNewRole.php?role=".$role;
 ?>
 <!DOCTYPE html>
 
@@ -65,43 +68,43 @@
                     </h3>
                   </div>
                   <!--begin::Form-->
-                  <form>
+                  <form action="<?php echo $actionPath ?>" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Enter full name" />
+                        <input type="text" name="fullName" class="form-control" placeholder="Enter full name" />
                       </div>
                       <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" placeholder="Enter email" />
+                        <input type="email" name="email" class="form-control" placeholder="Enter email" />
                       </div>
                       <div class="form-group">
                         <label>Contact <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" placeholder="Enter phone number" />
+                        <input type="number" name="contact" class="form-control" placeholder="Enter phone number" />
                       </div>
 
                       <div class="form-group">
                         <label>Address <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Enter your address" />
+                        <input type="text" name="address" class="form-control" placeholder="Enter your address" />
                       </div>
                       <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
-                        <textarea class="form-control" id="description" rows="3"></textarea>
+                        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
                       </div>
                       <div class="form-group">
                         <label>Profile Image <span class="text-danger">*</span></label>
                         <div></div>
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="customFile" />
+                          <input name="profile_img" type="file" accept=".png, .jpg, .jpeg" class="custom-file-input"
+                            id="customFile" />
                           <label class="custom-file-label" for="customFile">Choose Image</label>
                         </div>
                       </div>
                     </div>
-                  </form>
-                  <div class="card-footer">
-                    <button type="reset" class="btn btn-primary mr-2">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Cancel</button>
-                  </div>
+                    <div class="card-footer">
+                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="reset" class="btn btn-secondary">Cancel</button>
+                    </div>
                   </form>
                   <!--end::Form-->
                 </div>

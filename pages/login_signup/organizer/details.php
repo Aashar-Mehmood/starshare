@@ -1,6 +1,7 @@
 <?php
-  include_once('../checkUsersSession.php');
-  ?>
+include_once('../checkUsersSession.php');
+
+?>
 
 <!DOCTYPE html>
 
@@ -30,9 +31,9 @@
 
 <body id="kt_body"
   class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-  <?php 
-  include("../../../partials/_header-mobile.php"); 
-?>
+  <?php
+  include("../../../partials/_header-mobile.php");
+  ?>
 
   <div class="d-flex flex-column flex-root">
 
@@ -76,9 +77,13 @@
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
                   id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                    <?php echo $_SESSION['name'] ?>
+                  </span>
                   <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                    <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                    <span class="symbol-label font-size-h5 font-weight-bold">
+                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                    </span>
                   </span>
                 </div>
               </div>
@@ -369,7 +374,7 @@
                         </div>
 
                         <div class="d-flex col-md-6 mt-12 px-6">
-                          <button type="button" class="btn btn-primary" data->Save changes</button>
+                          <button type="submit" name="submit" class="btn btn-primary" data->Save</button>
 
                           <button type="button" class="btn btn-secondary ml-12" data-dismiss="modal">Close</button>
                         </div>
@@ -713,16 +718,16 @@
                         <div class="d-flex align-items-center">
                           <!--begin::Button-->
                           <a href="#" class="btn btn-default font-weight-bold
-                      btn-sm px-3 font-size-base
-                      mb-6 mb-md-0">
+                            btn-sm px-3 font-size-base
+                            mb-6 mb-md-0">
                             Back
                           </a>
                           <!--end::Button-->
                           <!--begin::Dropdown-->
                           <div class="btn-group ml-2">
-                            <button type="button" class="btn btn-primary font-weight-bold
-                      btn-sm px-3 font-size-base
-                      ml-14 ml-md-0 mb-6 mb-md-0">
+                            <button type="button" name="editSettings" id="editSettings" class="btn btn-primary font-weight-bold
+                              btn-sm px-3 font-size-base
+                              ml-14 ml-md-0 mb-6 mb-md-0">
                               Save Changes
                             </button>
                           </div>
@@ -733,7 +738,9 @@
                       <!--end::Card header-->
                       <!--begin::Card body-->
                       <div class="card-body">
-                        <form class="form" id="kt_form">
+                        <form class="form" id="kt_form"
+                          action="pages/login_signup/updateRoleSettings/update.php?role=organizer" method="POST"
+                          enctype="multipart/form-data">
                           <div class="tab-content">
                             <!--begin::Tab-->
                             <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
@@ -784,8 +791,8 @@
                                   <div class="form-group row">
                                     <label class="col-form-label col-md-3  ">Full Name</label>
                                     <div class="col-md-9">
-                                      <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="Anna">
+                                      <input name="fullName" class="form-control form-control-lg form-control-solid"
+                                        type="text">
                                     </div>
                                   </div>
                                   <!--end::Group-->
@@ -799,8 +806,8 @@
                                             <i class="la la-at"></i>
                                           </span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg form-control-solid"
-                                          value="anna.krox@loop.com" placeholder="Email">
+                                        <input name="email" type="email"
+                                          class="form-control form-control-lg form-control-solid" placeholder="Email">
                                       </div>
                                     </div>
                                   </div>
@@ -815,8 +822,8 @@
                                             <i class="la la-phone"></i>
                                           </span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg form-control-solid"
-                                          value="+45678967456" placeholder="Phone">
+                                        <input name="contact" type="text"
+                                          class="form-control form-control-lg form-control-solid" placeholder="Phone">
                                       </div>
                                     </div>
                                   </div>
@@ -828,23 +835,23 @@
                                       <div class="input-group input-group-lg input-group-solid">
                                         <div class="input-group-prepend">
                                           <span class="input-group-text">
-                                            <i class="fa fa-map-marker"></i>
+                                            <i class="fa fa-map-marker-alt"></i>
                                           </span>
                                         </div>
-                                        <input type="text" disabled
-                                          class="form-control form-control-lg form-control-solid"
-                                          value="Street 2, Lorem Ipsum" placeholder="Address">
+                                        <input type="text" name="address"
+                                          class="form-control form-control-lg form-control-solid" placeholder="Address">
                                       </div>
                                     </div>
                                   </div>
                                   <!--end::Group-->
+
                                   <!--begin::Group-->
                                   <div class="form-group row">
-                                    <label class="col-form-label col-md-3  ">Description </label>
+                                    <label class="col-form-label col-md-3">Description </label>
                                     <div class="col-md-9">
                                       <div class="input-group input-group-lg input-group-solid">
-                                        <textarea class="form-control" style="border: none !important;" rows="3"
-                                          spellcheck="false"></textarea>
+                                        <textarea name="description" class="form-control"
+                                          style="border: none !important;" rows="3" spellcheck="false"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -854,7 +861,6 @@
                               <!--end::Row-->
                             </div>
                             <!--end::Tab-->
-
                           </div>
                         </form>
                       </div>
@@ -891,9 +897,15 @@
   </div>
   <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
   <?php
-    include("../../../partials/jslinks.php");
+  include("../../../partials/jslinks.php");
   ?>
-
+  <script>
+  const editSettingsBtn = document.getElementById("editSettings");
+  const settingsForm = document.getElementById("kt_form");
+  editSettingsBtn.addEventListener('click', () => {
+    settingsForm.submit();
+  });
+  </script>
 
 </body>
 

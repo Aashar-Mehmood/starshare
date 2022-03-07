@@ -3,7 +3,7 @@
   if (
     !isset($_SESSION["id"]) || 
     !isset($_SESSION["name"]) ||
-    $_SESSION["role"]!=="Admin"
+    $_SESSION["is_admin"]!==true
     ) {
     header("location: pages/login_signup/login_signup.php");
   }
