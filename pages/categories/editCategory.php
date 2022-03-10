@@ -65,7 +65,7 @@ $row = mysqli_fetch_assoc($result);
                     </h3>
                   </div>
                   <!--begin::Form-->
-                  <form method="POST" action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                  <form method="POST" action='<?php echo "pages/categories/edited.php?id=" . $id ?>'>
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name :</label>
@@ -127,20 +127,3 @@ $row = mysqli_fetch_assoc($result);
 <!--end::Body-->
 
 </html>
-
-<?php
-if (isset($_POST["submit"])) {
-  $newName = $_POST["newName"];
-  $parent = $_POST["parentCategory"];
-  $res = mysqli_query(
-    $conn,
-    "UPDATE `ss_categories` SET `parent_category`='$parent', `child`='$newName' WHERE `id` = '$id' ;"
-  );
-  if (!$res) {
-    echo "<script>alert('Unable to Edit')</script>";
-  } else {
-    echo "<script>alert('Edited Successfully')</script>";
-  }
-  header("location:./categories.php");
-}
-?>

@@ -32,7 +32,7 @@
           </span>
           <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
             <span class="symbol-label font-size-h5 font-weight-bold">
-              <?php echo $_SESSION["name"][0] ?>
+              <?php echo substr($_SESSION["name"], 0, 1) ?>
             </span>
           </span>
         </div>

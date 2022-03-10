@@ -1,5 +1,7 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
+$uId = $_SESSION['id'];
 
 ?>
 
@@ -64,7 +66,6 @@ include_once('../checkUsersSession.php');
                 <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Settings</a>
               </li>
 
-
             </ul>
             <!--end::Header Menu-->
 
@@ -119,11 +120,12 @@ include_once('../checkUsersSession.php');
                               <!--end::Symbol-->
                               <!--begin::Username-->
                               <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">Jerry
-                                Kane</a>
+                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
+                                <?php echo $_SESSION['name'] ?>
+                              </a>
                               <!--end::Username-->
                               <!--begin::Info-->
-                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">star related info</div>
+                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">Organizer</div>
                               <!--end::Info-->
                             </div>
                             <!--end::Header-->

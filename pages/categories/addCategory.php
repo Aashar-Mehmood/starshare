@@ -1,5 +1,6 @@
 <?php
-$message =  " ";
+include_once('../login_signup/check_session.php');
+$message =  "";
 $parent = $_POST['parent'];
 $child = $_POST['child'];
 if (!isset($_POST['addNew'])) {
@@ -25,4 +26,5 @@ if (!isset($_POST['addNew'])) {
     }
   }
 }
-header("location:./categories.php?message=$message");
+$_SESSION['message'] = $message;
+header("location:./categories.php");

@@ -1,4 +1,4 @@
-<?php include_once("../login_signup/check_session.php");?>
+<?php include_once("../login_signup/check_session.php"); ?>
 
 <!DOCTYPE html>
 
@@ -53,9 +53,9 @@
 
 <body id="kt_body"
   class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-  <?php 
-  include("./../../partials/_header-mobile.php"); 
-?>
+  <?php
+  include("./../../partials/_header-mobile.php");
+  ?>
 
   <div class="d-flex flex-column flex-root">
 
@@ -151,7 +151,7 @@
                             <label class="col-form-label col-md-3  ">Profile Picture</label>
                             <div class="col-md-9">
                               <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar"
-                                style="background-image: url('<?php echo $_SESSION['profile']?>')">
+                                style="background-image: url('<?php echo $_SESSION['profile'] ?>')">
                                 <div class="image-input-wrapper"></div>
                                 <label
                                   class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -180,7 +180,7 @@
                             <label class="col-form-label col-md-3  ">Full Name</label>
                             <div class="col-md-9">
                               <input name="fullName" class="form-control form-control-lg form-control-solid" type="text"
-                                value="<?php echo $_SESSION["name"]?>">
+                                value="<?php echo $_SESSION["name"] ?>">
                             </div>
                           </div>
                           <!--end::Group-->
@@ -195,7 +195,7 @@
                                   </span>
                                 </div>
                                 <input name="email" type="email" class="form-control form-control-lg form-control-solid"
-                                  placeholder="Email" value="<?php echo $_SESSION["email"]?>">
+                                  placeholder="Email" value="<?php echo $_SESSION["email"] ?>">
                               </div>
                             </div>
                           </div>
@@ -252,11 +252,19 @@
       </div>
 
     </div>
-    <?php 
-			include("../../partials/_extras/offcanvas/quick-user.php");
-			include("../../partials/_footer.php");
-  	  include("../../partials/jslinks.php");
-		?>
+    <?php
+    include("../../partials/_extras/offcanvas/quick-user.php");
+    include("../../partials/_footer.php");
+    include("../../partials/jslinks.php");
+    if (isset($_SESSION['message']) && $_SESSION['message'] !== "") {
+      $msg = $_SESSION['message'];
+      echo "
+      <script>
+        alert('$msg');
+      </script>";
+      unset($_SESSION['message']);
+    }
+    ?>
 
     <script>
     const saveBtn = document.getElementById("saveBtn");

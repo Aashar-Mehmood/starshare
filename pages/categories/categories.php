@@ -183,9 +183,10 @@ include_once("../login_signup/db_connection.php");
   <?php
   include("../../partials/_extras/offcanvas/quick-user.php");
   include("../../partials/jslinks.php");
-  if (isset($_GET['message'])) {
-    $alert = $_GET['message'];
-    echo "<script>alert('$alert')</script>";
+  if (isset($_SESSION['message']) && $_SESSION['message'] !== "") {
+    $msg = $_SESSION['message'];
+    echo "<script>alert('$msg')</script>";
+    unset($_SESSION['message']);
   }
   ?>
 </body>

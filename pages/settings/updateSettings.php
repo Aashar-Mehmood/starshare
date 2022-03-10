@@ -7,21 +7,21 @@ $email = $_POST['email'];
 $contact = $_POST['contact'];
 $address = $_POST['address'];
 
+$message = "";
+
+
 if (isset($_FILES['profile_avatar'])) {
-  $random = rand(10, 100);
+  $random = rand(10, 1000);
   $profileImg = $random . $_FILES['profile_avatar']['name'];
 
   $destination = '../../assets/media/profiles/' . $profileImg;
-  if (file_exists($destination)) {
-    echo "This file already exists, rename before uploading" . "<br>";
+  $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
+  if (!$uploaded) {
+    echo "File not uploaded" . "<br>";
   } else {
-    $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
-    if (!$uploaded) {
-      echo "File not uploaded" . "<br>";
-    } else {
-      $_SESSION['profile'] = "assets/media/profiles/" . $profileImg;
-      updateField($conn, 'profile_img', $_SESSION['profile']);
-    }
+    unlink($_SESSION['profile']);
+    $_SESSION['profile'] = "assets/media/profiles/" . $profileImg;
+    updateField($conn, 'profile_img', $_SESSION['profile']);
   }
 }
 
@@ -55,10 +55,19 @@ function updateField($conn, $column, $val)
   mysqli_stmt_bind_param($statement, "si", $val, $uId);
   $executed = mysqli_stmt_execute($statement);
   if (!$executed) {
-    echo "Update Failed";
+    global $message;
+    $message = "Update Failed";
     return false;
   } else {
-    echo $column . " updated successfully" . "<br>";
+    global $message;
+    $message .= " " . $column . " updated ";
     return true;
   }
 }
+$_SESSION['message'] = $message;
+if ($_SESSION['is_admin']) {
+  $location = "location: ./settings.php";
+} else {
+  $location = "location: ../login_signup/settings/settings.php";
+}
+header($location);

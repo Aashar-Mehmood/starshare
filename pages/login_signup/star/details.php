@@ -84,11 +84,11 @@ include_once('../checkUsersSession.php');
                   id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                   <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                    <?php echo $_SESSION['name'] ?>
+                    <?php echo $_SESSION['star_name'] ?>
                   </span>
                   <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                     <span class="symbol-label font-size-h5 font-weight-bold">
-                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                      <?php echo substr($_SESSION['star_name'], 0, 1)  ?>
                     </span>
                   </span>
                 </div>
