@@ -1,6 +1,6 @@
 <?php
-  include_once('../checkUsersSession.php');
-  ?>
+include_once('../checkUsersSession.php');
+?>
 <!DOCTYPE html>
 
 <html lang="en">

@@ -6,22 +6,31 @@ $name = $_POST['fullName'];
 $email = $_POST['email'];
 $contact = $_POST['contact'];
 $address = $_POST['address'];
+$uploadOk = true;
 
-$message = "";
 
 
 if (isset($_FILES['profile_avatar'])) {
   $random = rand(10, 1000);
   $profileImg = $random . $_FILES['profile_avatar']['name'];
-
+  $extension = strtolower(pathinfo($profileImg, PATHINFO_EXTENSION));
+  $size = filesize($_FILES['profile_avatar']['tmp_name']);
   $destination = '../../assets/media/profiles/' . $profileImg;
   $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
-  if (!$uploaded) {
+  if ($extension != "jpg" && $extension != "jpeg" && $extension != "png" && $extension != "svg" && $extension != "gif") {
+    echo "Only jpg, jpeg, png, svg and gif files are allowed";
+    $uploadOk = false;
+  }
+  if ($size > 1100000) {
+    echo "Files upto 1 MB are allowed only";
+    $uploadOk = false;
+  }
+  if (!$uploadOk) {
     echo "File not uploaded" . "<br>";
   } else {
-    unlink($_SESSION['profile']);
-    $_SESSION['profile'] = "assets/media/profiles/" . $profileImg;
-    updateField($conn, 'profile_img', $_SESSION['profile']);
+    $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
+    $profileVal = "assets/media/profiles/" . $profileImg;
+    updateField($conn, 'profile_img', $profileVal);
   }
 }
 

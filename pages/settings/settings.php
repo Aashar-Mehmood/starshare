@@ -151,7 +151,7 @@
                             <label class="col-form-label col-md-3  ">Profile Picture</label>
                             <div class="col-md-9">
                               <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar"
-                                style="background-image: url('<?php echo $_SESSION['profile'] ?>')">
+                                style="background-image: url('<?php echo $_SESSION['profile_img'] ?>')">
                                 <div class="image-input-wrapper"></div>
                                 <label
                                   class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"

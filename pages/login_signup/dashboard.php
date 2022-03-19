@@ -60,6 +60,7 @@ if (
           <!--content start-->
           <div class="container">
             <div class="row">
+
               <div class="col-12">
                 <h1 class="w-100 mb-0">Fan Dashboard</h1>
               </div>
@@ -338,7 +339,9 @@ if (
 
               </div>
             </div>
-            <div class="row">
+            <?php
+            if ($_SESSION['is_star']) {
+              echo '<div class="row">
               <div class="col-12">
                 <h1 class="w-100 mb-0">Star Dashboard</h1>
               </div>
@@ -619,8 +622,13 @@ if (
                 <!--end::Mixed Widget 1-->
 
               </div>
-            </div>
-            <div class="row">
+            </div>';
+            }
+            ?>
+
+            <?php
+            if ($_SESSION['is_organizer']) {
+              echo '<div class="row">
               <div class="col-12">
                 <h1 class="w-100 mb-0">Organizer Dashboard</h1>
               </div>
@@ -898,8 +906,13 @@ if (
                 </div>
 
               </div>
-            </div>
-            <div class="row">
+            </div>';
+            }
+            ?>
+
+            <?php
+            if ($_SESSION['is_supplier']) {
+              echo '<div class="row">
               <div class="col-12">
                 <h1 class="w-100 mb-0">Supplier Dashboard</h1>
               </div>
@@ -1182,7 +1195,10 @@ if (
                 <!--end::Mixed Widget 1-->
 
               </div>
-            </div>
+            </div>';
+            }
+            ?>
+
           </div>
         </div>
 

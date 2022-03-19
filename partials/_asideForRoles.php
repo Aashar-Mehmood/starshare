@@ -56,7 +56,7 @@
         <li id="star" class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fas fa-music menu-icon"></i>
-            <span class="menu-text">Star</span>
+            <span class="menu-text">Stars</span>
             <i class="menu-arrow"></i>
           </a>
           <div class="menu-submenu" kt-hidden-height="80">
@@ -64,33 +64,43 @@
             <ul class="menu-subnav">
               <li class="menu-item menu-item-parent" aria-haspopup="true">
                 <span class="menu-link">
-                  <span class="menu-text">Star</span>
+                  <span class="menu-text">Stars</span>
                 </span>
               </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/star/details.php?parentId=star" class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">Private Profile</span>
-                </a>
-              </li>
+              <?php
+              if ($_SESSION['is_star']) {
+                echo "<li class='menu-item' aria-haspopup='true'>
+                  <a href='pages/login_signup/star/details.php?parentId=star' class='menu-link'>
+                    <i class='menu-bullet menu-bullet-dot'>
+                      <span></span>
+                    </i>
+                    <span class='menu-text'>Private Profile</span>
+                  </a>
+                </li>";
+              }
+              ?>
+
               <li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/star/allStars.php?parentId=star" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
-                  <span class="menu-text">View Stars</span>
+                  <span class="menu-text">Search Stars</span>
                 </a>
               </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/signupForRole.php?role=star&parentId=star" class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">Become Star</span>
-                </a>
-              </li>
+              <?php
+              if (!$_SESSION['is_star']) {
+                echo '<li class="menu-item" aria-haspopup="true">
+                  <a href="pages/login_signup/signupForRole.php?role=star&parentId=star" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">Become Star</span>
+                  </a>
+                </li>';
+              }
+              ?>
+
             </ul>
           </div>
         </li>
@@ -108,14 +118,19 @@
                   <span class="menu-text">Organizers</span>
                 </span>
               </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/organizer/details.php?parentId=organizer" class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">Private Profile</span>
-                </a>
-              </li>
+              <?php
+              if ($_SESSION['is_organizer']) {
+                echo '<li class="menu-item" aria-haspopup="true">
+                  <a href="pages/login_signup/organizer/details.php?parentId=organizer" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">Private Profile</span>
+                  </a>
+                </li>';
+              }
+              ?>
+
               <li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/organizer/allOrganizers.php?parentId=organizer" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
@@ -124,21 +139,26 @@
                   <span class="menu-text">Search Organizers</span>
                 </a>
               </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/signupForRole.php?role=organizer&parentId=organizer" class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">Become Organizer</span>
-                </a>
-              </li>
+              <?php
+              if (!$_SESSION['is_organizer']) {
+                echo '<li class="menu-item" aria-haspopup="true">
+                  <a href="pages/login_signup/signupForRole.php?role=organizer&parentId=organizer" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">Become Organizer</span>
+                  </a>
+                </li>';
+              }
+              ?>
+
             </ul>
           </div>
         </li>
         <li id="supplier" class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
           <a href="javascript:;" class="menu-link menu-toggle">
             <i class="fa fa-fill-drip menu-icon"></i>
-            <span class="menu-text">Supplier</span>
+            <span class="menu-text">Suppliers</span>
             <i class="menu-arrow"></i>
           </a>
           <div class="menu-submenu" kt-hidden-height="80">
@@ -146,17 +166,22 @@
             <ul class="menu-subnav">
               <li class="menu-item menu-item-parent" aria-haspopup="true">
                 <span class="menu-link">
-                  <span class="menu-text">Supplier</span>
+                  <span class="menu-text">Suppliers</span>
                 </span>
               </li>
-              <li class="menu-item" aria-haspopup="true">
+              <?php
+              if ($_SESSION['is_supplier']) {
+                echo '<li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/supplier/details.php?parentId=supplier" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
                   <span class="menu-text">Private Profile</span>
                 </a>
-              </li>
+              </li>';
+              }
+              ?>
+
               <li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/supplier/allSuppliers.php?parentId=supplier" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
@@ -165,14 +190,19 @@
                   <span class="menu-text">Search Suppliers</span>
                 </a>
               </li>
-              <li class="menu-item" aria-haspopup="true">
+              <?php
+              if (!$_SESSION['is_supplier']) {
+                echo '<li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/signupForRole.php?role=supplier&parentId=supplier" class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
                     <span></span>
                   </i>
                   <span class="menu-text">Become Supplier</span>
                 </a>
-              </li>
+              </li>';
+              }
+              ?>
+
             </ul>
           </div>
         </li>
@@ -185,30 +215,42 @@
           <div class="menu-submenu" kt-hidden-height="80">
             <i class="menu-arrow"></i>
             <ul class="menu-subnav">
+
               <li class="menu-item menu-item-parent" aria-haspopup="true">
                 <span class="menu-link">
                   <span class="menu-text">Transactions</span>
                 </span>
               </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/transactions/main.php?roleTransaction=starTransactions&parentId=transactions"
-                  class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">As a Star</span>
-                </a>
-              </li>
-              <li class="menu-item" aria-haspopup="true">
-                <a href="pages/login_signup/transactions/main.php?roleTransaction=organizerTransactions&parentId=transactions"
-                  class="menu-link">
-                  <i class="menu-bullet menu-bullet-dot">
-                    <span></span>
-                  </i>
-                  <span class="menu-text">As an Organizer</span>
-                </a>
-              </li>
-              <li class="menu-item" aria-haspopup="true">
+              <?php
+              if ($_SESSION['is_star']) {
+                echo '<li class="menu-item" aria-haspopup="true">
+                  <a href="pages/login_signup/transactions/main.php?roleTransaction=starTransactions&parentId=transactions"
+                    class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">As a Star</span>
+                  </a>
+                </li>';
+              }
+              ?>
+
+              <?php
+              if ($_SESSION['is_organizer']) {
+                echo '<li class="menu-item" aria-haspopup="true">
+                  <a href="pages/login_signup/transactions/main.php?roleTransaction=organizerTransactions&parentId=transactions"
+                    class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                      <span></span>
+                    </i>
+                    <span class="menu-text">As an Organizer</span>
+                  </a>
+                </li>';
+              }
+              ?>
+              <?php
+              if ($_SESSION['is_supplier']) {
+                echo '<li class="menu-item" aria-haspopup="true">
                 <a href="pages/login_signup/transactions/main.php?roleTransaction=supplierTransactions&parentId=transactions"
                   class="menu-link">
                   <i class="menu-bullet menu-bullet-dot">
@@ -216,7 +258,10 @@
                   </i>
                   <span class="menu-text">As a Supplier</span>
                 </a>
-              </li>
+              </li>';
+              }
+              ?>
+
             </ul>
           </div>
         </li>

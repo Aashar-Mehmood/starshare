@@ -4,7 +4,7 @@
 $submitError = false;
 
 if (!isset($_POST["signup"])) {
-  echo "Error occured while submitting form";
+  echo "<script>alert('Error occured while submitting form')</script>";
   $submitError = true;
 } else {
   $name = $_POST['fullname'];
@@ -16,26 +16,26 @@ if (!isset($_POST["signup"])) {
     $name == '' || $email  == '' ||
     $userPwd  == '' || $confirmUserPwd == ''
   ) {
-    echo "Fill all the fields";
+    echo "<script>alert('Fill all the fields')</script>";
     $submitError = true;
   } else {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      echo "Enter a valid email address";
+      echo "<script>alert('Enter a valid email address')</script>";
       $submitError = true;
     }
     if ($userPwd !== $confirmUserPwd) {
-      echo "Passwords does not match";
+      echo "<script>alert('Passwords does not match')</script>";
       $submitError = true;
     }
   }
 }
 
 if ($submitError == true) {
-  header('Refresh:2; URL=./login_signup.php?register=failed');
+  header('Refresh:0; URL=./login_signup.php?register=failed');
 } else {
 
   include_once('./db_connection.php');
-  
+
   $hashedPwd = password_hash($userPwd, PASSWORD_DEFAULT);
 
   $query = "INSERT INTO `users`(`name`, `email`, `password`) VALUES (?, ?, ?);";
@@ -46,9 +46,9 @@ if ($submitError == true) {
   mysqli_stmt_close($stmt);
 
   if (!$executed) {
-    echo " Query not executed ";
+    echo "<script>alert('Query not executed')</script>";
   } else {
-    echo " Data inserted successfully ";
-    header('Refresh:2; URL=./login_signup.php?register=succeeded');
+    echo "<script>alert('Data inserted successfully')</script>";
+    header('Refresh:1; URL=./login_signup.php?register=succeeded');
   }
 }

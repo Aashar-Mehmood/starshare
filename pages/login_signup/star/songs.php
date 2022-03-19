@@ -1,6 +1,6 @@
 <?php
-  include_once('../checkUsersSession.php');
-  ?>
+include_once('../checkUsersSession.php');
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,7 +10,7 @@
 <head>
   <base href="../../../">
   <meta charset="utf-8" />
-  <title>Songs by Artist</title>
+  <title>Songs by Star</title>
   <?php include("../../../partials/csslinks.php"); ?>
 
 </head>

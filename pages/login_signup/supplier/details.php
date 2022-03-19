@@ -95,11 +95,11 @@ include_once('../checkUsersSession.php');
                   id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                   <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                    <?php echo $_SESSION['name'] ?>
+                    <?php echo $_SESSION['supplier_name'] ?>
                   </span>
                   <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                     <span class="symbol-label font-size-h5 font-weight-bold">
-                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                      <?php echo substr($_SESSION['supplier_name'], 0, 1)  ?>
                     </span>
                   </span>
                 </div>
@@ -130,25 +130,29 @@ include_once('../checkUsersSession.php');
                               <!--begin::Symbol-->
                               <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
                                 <span class="symbol-label">
-                                  <img src="assets/media/svg/avatars/007-boy-2.svg" class="h-75 align-self-end" alt="">
+                                  <img src="<?php echo $_SESSION['supplier_profile_img'] ?>" class="h-75 align-self-end"
+                                    alt="">
                                 </span>
                               </div>
                               <!--end::Symbol-->
                               <!--begin::Username-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">Jerry
-                                Kane</a>
+                              <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
+                                <?php echo $_SESSION['supplier_name'] ?>
+                              </p>
                               <!--end::Username-->
                               <!--begin::Info-->
-                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">Supplier related info</div>
+                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">
+                                <?php echo $_SESSION['supplier_email'] ?>
+                              </div>
                               <!--end::Info-->
                             </div>
                             <!--end::Header-->
                             <!--begin::Body-->
                             <div class="pt-1">
                               <!--begin::Text-->
-                              <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">Lorem ipsum dolor, sit
-                                amet consectetur adipisicing elit. Est, laudantium.</p>
+                              <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
+                                <?php echo $_SESSION['supplier_description'] ?>
+                              </p>
                               <!--end::Text-->
                               <!--begin::Item-->
                               <div class="d-flex align-items-center pb-9">
@@ -176,8 +180,7 @@ include_once('../checkUsersSession.php');
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="d-flex flex-column flex-grow-1">
-                                  <a href="#"
-                                    class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
+                                  <a href="#" class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                     Reviews
                                   </a>
                                 </div>
@@ -369,8 +372,7 @@ include_once('../checkUsersSession.php');
                             <tbody>
                               <tr>
                                 <td class="">
-                                  <a href="#"
-                                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                  <a href="#" class="text-dark-75 font-weight-bolder  mb-1 font-size-lg">
                                     124t456cf5</a>
                                 </td>
                                 <td>
@@ -420,8 +422,7 @@ include_once('../checkUsersSession.php');
                               </tr>
                               <tr>
                                 <td class="">
-                                  <a href="#"
-                                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                  <a href="#" class="text-dark-75 font-weight-bolder  mb-1 font-size-lg">
                                     445400458
                                   </a>
                                 </td>
@@ -472,8 +473,7 @@ include_once('../checkUsersSession.php');
                               </tr>
                               <tr>
                                 <td class="">
-                                  <a href="#"
-                                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                  <a href="#" class="text-dark-75 font-weight-bolder  mb-1 font-size-lg">
                                     3544443f4
                                   </a>
                                 </td>
@@ -526,8 +526,7 @@ include_once('../checkUsersSession.php');
                               </tr>
                               <tr>
                                 <td class="">
-                                  <a href="#"
-                                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                  <a href="#" class="text-dark-75 font-weight-bolder  mb-1 font-size-lg">
                                     355633355
                                   </a>
                                 </td>
@@ -579,8 +578,7 @@ include_once('../checkUsersSession.php');
                               </tr>
                               <tr>
                                 <td class="">
-                                  <a href="#"
-                                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+                                  <a href="#" class="text-dark-75 font-weight-bolder  mb-1 font-size-lg">
                                     454454ffs
                                   </a>
                                 </td>
@@ -661,8 +659,7 @@ include_once('../checkUsersSession.php');
                                 style="background-image: url(assets/media/stock-600x400/img-16.jpg)"></div>
                               <!--end::Image-->
                               <!--begin::Title-->
-                              <p
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
+                              <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
                                 Event Title
                               </p>
                               <!--end::Title-->
@@ -683,7 +680,7 @@ include_once('../checkUsersSession.php');
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="flex-grow-1">
-                                  <p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
+                                  <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                     Quote Amount
                                   </p>
                                 </div>
@@ -738,8 +735,7 @@ include_once('../checkUsersSession.php');
                                 style="background-image: url(assets/media/stock-600x400/img-51.jpg)"></div>
                               <!--end::Image-->
                               <!--begin::Title-->
-                              <p
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
+                              <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
                                 Event Title
                               </p>
                               <!--end::Title-->
@@ -760,7 +756,7 @@ include_once('../checkUsersSession.php');
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="flex-grow-1">
-                                  <p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
+                                  <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                     Quote Amount
                                   </p>
                                 </div>
@@ -815,8 +811,7 @@ include_once('../checkUsersSession.php');
                                 style="background-image: url(assets/media/stock-600x400/img-52.jpg)"></div>
                               <!--end::Image-->
                               <!--begin::Title-->
-                              <p
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
+                              <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
                                 Event Title
                               </p>
                               <!--end::Title-->
@@ -837,7 +832,7 @@ include_once('../checkUsersSession.php');
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="flex-grow-1">
-                                  <p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
+                                  <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                     Quote Amount
                                   </p>
                                 </div>
@@ -1097,7 +1092,7 @@ include_once('../checkUsersSession.php');
   </div>
 
   </div>
-  <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
+  <?php include("../../../partials/_extras/offcanvas/quick-supplier.php") ?>
   <?php
   include("../../../partials/jslinks.php");
   ?>

@@ -1,6 +1,6 @@
 <?php
-  include_once('../checkUsersSession.php');
-  ?>
+include_once('../checkUsersSession.php');
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -74,9 +74,13 @@
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
                   id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                    <?php echo $_SESSION['organizer_name']; ?>
+                  </span>
                   <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                    <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                    <span class="symbol-label font-size-h5 font-weight-bold">
+                      <?php echo substr($_SESSION['organizer_name'], 0, 1);  ?>
+                    </span>
                   </span>
                 </div>
               </div>
@@ -102,84 +106,61 @@
                         </h2>
                       </div>
                       <!--begin::Form-->
-                      <form class="form">
+
+                      <form
+                        action="<?php echo "pages/login_signup/organizer/editEventDb.php?eventId=" . $_GET['eventId'] ?>"
+                        method="POST" enctype="multipart/form-data">
 
                         <div class="card-body">
                           <div class="form-group row">
                             <div class="col-lg-6">
                               <label>Title :</label>
-                              <input type="text" class="form-control form-control-solid" value="Old Title" />
+                              <input name="title" type="text" class="form-control form-control-solid" />
                             </div>
                             <div class="col-lg-6">
                               <label>Description :</label>
-                              <textarea class="form-control form-control-solid" rows="3">
-                        </textarea>
+                              <textarea name="description" class="form-control form-control-solid" rows="3"></textarea>
                             </div>
                           </div>
                           <div class="form-group row">
                             <div class="col-lg-6">
-                              <label>Address :</label>
-                              <input type="text" class="form-control form-control-solid" value="Previous Address" />
+                              <label>New Location :</label>
+                              <input name="location" type="text" class="form-control form-control-solid" />
                             </div>
                             <div class="col-lg-6">
-                              <label>Number of Seats :</label>
-                              <input type="text" class="form-control form-control-solid" value="20" disabled />
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <div class="col-lg-6">
-                              <label>Seats Booked :</label>
-                              <input type="text" class="form-control form-control-solid" value="5" />
-                            </div>
-                            <div class="col-lg-6">
-                              <label>Remaining Seats :</label>
-                              <input type="text" class="form-control form-control-solid" value="15" />
+                              <label>Ticket Price :</label>
+                              <input name="ticket_price" type="number" name="ticketPrice"
+                                class="form-control form-control-solid" />
                             </div>
                           </div>
+
                           <div class="form-group row">
                             <div class="col-lg-6">
-                              <label for="eventTime">Time :</label>
-                              <input class="form-control form-control-solid" type="time" id="eventTime" />
+                              <label for="eventDate">New Date :</label>
+                              <input name="date" class="form-control form-control-solid" type="date" id="eventDate" />
                             </div>
                             <div class="col-lg-6">
-                              <label for="eventDate">Date :</label>
-                              <input class="form-control form-control-solid" type="date" id="eventDate" />
+                              <label for="eventTime">New Time :</label>
+                              <input name="time" class="form-control form-control-solid" type="time" id="eventTime" />
                             </div>
+
                           </div>
                           <div class="form-group row">
+
                             <div class="col-lg-6">
-                              <label for="selectArtists">
-                                Select Star
-                              </label>
-                              <select class="form-control form-control-solid" id="selectArtists">
-                                <option>Star 1 &nbsp;&nbsp;&nbsp; Rating : 4 stars &nbsp;&nbsp;&nbsp; Total Reviews : 12
-                                </option>
-                                <option>Star 2 &nbsp;&nbsp;&nbsp; Rating : 3 stars &nbsp;&nbsp;&nbsp; Total Reviews : 20
-                                </option>
-                                <option>Star 3 &nbsp;&nbsp;&nbsp; Rating : 5 stars &nbsp;&nbsp;&nbsp; Total Reviews : 10
-                                </option>
-                                <option>Star 4 &nbsp;&nbsp;&nbsp; Rating : 4 stars &nbsp;&nbsp;&nbsp; Total Reviews : 34
-                                </option>
-                                <option>Star 5 &nbsp;&nbsp;&nbsp; Rating : 3 stars &nbsp;&nbsp;&nbsp; Total Reviews : 20
-                                </option>
-                              </select>
-                            </div>
-                            <div class="col-lg-6">
-                              <label>Banner Image</label>
+                              <label>New Banner Image</label>
                               <div></div>
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" />
+                                <input name="banner" type="file" class="custom-file-input" id="customFile" />
                                 <label class="custom-file-label" for="customFile">Choose Image</label>
                               </div>
                             </div>
                           </div>
                         </div>
-
-                      </form>
-                      <div class="card-footer ml-6">
-                        <button type="reset" class="btn btn-primary">Submit</button>
-                        <button type="reset" class="btn btn-secondary ml-10">Cancel</button>
-                      </div>
+                        <div class="card-footer ml-6">
+                          <input type="submit" name="updateEvent" value="Save Changes" class="btn btn-primary" />
+                          <input type="reset" value="Reset" class="btn btn-secondary ml-10" />
+                        </div>
                       </form>
                       <!--end::Form-->
                     </div>
@@ -329,7 +310,7 @@
   </div>
 
   <!--end::Main-->
-  <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
+  <?php include("../../../partials/_extras/offcanvas/quick-organizer.php") ?>
   <?php include("../../../partials/jslinks.php"); ?>
 </body>
 

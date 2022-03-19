@@ -1,16 +1,19 @@
 <!-- begin::User Panel-->
+<?php
+
+$name = $_SESSION['organizer_name'];
+$email = $_SESSION['organizer_email'];
+$profile = $_SESSION['organizer_profile_img'];
+$role = "Organizer";
+
+?>
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 
   <!--begin::Header-->
   <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
     <h3 class="font-weight-bold m-0">
       <?php
-      if ($_SESSION['is_admin']) {
-        echo "Admin Profile";
-      } else {
-        echo "Fan Profile";
-      }
-
+      echo $role . " Profile";
       ?>
     </h3>
     <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
@@ -26,22 +29,17 @@
     <!--begin::Header-->
     <div class="d-flex align-items-center mt-5">
       <div class="symbol symbol-100 mr-5">
-        <div class="symbol-label" style="background-image:url('<?php echo $_SESSION['profile_img'] ?>')"></div>
-
+        <div class="symbol-label" style="background-image:url('<?php echo $profile; ?>');">
+        </div>
 
       </div>
       <div class="d-flex flex-column">
         <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-          <?php echo $_SESSION['name'] ?>
+          <?php echo $name ?>
         </a>
         <div class="text-muted mt-1">
           <?php
-          if ($_SESSION['is_admin']) {
-            echo "Admin";
-          } else {
-            echo "Fan";
-          }
-
+          echo $role;
           ?>
         </div>
         <div class="navi mt-2">
@@ -66,7 +64,7 @@
                 </span>
               </span>
               <span class="navi-text text-muted text-hover-primary">
-                <?php echo $_SESSION['email'] ?>
+                <?php echo $email ?>
               </span>
             </span>
           </a>

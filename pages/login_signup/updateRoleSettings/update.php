@@ -8,38 +8,48 @@ $email = $_POST['email'];
 $contact = $_POST['contact'];
 $address = $_POST['address'];
 $description = $_POST['description'];
+$uploadOk = true;
 
 if (isset($_FILES['profile_avatar'])) {
-  $profileImg = $_FILES['profile_avatar']['name'];
+  $allowedImg = array("jpg", "jpge", "png", "svg", "gif");
+
+  $random = rand(10, 1000);
+  $profileImg = $random . $_FILES['profile_avatar']['name'];
   $destination = '../../../assets/media/profiles/' . $profileImg;
-  if (file_exists($destination)) {
-    echo "This file already exists, rename before uploading" . "<br>";
+  $extension = strtolower(pathinfo($profileImg, PATHINFO_EXTENSION));
+  $size = filesize($_FILES['profile_avatar']['tmp_name']);
+  if (!in_array($extension, $allowedImg)) {
+    echo "Only jpg, jpeg, png, svg and gif files are allowed";
+    $uploadOk = false;
+  }
+  if ($size > 1100000) {
+    echo "Files upto 1 MB are allowed only";
+    $uploadOk = false;
+  }
+  if (!$uploadOk) {
+    echo "<br> File not uploaded <br>";
   } else {
     $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
-    if (!$uploaded) {
-      echo "File not uploaded" . "<br>";
-    } else {
-      $_SESSION['profile'] = "assets/media/profiles/" . $profileImg;
-      updateField($conn, 'profile_img', $_SESSION['profile']);
-    }
+    $profileVal = "assets/media/profiles/" . $profileImg;
+    updateField($conn, 'profile_img', $profileVal);
   }
 }
 
-if ($name !== "") {
+if ($name != "") {
   updateField($conn, 'name', $name);
 }
-if ($email !== "") {
+if ($email != "") {
   updateField($conn, 'email', $email);
 }
-if ($contact !== "") {
+if ($contact != "") {
 
   updateField($conn, 'contact', $contact);
 }
-if ($address !== "") {
+if ($address != "") {
 
   updateField($conn, 'address', $address);
 }
-if ($description !== "") {
+if ($description != "") {
 
   updateField($conn, 'description', $description);
 }
@@ -55,9 +65,9 @@ function updateField($conn, $column, $val)
   $executed = mysqli_stmt_execute($statement);
   if (!$executed) {
     echo "Update Failed";
-    return false;
   } else {
     echo $column . " updated successfully" . "<br>";
-    return true;
+    $sessionVariable = $_GET['role'] . "_" . $column;
+    $_SESSION[$sessionVariable] = $val;
   }
 }
