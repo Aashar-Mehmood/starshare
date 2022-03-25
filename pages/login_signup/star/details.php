@@ -1,14 +1,18 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
+
 if (!$_SESSION['is_star']) {
   header("location:../signupForRole.php?role=star");
   exit();
 }
+$role = "Star";
+$profile = $_SESSION['star_profile_img'];
 
 $name = $_SESSION['star_name'];
 $email = $_SESSION['star_email'];
-$profile = $_SESSION['star_profile_img'];
-$role = "Star";
+$contact = $_SESSION['star_contact'];
+$address = $_SESSION['star_address'];
 $description = $_SESSION['star_description'];
 
 ?>
@@ -395,9 +399,8 @@ $description = $_SESSION['star_description'];
                               </thead>
                               <tbody>
                                 <?php
-                                include_once('../../login_signup/db_connection.php');
                                 $star_id = $_SESSION['id'];
-                                $query = "SELECT * FROM `songs` WHERE `star_id` = $star_id;";
+                                $query = "SELECT * FROM `songs` WHERE `star_id` = $star_id AND `status` ='published';";
                                 $result = mysqli_query($conn, $query);
 
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -427,7 +430,7 @@ $description = $_SESSION['star_description'];
                                       <i class='
                                         fas fa-edit text-primary' aria-hidden='true'></i>
                                     </a>
-                                    <a href='pages/login_signup/star/deleteSong.php?songId=$songId&parentId=star' title='Delete' class='btn btn-icon btn-light btn-hover-danger btn-sm'>
+                                    <a href='pages/login_signup/star/deleteSong.php?songId=$songId&parentId=star' title='Unpublish' class='btn btn-icon btn-light btn-hover-danger btn-sm'>
                                     <i class='
                                       fas fa-trash text-danger' aria-hidden='true'></i>
                                     </a>
@@ -741,16 +744,23 @@ $description = $_SESSION['star_description'];
                               </a>
                             </li>
                             <!--end::Item-->
-
+                            <li class="nav-item mr-3">
+                              <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2">
+                                <span class="nav-icon">
+                                  <span class="svg-icon">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </span>
+                                </span>
+                                <span class="nav-text font-size-lg">Password</span>
+                              </a>
+                            </li>
                           </ul>
                         </div>
                         <div class="d-flex align-items-center">
                           <!--begin::Button-->
-                          <a href="#" class="btn btn-default font-weight-bold
-                      btn-sm px-3 font-size-base
-                      mb-6 mb-md-0">
-                            Back
-                          </a>
+                          <button id="resetBtn" name="reset" class="btn btn-default font-weight-bold
+                            btn-sm px-3 font-size-base
+                            mb-6 mr-10 mb-md-0">Reset</button>
                           <!--end::Button-->
                           <!--begin::Dropdown-->
                           <div class="btn-group ml-2">
@@ -786,11 +796,10 @@ $description = $_SESSION['star_description'];
                                   <!--end::Row-->
                                   <!--begin::Group-->
                                   <div class="form-group row">
-                                    <label class="col-form-label col-md-3  ">Prfile Image</label>
+                                    <label class="col-form-label col-md-3  ">Profile Image</label>
                                     <div class="col-md-9">
                                       <div class="image-input image-input-empty image-input-outline"
-                                        id="kt_user_edit_avatar"
-                                        style="background-image: url(assets/media/users/blank.png)">
+                                        id="kt_user_edit_avatar" style="background-image: url(<?php echo $profile ?>)">
                                         <div class="image-input-wrapper"></div>
                                         <label
                                           class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -821,7 +830,7 @@ $description = $_SESSION['star_description'];
                                     <label class="col-form-label col-md-3  ">Full Name</label>
                                     <div class="col-md-9">
                                       <input name="fullName" class="form-control form-control-lg form-control-solid"
-                                        type="text">
+                                        type="text" placeholder="<?php echo $_SESSION['star_name'] ?>">
                                     </div>
                                   </div>
                                   <!--end::Group-->
@@ -836,7 +845,8 @@ $description = $_SESSION['star_description'];
                                           </span>
                                         </div>
                                         <input name="email" type="email"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Email">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $_SESSION['star_email'] ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -852,7 +862,8 @@ $description = $_SESSION['star_description'];
                                           </span>
                                         </div>
                                         <input name="contact" type="text"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Phone">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $contact ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -868,7 +879,8 @@ $description = $_SESSION['star_description'];
                                           </span>
                                         </div>
                                         <input type="text" name="address"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Address">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $address ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -879,8 +891,9 @@ $description = $_SESSION['star_description'];
                                     <label class="col-form-label col-md-3">Description </label>
                                     <div class="col-md-9">
                                       <div class="input-group input-group-lg input-group-solid">
-                                        <textarea name="description" class="form-control"
-                                          style="border: none !important;" rows="3" spellcheck="false"></textarea>
+                                        <textarea placeholder="<?php echo $description ?>" name="description"
+                                          class="form-control" style="border: none !important;" rows="3"
+                                          spellcheck="false"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -890,7 +903,39 @@ $description = $_SESSION['star_description'];
                               <!--end::Row-->
                             </div>
                             <!--end::Tab-->
+                            <div class="tab-pane px-md-7" id="kt_user_edit_tab_2" role="tabpanel">
+                              <!--begin::Row-->
+                              <div class="row">
+                                <div class="col-xl-7 my-2">
+                                  <!--begin::Row-->
+                                  <div class="row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                      <h6 class="text-dark font-weight-bold mb-10">Change Password:</h6>
+                                    </div>
+                                  </div>
+                                  <!--end::Row-->
 
+                                  <!--begin::Group-->
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-md-3  ">New Password</label>
+                                    <div class="col-md-9">
+                                      <input name="newPwd" class="form-control form-control-lg form-control-solid"
+                                        type="password" autocomplete="new-password">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-md-3  ">Confirm Password</label>
+                                    <div class="col-md-9">
+                                      <input name="confirmNewPwd"
+                                        class="form-control form-control-lg form-control-solid" type="password">
+                                    </div>
+                                  </div>
+                                  <!--end::Group-->
+                                </div>
+                              </div>
+                              <!--end::Row-->
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -927,9 +972,13 @@ $description = $_SESSION['star_description'];
   ?>
   <script>
   const editSettingsBtn = document.getElementById("editSettings");
+  const resetBtn = document.getElementById("resetBtn");
   const settingsForm = document.getElementById("kt_form");
   editSettingsBtn.addEventListener('click', () => {
     settingsForm.submit();
+  });
+  resetBtn.addEventListener('click', () => {
+    settingsForm.reset();
   });
   </script>
 

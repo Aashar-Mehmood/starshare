@@ -2,8 +2,10 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
+$message = "";
+
 if (!isset($_POST['addSong'])) {
-  echo "Form not submitted";
+  $message =  "Form not submitted";
 } else {
   $star_id = $_SESSION['id'];
   $title = $_POST['title'];
@@ -14,7 +16,7 @@ if (!isset($_POST['addSong'])) {
     empty($title) || $originalSize == 0 ||
     $sampleSize == 0 || $bannerSize == 0
   ) {
-    echo "All fields are required";
+    $message =  "All fields are required";
   } else {
     $originalPath = "assets/media/songs/" . rand(10, 1000) . $_FILES['original']['name'];
     $samplePath = "assets/media/songs/" . rand(10, 1000)  . $_FILES['sample']['name'];
@@ -24,23 +26,32 @@ if (!isset($_POST['addSong'])) {
     $uploadOk2 = handleAudio($_FILES['original'], $originalPath);
     $uploadOk3 = handleAudio($_FILES['sample'], $samplePath);
     if ($uploadOk1 && $uploadOk2 && $uploadOk3) {
-
       $query = "INSERT INTO `songs` (`star_id`, `title`, `original`, `sample`, `banner`) VALUES (?, ?, ?, ?, ?);";
       $stmt = mysqli_stmt_init($conn);
       mysqli_stmt_prepare($stmt, $query);
       mysqli_stmt_bind_param($stmt, "issss", $star_id, $title, $originalPath, $samplePath, $bannerPath);
       $executed = mysqli_stmt_execute($stmt);
-      if (!$executed) {
-        echo "Song not added to database";
-      } else {
-        echo "New song added in database";
+      if ($executed) {
+        $message =  "New song added";
       }
     }
   }
 }
+if (!empty($message)) {
+  alertMessage($message);
+}
+
+header("Refresh:0; URL=./details.php?parentId=star");
+
+
+function alertMessage($msg)
+{
+  echo "<script>alert('$msg')</script>";
+}
 
 function handleBanner($fileArray, $path)
 {
+  $message = "";
   $allowedImg = array("jpg", "jpeg", "png", "svg", "gif", "jfif");
 
   $destination = '../../../' . $path;
@@ -48,18 +59,15 @@ function handleBanner($fileArray, $path)
   $size = filesize($fileArray['tmp_name']);
 
   if (!in_array($extension, $allowedImg)) {
-    echo "Only jpg, jpeg, png, svg, jfif and gif files are allowed <br>";
-  }
-  if ($size > 1100000) {
-    echo "Files upto 1 MB are allowed only <br>";
+    $message =  "Only jpg, jpeg, png, svg, jfif and gif files are allowed";
+  } else if ($size > 1100000) {
+    $message =  "Files upto 1 MB are allowed only";
   } else {
     $uploaded = move_uploaded_file($fileArray['tmp_name'], $destination);
-    if (!$uploaded) {
-      echo "Failed to upload";
-      return false;
-    } else {
-      return true;
-    }
+    return $uploaded;
+  }
+  if (!empty($message)) {
+    alertMessage($message);
   }
 }
 
@@ -72,14 +80,10 @@ function handleAudio($fileArray, $path)
   $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
   if (!in_array($extension, $allowedAudio)) {
-    echo "Only mp3, mp4, ogg, webm, aac, and wav files are allowed <br>";
+    $message = "Only mp3, mp4, ogg, webm, aac, and wav files are allowed";
+    alertMessage($message);
   } else {
     $uploaded = move_uploaded_file($fileArray['tmp_name'], $destination);
-    if (!$uploaded) {
-      echo "Failed to upload";
-      return false;
-    } else {
-      return true;
-    }
+    return $uploaded;
   }
 }

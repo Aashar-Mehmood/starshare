@@ -78,7 +78,7 @@ $limitResult = mysqli_query($conn, $limitSelect);
                   <div class="input-group input-group-sm input-group-solid bg-white"
                     style="height: 46px; box-shadow:0 1px 6px 0 rgb(32 33 36 / 70%)">
                     <input required type="text" name="searchedCountry" class="form-control pl-4"
-                      placeholder="Search by Country">
+                      placeholder="Search by City, Country">
                     <div class="input-group-append">
                       <span class="input-group-text">
                         <span class="svg-icon svg-icon-lg">
@@ -101,6 +101,7 @@ $limitResult = mysqli_query($conn, $limitSelect);
                     </div>
                   </div>
                   <input type="submit" name="search" value="Search" class="btn btn-primary btn-lg my-8">
+                  <a href="<?php echo $_SERVER['PHP_SELF'] ?>" class="btn btn-primary btn-lg ml-8">Display All</a>
                 </form>
 
               </div>
@@ -114,7 +115,7 @@ $limitResult = mysqli_query($conn, $limitSelect);
                 $sAddress = $record['address'];
                 $sDesc = $record['description'];
                 $sProfile = $record['profile_img'];
-                $countSongs = mysqli_query($conn, "SELECT * FROM `songs` WHERE `star_id` = $sId;");
+                $countSongs = mysqli_query($conn, "SELECT * FROM `songs` WHERE `star_id` = $sId AND `status`= 'published';");
                 $totalSongs = mysqli_num_rows($countSongs);
                 echo '<div class="col-md-6 col-xl-4">
                 <div class="card card-custom gutter-b">

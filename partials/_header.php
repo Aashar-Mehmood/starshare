@@ -18,10 +18,6 @@
     <!--begin::Topbar-->
     <div class="topbar">
 
-      <!--begin::Search-->
-
-      <!--end::Search-->
-
       <!--begin::User-->
       <div class="topbar-item">
         <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"

@@ -1,5 +1,6 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +12,12 @@ include_once('../checkUsersSession.php');
 <head>
   <base href="../../../">
   <meta charset="utf-8" />
-  <title>Settings</title>
+  <title>Fan Settings</title>
   <?php
   include("../../../partials/csslinks.php");
   ?>
+  <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
+
   <style>
   div.col-xl-6 {
     padding: 5rem 3rem;
@@ -105,17 +108,27 @@ include_once('../checkUsersSession.php');
                         <span class="nav-text font-size-lg">Profile</span>
                       </a>
                     </li>
+                    <li class="nav-item mr-3">
+                      <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2">
+                        <span class="nav-icon">
+                          <span class="svg-icon">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                          </span>
+                        </span>
+                        <span class="nav-text font-size-lg">Password</span>
+                      </a>
+                    </li>
                     <!--end::Item-->
 
                   </ul>
                 </div>
                 <div class="d-flex align-items-center">
                   <!--begin::Button-->
-                  <a href="#" class="btn btn-default font-weight-bold
-                      btn-sm px-3 font-size-base
-                      mb-6 mb-md-0">
-                    Back
-                  </a>
+                  <button id="resetBtn" name="reset" class="btn btn-default font-weight-bold
+                            btn-sm px-3 font-size-base
+                            mb-6 mr-10 mb-md-0">
+                    Reset
+                  </button>
                   <!--end::Button-->
                   <!--begin::Dropdown-->
                   <div class="btn-group ml-2">
@@ -132,8 +145,8 @@ include_once('../checkUsersSession.php');
               <!--end::Card header-->
               <!--begin::Card body-->
               <div class="card-body">
-                <form class="form" id="kt_form" action="pages/settings/updateSettings.php" method="POST"
-                  enctype="multipart/form-data">
+                <form autocomplete="off" class="form" id="kt_form" action="pages/settings/updateSettings.php"
+                  method="POST" enctype="multipart/form-data">
                   <div class="tab-content">
                     <!--begin::Tab-->
                     <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
@@ -153,7 +166,7 @@ include_once('../checkUsersSession.php');
                             <label class="col-form-label col-md-3  ">Profile Picture</label>
                             <div class="col-md-9">
                               <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar"
-                                style="background-image: url('<?php echo $_SESSION['profile_img'] ?>')">
+                                style="background-image: url(<?php echo $_SESSION['profile_img'] ?>)">
                                 <div class="image-input-wrapper"></div>
                                 <label
                                   class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -182,7 +195,7 @@ include_once('../checkUsersSession.php');
                             <label class="col-form-label col-md-3  ">Full Name</label>
                             <div class="col-md-9">
                               <input name="fullName" class="form-control form-control-lg form-control-solid" type="text"
-                                value="<?php echo $_SESSION["name"] ?>">
+                                placeholder="<?php echo $_SESSION["name"] ?>">
                             </div>
                           </div>
                           <!--end::Group-->
@@ -196,8 +209,9 @@ include_once('../checkUsersSession.php');
                                     <i class="la la-at"></i>
                                   </span>
                                 </div>
-                                <input name="email" type="email" class="form-control form-control-lg form-control-solid"
-                                  placeholder="Email" value="<?php echo $_SESSION["email"] ?>">
+                                <input name="email" type="email" autocomplete="FALSE"
+                                  class="form-control form-control-lg form-control-solid"
+                                  placeholder="<?php echo $_SESSION["email"] ?>">
                               </div>
                             </div>
                           </div>
@@ -239,7 +253,41 @@ include_once('../checkUsersSession.php');
                       <!--end::Row-->
                     </div>
                     <!--end::Tab-->
+                    <!--begin::Tab-->
+                    <div class="tab-pane px-md-7" id="kt_user_edit_tab_2" role="tabpanel">
+                      <!--begin::Row-->
+                      <div class="row">
+                        <div class="col-xl-7 my-2">
+                          <!--begin::Row-->
+                          <div class="row">
+                            <label class="col-md-3"></label>
+                            <div class="col-md-9">
+                              <h6 class="text-dark font-weight-bold mb-10">Change Password:</h6>
+                            </div>
+                          </div>
+                          <!--end::Row-->
 
+                          <!--begin::Group-->
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3  ">New Password</label>
+                            <div class="col-md-9">
+                              <input name="newPwd" class="form-control form-control-lg form-control-solid"
+                                type="password" autocomplete="new-password">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3  ">Confirm Password</label>
+                            <div class="col-md-9">
+                              <input name="confirmNewPwd" class="form-control form-control-lg form-control-solid"
+                                type="password">
+                            </div>
+                          </div>
+                          <!--end::Group-->
+                        </div>
+                      </div>
+                      <!--end::Row-->
+                    </div>
+                    <!--end::Tab-->
                   </div>
                 </form>
               </div>
@@ -268,9 +316,14 @@ include_once('../checkUsersSession.php');
 
     <script>
     const saveBtn = document.getElementById("saveBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
     const form = document.getElementById("kt_form");
     saveBtn.addEventListener('click', () => {
       form.submit();
+    });
+    resetBtn.addEventListener('click', () => {
+      form.reset();
     });
     </script>
 </body>

@@ -2,7 +2,6 @@
 include_once("./db_connection.php");
 $email =  $_POST['email'];
 $pwd = $_POST['password'];
-$userRoles = '';
 
 $query = "SELECT * FROM `users` WHERE `email` = ?;";
 $stmt = mysqli_stmt_init($conn);
@@ -18,7 +17,6 @@ if (mysqli_num_rows($result) < 1) {
 } else {
   $row = mysqli_fetch_assoc($result);
   $hashedPwd = $row['password'];
-  echo $pwd;
   if (!password_verify($pwd, $hashedPwd)) {
     echo "<script>alert('Wrong Password')</script>";
     header("Refresh:0; URL = ./login_signup.php");
@@ -66,11 +64,15 @@ function setSessionVars($conn, $role)
   $record = mysqli_fetch_assoc($result);
   $name = $role . "_name";
   $email = $role . "_email";
+  $contact = $role . "_contact";
+  $address = $role . "_address";
   $desc = $role . "_description";
   $profile = $role . "_profile_img";
   $isRole = "is_" . $role;
   $_SESSION["$name"] = $record["name"];
   $_SESSION["$email"] = $record["email"];
+  $_SESSION["$contact"] = $record["contact"];
+  $_SESSION["$address"] = $record["address"];
   $_SESSION["$desc"] = $record["description"];
   $_SESSION["$profile"] = $record["profile_img"];
   $_SESSION["$isRole"] = true;

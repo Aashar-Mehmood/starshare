@@ -1,92 +1,88 @@
 <?php
 
 include_once('./checkUsersSession.php');
-$uId = $_SESSION['id'];
+include_once('./db_connection.php');
 
+$uId = $_SESSION['id'];
+$message = "";
 $submitError = false;
 $role = $_GET['role'];
 
 if (!isset($_POST["submit"])) {
-  echo "Error occured while submitting form";
-  header("Refresh:2; URL=./signupForRole.php?role=$role");
+  $message = "Form not submitted";
+  $submitError = true;
 } else {
+  $name = $_POST['fullName'];
+  $email = $_POST['email'];
+  $contact = $_POST['contact'];
+  $address = $_POST['address'];
+  $description = $_POST['description'];
+  $profileName = $_FILES['profile_img']['name'];
 
-  $dataArr = array(
-    $_POST['fullName'],
-    $_POST['email'], $_POST['contact'],
-    $_POST['address'], $_POST['description']
-  );
+  $profileSize = filesize($_FILES['profile_img']['tmp_name']);
 
-  for ($i = 0; $i < count($dataArr); $i++) {
-    if ($dataArr[$i] == '') {
-      echo "Fill all the fields";
-      header("Refresh:2; URL=./signupForRole.php?role=$role");
-      exit();
-    }
-  }
+  $allowedImg = array("jpg", "jpeg", "png", "svg", "gif", "jfif");
+  $extensionArr = explode('.', $profileName);
+  $extension = end($extensionArr);
 
-  if (!filter_var($dataArr[1], FILTER_VALIDATE_EMAIL)) {
-    echo "Enter a valid email address";
-    header("Refresh:2; URL=./signupForRole.php?role=$role");
-    exit();
-  }
-
-  if ($_FILES['profile_img']['size'] == 0) {
-    echo "Upload your profile picture";
-    header("Refresh:2; URL=./signupForRole.php?role=$role");
-    exit();
+  if (
+    empty($name) || empty($email) || empty($contact) ||
+    empty($address) || empty($description) || $profileSize == 0
+  ) {
+    $message = "All fields are required.";
+    $submitError = true;
+  } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $message = "Enter a valid email address";
+    $submitError = true;
+  } else if (!in_array($extension, $allowedImg)) {
+    $message = "Only jpg, jpeg, png, svg, gif, and jfif files are allowed";
+    $submitError = true;
+  } else if ($profileSize > 1100000) {
+    $message = "Files upto 1.1 Mb are allowed";
+    $submitError = true;
   } else {
     $random = rand(10, 1000);
-    $allowedImg = array("jpg", "jpge", "png", "svg", "gif");
-    $profileImg = $random . $_FILES['profile_img']['name'];
-    $destination = '../../../assets/media/profiles/' . $profileImg;
-    $extension = strtolower(pathinfo($profileImg, PATHINFO_EXTENSION));
-    $size = filesize($_FILES['profile_img']['tmp_name']);
+    $path = "assets/media/profiles/" . $random . $profileName;
+    $destination = '../../' . $path;
+    move_uploaded_file($_FILES['profile_img']['tmp_name'], $destination);
 
-    if (!in_array($extension, $allowedImg)) {
-      echo "Only jpg, jpeg, png, svg and gif files are allowed";
-    }
-    if ($size > 1100000) {
-      echo "Files upto 1 MB are allowed only";
+    //Begin data insertion in database
+
+    $tableName = $role . "s";
+    $insertQuery = "INSERT INTO 
+    `$tableName`(`u_id`, `name`, `email`, `contact`, `address`, `description`, `profile_img`) 
+    VALUES ($uId, '$name', '$email', '$contact', '$address', '$description', '$path');";
+    $inserted = mysqli_query($conn, $insertQuery);
+
+    // check if data is inserted
+    if (!$inserted) {
+      $message = "Error occured while registering";
     } else {
-      $path = "assets/media/profiles/" . $_FILES['profile_img']['name'];
-      move_uploaded_file($_FILES['profile_img']['tmp_name'], "../../" . $path);
+      $columnName = "is_" . $role;
+      $updateQuery = "UPDATE `users` SET `$columnName` = 1 WHERE `id` = $uId;";
+
+      $updated = mysqli_query($conn, $updateQuery);
+
+      if ($updated) {
+        $submitError = false;
+        setSessionVars($conn, $role);
+        $message = "Registered Successfully";
+      }
     }
   }
-
-  include_once('./db_connection.php');
-
-  $tableName = $role . "s";
-  $insertQuery = "INSERT INTO 
-  `$tableName`(`u_id`, `name`, `email`, `contact`, `address`, `description`, `profile_img`) 
-  VALUES ($uId, '$dataArr[0]', '$dataArr[1]', '$dataArr[2]', '$dataArr[3]', '$dataArr[4]', '$path');";
-
-  $inserted = mysqli_query($conn, $insertQuery);
-
-
-
-
-  if (!$inserted) {
-    echo "<script>alert('Error occured while registering')</script>";
-    header("Refresh:0; URL=./signupForRole.php?role=$role");
-  } else {
-
-    $columnName = "is_" . $role;
-    $updateQuery = "UPDATE `users` SET `$columnName` = 1 WHERE `id` = $uId;";
-
-    $updated = mysqli_query($conn, $updateQuery);
-
-    if ($updated) {
-      setSessionVars($conn, $role);
-      echo "<script>alert('Registered Successfully')</script>";
-      header("Refresh:0; URL=./$role/details.php");
-    }
-  }
-
-
-
-  mysqli_close($conn);
 }
+mysqli_close($conn);
+
+echo "<script>alert('$message')</script>";
+
+if ($submitError) {
+  header("Refresh:0; URL=./signupForRole.php?role=$role");
+} else {
+  header("Refresh:0; URL=./$role/details.php");
+}
+
+
+
 function setSessionVars($conn, $role)
 {
   $table = $role . "s";
@@ -99,11 +95,15 @@ function setSessionVars($conn, $role)
   $record = mysqli_fetch_assoc($result);
   $name = $role . "_name";
   $email = $role . "_email";
+  $contact = $role . "_contact";
+  $address = $role . "_address";
   $desc = $role . "_description";
   $profile = $role . "_profile_img";
   $isRole = "is_" . $role;
   $_SESSION["$name"] = $record["name"];
   $_SESSION["$email"] = $record["email"];
+  $_SESSION["$contact"] = $record["contact"];
+  $_SESSION["$address"] = $record["address"];
   $_SESSION["$desc"] = $record["description"];
   $_SESSION["$profile"] = $record["profile_img"];
   $_SESSION["$isRole"] = true;

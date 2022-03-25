@@ -1,5 +1,15 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
+
+$songId = $_GET['songId'];
+$songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $songId");
+$dataArr = mysqli_fetch_assoc($songData);
+$prevTitle = $dataArr['title'];
+$prevOriginal = $dataArr['original'];
+$prevSample = $dataArr['sample'];
+$prevBanner = $dataArr['banner'];
+
 ?>
 
 <!DOCTYPE html>
@@ -93,8 +103,69 @@ include_once('../checkUsersSession.php');
           <!--end::Container-->
         </div>
 
+        <!-- Modals to play previous song and demo -->
+
+        <!-- play original song modal -->
+        <div class="modal fade" id="previousOriginal" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Previous Song</h5>
+              </div>
+              <div class="modal-body">
+                <audio controls>
+                  <source src="<?php echo $prevOriginal ?>"
+                    type="<?php echo mime_content_type("../../../" . $prevOriginal) ?>">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End play original song modal -->
+
+        <!-- play demo song modal -->
+        <div class="modal fade" id="previousSample" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Previous Sample</h5>
+              </div>
+              <div class="modal-body">
+                <audio controls>
+                  <source src="<?php echo $prevSample ?>"
+                    type="<?php echo mime_content_type("../../../" . $prevSample) ?>">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- End play demo song modal -->
+
+        <!-- View Previous Banner -->
+        <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Previous Banner</h5>
+              </div>
+              <div class="modal-body p-4">
+                <img class="w-100" src="<?php echo $prevBanner ?>" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End play demo song modal -->
+        <!--      end modals to play previous      -->
+
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
           <div class="container">
             <div class="row flex flex-center">
               <div class="col-md-6 ">
@@ -103,15 +174,20 @@ include_once('../checkUsersSession.php');
                     <h2 class="card-title">Edit Song</h2>
                   </div>
                   <div class="card-body">
-                    <?php $action = "pages/login_signup/star/editSongDb.php?songId=" . $_GET['songId'] ?>
+                    <?php $action = "pages/login_signup/star/editSongDb.php?songId=" . $songId ?>
                     <form class="form" action="<?php echo $action ?>" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                         <label>Change Title :</label>
-                        <input type="text" name="title" class="form-control form-control-solid" />
+                        <input placeholder="<?php echo $prevTitle; ?>" type="text" name="title"
+                          class="form-control form-control-solid" />
                       </div>
 
                       <div class="form-group">
-                        <label>Change Song</label>
+                        <label class="d-flex justify-content-between pr-2">
+                          Change Song
+                          <span><a href="javascript;" data-target="#previousOriginal" data-toggle="modal">Play
+                              Previous</a></span>
+                        </label>
                         <div></div>
                         <div class="custom-file">
                           <input name="original" type="file" class="custom-file-input" id="customFile" />
@@ -119,7 +195,11 @@ include_once('../checkUsersSession.php');
                         </div>
                       </div>
                       <div class="form-group">
-                        <label>Change Sample</label>
+                        <label class="d-flex justify-content-between pr-2">
+                          Change Sample
+                          <span><a href="javascript;" data-target="#previousSample" data-toggle="modal">Play
+                              Previous</a></span>
+                        </label>
                         <div></div>
                         <div class="custom-file">
                           <input name="sample" type="file" class="custom-file-input" id="customFile" />
@@ -127,7 +207,12 @@ include_once('../checkUsersSession.php');
                         </div>
                       </div>
                       <div class="form-group">
-                        <label>Change Banner</label>
+                        <label class="d-flex justify-content-between pr-2">
+                          Change Banner
+                          <span><a href="javascript;" data-target="#previousBanner" data-toggle="modal">
+                              View Previous
+                            </a></span>
+                        </label>
                         <div></div>
                         <div class="custom-file">
                           <input name="banner" type="file" class="custom-file-input" id="customFile" />

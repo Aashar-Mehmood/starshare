@@ -35,19 +35,12 @@ if (isset($_FILES['profile_avatar'])) {
 }
 
 if ($name !== "") {
-  $udated = updateField($conn, 'name', $name);
-  if ($udated) {
-    $_SESSION["name"] = $name;
-  }
+  updateField($conn, 'name', $name);
 }
 if ($email !== "") {
-  $udated = updateField($conn, 'email', $email);
-  if ($udated) {
-    $_SESSION["email"] = $email;
-  }
+  updateField($conn, 'email', $email);
 }
 if ($contact !== "") {
-
   updateField($conn, 'contact', $contact);
 }
 if ($address !== "") {
@@ -66,11 +59,10 @@ function updateField($conn, $column, $val)
   if (!$executed) {
     global $message;
     $message = "Update Failed";
-    return false;
   } else {
+    $_SESSION["$column"] = $val;
     global $message;
     $message .= " " . $column . " updated ";
-    return true;
   }
 }
 $_SESSION['message'] = $message;

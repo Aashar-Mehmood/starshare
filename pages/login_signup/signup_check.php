@@ -46,9 +46,9 @@ if ($submitError == true) {
   mysqli_stmt_close($stmt);
 
   if (!$executed) {
-    echo "<script>alert('Query not executed')</script>";
+    echo "<script>alert('Registration Failed')</script>";
   } else {
-    echo "<script>alert('Data inserted successfully')</script>";
-    header('Refresh:1; URL=./login_signup.php?register=succeeded');
+    echo "<script>alert('Registered successfully')</script>";
+    header('Refresh:0; URL=./login_signup.php?register=succeeded');
   }
 }

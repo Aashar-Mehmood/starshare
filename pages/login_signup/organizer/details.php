@@ -451,7 +451,7 @@ $uId = $_SESSION['id'];
                                   </td>
                                   <td>
                                   <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                  ' . $record['time'] . '
+                                  ' . date_format(new DateTime($record['time']), 'h-i-s : A') . '
                                   </span>
                                   </td>
                                   <td>
@@ -535,16 +535,25 @@ $uId = $_SESSION['id'];
                               </a>
                             </li>
                             <!--end::Item-->
-
+                            <li class="nav-item mr-3">
+                              <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2">
+                                <span class="nav-icon">
+                                  <span class="svg-icon">
+                                    <i class="fa fa-key" aria-hidden="true"></i>
+                                  </span>
+                                </span>
+                                <span class="nav-text font-size-lg">Password</span>
+                              </a>
+                            </li>
                           </ul>
                         </div>
                         <div class="d-flex align-items-center">
                           <!--begin::Button-->
-                          <a href="#" class="btn btn-default font-weight-bold
+                          <button id="resetBtn" name="reset" class="btn btn-default font-weight-bold
                             btn-sm px-3 font-size-base
-                            mb-6 mb-md-0">
-                            Back
-                          </a>
+                            mb-6 mr-10 mb-md-0">
+                            Reset
+                          </button>
                           <!--end::Button-->
                           <!--begin::Dropdown-->
                           <div class="btn-group ml-2">
@@ -580,11 +589,11 @@ $uId = $_SESSION['id'];
                                   <!--end::Row-->
                                   <!--begin::Group-->
                                   <div class="form-group row">
-                                    <label class="col-form-label col-md-3  ">Prfile Image</label>
+                                    <label class="col-form-label col-md-3  ">Profile Image</label>
                                     <div class="col-md-9">
                                       <div class="image-input image-input-empty image-input-outline"
                                         id="kt_user_edit_avatar"
-                                        style="background-image: url(assets/media/users/blank.png)">
+                                        style="background-image: url(<?php echo $_SESSION['organizer_profile_img'] ?>)">
                                         <div class="image-input-wrapper"></div>
                                         <label
                                           class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -615,7 +624,7 @@ $uId = $_SESSION['id'];
                                     <label class="col-form-label col-md-3  ">Full Name</label>
                                     <div class="col-md-9">
                                       <input name="fullName" class="form-control form-control-lg form-control-solid"
-                                        type="text">
+                                        type="text" placeholder="<?php echo $_SESSION['organizer_name'] ?>">
                                     </div>
                                   </div>
                                   <!--end::Group-->
@@ -630,7 +639,8 @@ $uId = $_SESSION['id'];
                                           </span>
                                         </div>
                                         <input name="email" type="email"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Email">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $_SESSION['organizer_email'] ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -646,7 +656,8 @@ $uId = $_SESSION['id'];
                                           </span>
                                         </div>
                                         <input name="contact" type="text"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Phone">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $_SESSION['organizer_contact'] ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -662,7 +673,8 @@ $uId = $_SESSION['id'];
                                           </span>
                                         </div>
                                         <input type="text" name="address"
-                                          class="form-control form-control-lg form-control-solid" placeholder="Address">
+                                          class="form-control form-control-lg form-control-solid"
+                                          placeholder="<?php echo $_SESSION['organizer_address'] ?>">
                                       </div>
                                     </div>
                                   </div>
@@ -674,7 +686,8 @@ $uId = $_SESSION['id'];
                                     <div class="col-md-9">
                                       <div class="input-group input-group-lg input-group-solid">
                                         <textarea name="description" class="form-control"
-                                          style="border: none !important;" rows="3" spellcheck="false"></textarea>
+                                          style="border: none !important;" rows="3" spellcheck="false"
+                                          placeholder="<?php echo $_SESSION['organizer_description'] ?>"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -684,6 +697,39 @@ $uId = $_SESSION['id'];
                               <!--end::Row-->
                             </div>
                             <!--end::Tab-->
+                            <div class="tab-pane px-md-7" id="kt_user_edit_tab_2" role="tabpanel">
+                              <!--begin::Row-->
+                              <div class="row">
+                                <div class="col-xl-7 my-2">
+                                  <!--begin::Row-->
+                                  <div class="row">
+                                    <label class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                      <h6 class="text-dark font-weight-bold mb-10">Change Password:</h6>
+                                    </div>
+                                  </div>
+                                  <!--end::Row-->
+
+                                  <!--begin::Group-->
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-md-3  ">New Password</label>
+                                    <div class="col-md-9">
+                                      <input name="newPwd" class="form-control form-control-lg form-control-solid"
+                                        type="password" autocomplete="new-password">
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-form-label col-md-3  ">Confirm Password</label>
+                                    <div class="col-md-9">
+                                      <input name="confirmNewPwd"
+                                        class="form-control form-control-lg form-control-solid" type="password">
+                                    </div>
+                                  </div>
+                                  <!--end::Group-->
+                                </div>
+                              </div>
+                              <!--end::Row-->
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -724,9 +770,13 @@ $uId = $_SESSION['id'];
   ?>
   <script>
   const editSettingsBtn = document.getElementById("editSettings");
+  const resetBtn = document.getElementById("resetBtn");
   const settingsForm = document.getElementById("kt_form");
   editSettingsBtn.addEventListener('click', () => {
     settingsForm.submit();
+  });
+  resetBtn.addEventListener('click', () => {
+    settingsForm.reset();
   });
   </script>
 

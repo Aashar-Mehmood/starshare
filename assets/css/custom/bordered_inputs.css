@@ -10,3 +10,8 @@
 .form-group .input-group input {
   border: none !important;
 }
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+}

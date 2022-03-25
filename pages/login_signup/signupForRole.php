@@ -1,13 +1,13 @@
 <?php
-  include_once('./checkUsersSession.php');
+include_once('./checkUsersSession.php');
+include_once('./db_connection.php');
 
-  if(isset($_GET["role"])){
-    $role = $_GET["role"];
-  }
-  else{
-    $role = "star";
-  }
-  $actionPath = "pages/login_signup/addNewRole.php?role=".$role;
+if (isset($_GET["role"])) {
+  $role = $_GET["role"];
+} else {
+  $role = "star";
+}
+$actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
 ?>
 <!DOCTYPE html>
 
@@ -125,7 +125,7 @@
   </div>
 
   <!--end::Main-->
-  <?php include("../../partials/_extras/offcanvas/quick-user.php")?>
+  <?php include("../../partials/_extras/offcanvas/quick-user.php") ?>
   <?php include("../../partials/jslinks.php"); ?>
 </body>
 

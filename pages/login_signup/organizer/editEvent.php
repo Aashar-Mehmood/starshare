@@ -1,5 +1,23 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
+
+$eventId = $_GET['eventId'];
+$organizerId = $_SESSION['id'];
+
+$prevRecord = mysqli_query($conn, "SELECT * FROM `events` WHERE `id`= $eventId AND `organizer_id` = $organizerId;");
+$recordArr = mysqli_fetch_assoc($prevRecord);
+
+$prevSeats = mysqli_query($conn, "SELECT * FROM `tickets` WHERE `event_id` = $eventId;");
+$seatsArr = mysqli_fetch_assoc($prevSeats);
+$ticketPrice = $seatsArr['price'];
+
+$title = $recordArr['title'];
+$description = $recordArr['description'];
+$location = $recordArr['location'];
+$date = $recordArr['date'];
+$time = $recordArr['time'];
+$banner = $recordArr['banner'];
 ?>
 <!DOCTYPE html>
 
@@ -92,6 +110,22 @@ include_once('../checkUsersSession.php');
           <!--end::Container-->
         </div>
 
+        <!-- modal to show previous banner of event -->
+        <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Previous Banner</h5>
+              </div>
+              <div class="modal-body p-4">
+                <img class="w-100" src="<?php echo $banner ?>" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--============= end modal=================-->
+
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
           <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
@@ -107,48 +141,56 @@ include_once('../checkUsersSession.php');
                       </div>
                       <!--begin::Form-->
 
-                      <form
-                        action="<?php echo "pages/login_signup/organizer/editEventDb.php?eventId=" . $_GET['eventId'] ?>"
+                      <form action="<?php echo "pages/login_signup/organizer/editEventDb.php?eventId=" . $eventId ?>"
                         method="POST" enctype="multipart/form-data">
 
                         <div class="card-body">
                           <div class="form-group row">
                             <div class="col-lg-6">
                               <label>Title :</label>
-                              <input name="title" type="text" class="form-control form-control-solid" />
+                              <input name="title" type="text" class="form-control form-control-solid"
+                                placeholder="<?php echo $title ?>" />
                             </div>
                             <div class="col-lg-6">
                               <label>Description :</label>
-                              <textarea name="description" class="form-control form-control-solid" rows="3"></textarea>
+                              <textarea name="description" class="form-control form-control-solid" rows="3"
+                                placeholder="<?php echo $description ?>"></textarea>
                             </div>
                           </div>
                           <div class="form-group row">
                             <div class="col-lg-6">
                               <label>New Location :</label>
-                              <input name="location" type="text" class="form-control form-control-solid" />
+                              <input name="location" type="text" class="form-control form-control-solid"
+                                placeholder="<?php echo $location ?>" />
                             </div>
                             <div class="col-lg-6">
                               <label>Ticket Price :</label>
                               <input name="ticket_price" type="number" name="ticketPrice"
-                                class="form-control form-control-solid" />
+                                class="form-control form-control-solid" placeholder="<?php echo $ticketPrice ?>" />
                             </div>
                           </div>
 
                           <div class="form-group row">
                             <div class="col-lg-6">
                               <label for="eventDate">New Date :</label>
-                              <input name="date" class="form-control form-control-solid" type="date" id="eventDate" />
+                              <input name="date" class="form-control form-control-solid" type="date" id="eventDate"
+                                value="<?php echo $date ?>" />
                             </div>
                             <div class="col-lg-6">
                               <label for="eventTime">New Time :</label>
-                              <input name="time" class="form-control form-control-solid" type="time" id="eventTime" />
+                              <input name="time" class="form-control form-control-solid" type="time" id="eventTime"
+                                value="<?php echo $time ?>" />
                             </div>
 
                           </div>
                           <div class="form-group row">
 
                             <div class="col-lg-6">
-                              <label>New Banner Image</label>
+                              <label class="d-flex justify-content-between pr-2">
+                                New Banner Image
+                                <a href="javascript;" data-target="#previousBanner" data-toggle="modal">View
+                                  Previous</a>
+                              </label>
                               <div></div>
                               <div class="custom-file">
                                 <input name="banner" type="file" class="custom-file-input" id="customFile" />

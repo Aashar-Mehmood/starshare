@@ -1,5 +1,26 @@
 <?php
 include_once("../login_signup/check_session.php");
+include_once("../login_signup/db_connection.php");
+
+if (!isset($_GET['organizerId'])) {
+  header("location:./organizers.php");
+  exit();
+} else {
+  $id = $_GET['organizerId'];
+  $organizerQuery = "SELECT * FROM organizers WHERE u_id = $id;";
+  $organizerData = mysqli_query($conn, $organizerQuery);
+  $arr = mysqli_fetch_assoc($organizerData);
+  $name = $arr['name'];
+  $email = $arr['email'];
+  $contact = $arr['contact'];
+  $address = $arr['address'];
+  $description = $arr['description'];
+  $profile_img = $arr['profile_img'];
+
+  $eventQuery = "SELECT `id` FROM events WHERE organizer_id = $id;";
+  $totalEvents = mysqli_num_rows(mysqli_query($conn, $eventQuery));
+}
+
 ?>
 <!DOCTYPE html>
 
@@ -48,13 +69,15 @@ include_once("../login_signup/check_session.php");
             <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
               style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
+                <a class="nav-link active"
+                  href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Events</a>
+                <a class="nav-link" href="pages/organizers/allEvents.php?organizerId=<?php echo $id ?>">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Transactions</a>
+                <a class="nav-link"
+                  href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
               </li>
             </ul>
             <!--end::Header Menu-->
@@ -107,25 +130,28 @@ include_once("../login_signup/check_session.php");
                               <!--begin::Symbol-->
                               <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
                                 <span class="symbol-label">
-                                  <img src="assets/media/svg/avatars/007-boy-2.svg" class="h-75 align-self-end" alt="">
+                                  <img src="<?php echo $profile_img ?>" class="h-100 align-self-end" alt="">
                                 </span>
                               </div>
                               <!--end::Symbol-->
                               <!--begin::Username-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">Jerry
-                                Kane</a>
+                              <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
+                                <?php echo $name ?>
+                              </p>
                               <!--end::Username-->
                               <!--begin::Info-->
-                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">star related info</div>
+                              <div class="font-weight-bold text-dark-50 font-size-sm pb-6">
+                                <?php echo $email ?>
+                              </div>
                               <!--end::Info-->
                             </div>
                             <!--end::Header-->
                             <!--begin::Body-->
                             <div class="pt-1">
                               <!--begin::Text-->
-                              <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">Lorem ipsum dolor, sit
-                                amet consectetur adipisicing elit. Est, laudantium.</p>
+                              <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
+                                <?php echo $description ?>
+                              </p>
                               <!--end::Text-->
                               <!--begin::Item-->
                               <div class="d-flex align-items-center pb-9">
@@ -153,8 +179,7 @@ include_once("../login_signup/check_session.php");
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="d-flex flex-column flex-grow-1">
-                                  <a href="#"
-                                    class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">
+                                  <a href="#" class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                     Reviews
                                   </a>
                                 </div>
@@ -198,7 +223,9 @@ include_once("../login_signup/check_session.php");
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #24bd7680;">
-                          <h2>100</h2>
+                          <h2>
+                            <?php echo $totalEvents ?>
+                          </h2>
                           <h2>Events Organized</h2>
                         </div>
                         <!--end::Chart-->
@@ -278,587 +305,19 @@ include_once("../login_signup/check_session.php");
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-16.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-51.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-52.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-72.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-39.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-72.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">
-                              View Event
-                            </button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-16.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">View
-                              Events</button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-51.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">View
-                              Events</button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom gutter-b">
-                      <!--begin::Body-->
-                      <div class="card-body">
-                        <!--begin::Wrapper-->
-                        <div class="d-flex justify-content-between flex-column h-100">
-                          <!--begin::Container-->
-                          <div class="h-100">
-                            <!--begin::Header-->
-                            <div class="d-flex flex-column flex-center">
-                              <!--begin::Image-->
-                              <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                style="background-image: url(assets/media/stock-600x400/img-52.jpg)"></div>
-                              <!--end::Image-->
-                              <!--begin::Title-->
-                              <a href="#"
-                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">
-                                Event Title
-                              </a>
-                              <!--end::Title-->
-                              <!--begin::Text-->
-                              <div class="font-weight-bold text-dark-50 text-center pb-7">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum suscipit non
-                                  molestias? Voluptas alias dolorem, maxime sapiente sed aperiam</p>
-                              </div>
-                              <!--end::Text-->
-                            </div>
-                            <!--end::Header-->
-
-                          </div>
-                          <!--eng::Container-->
-                          <!--begin::Footer-->
-                          <div class="d-flex flex-center">
-                            <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-14">View
-                              Events</button>
-                          </div>
-                          <!--end::Footer-->
-                        </div>
-                        <!--end::Wrapper-->
-                      </div>
-                      <!--end::Body-->
-                    </div>
-                  </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center flex-wrap mt-12">
-                  <div class="d-flex flex-wrap py-2 px-6 justify-content-center"
-                    style="background-color: white; border-radius: 10px; width:60%;">
-
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">1</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary  mr-2 my-1">2</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">3</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">4</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">5</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">6</a>
-                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>
-                    <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1"><i
-                        class="ki ki-bold-arrow-next icon-xs"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
-              <div class="container">
-                <div class="col-lg-10 col-xl-12 px-md-10 pt-md-8">
-                  <h1 class="text-dark mb-8">Recent Transactions</h1>
-                  <div class="card card-custom card-stretch gutter-b w-md-75">
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                      <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label font-weight-bolder text-dark">Transaction Details</span>
-                      </h3>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-2 mt-3">
-                      <!--begin::Table-->
-                      <div class="table-responsive table-bordered table-hover">
-                        <table class="table table-vertical-center mb-0">
-                          <thead class="bg-primary text-dark">
-                            <tr>
-                              <th class=" min-w-100px">Paid By</th>
-                              <th class=" min-w-100px">Amount</th>
-                              <th class=" min-w-100px">Date</th>
-                              <th class=" min-w-100px">Transaction Id</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">Brad
-                                  Simmons</a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$2,000</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>12-oct-2021</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  112233556
-                                </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">
-                                  Dany Jons
-                                </a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$1,000</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>19-Sep-2021</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  110043533
-                                </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">
-                                  John Doe
-                                </a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$1,200</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>2-Jan-2020</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  005856556
-                                </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">Brad
-                                  Simmons</a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$2,000</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>12-oct-2021</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  112233556
-                                </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">
-                                  Dany Jons
-                                </a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$1,000</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>19-Sep-2021</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  110043533
-                                </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <a href="#" class="text-dark  text-hover-primary mb-1 font-size-lg">
-                                  John Doe
-                                </a>
-                              </td>
-                              <td>
-                                <span class="text-dark-75  d-block font-size-lg">$1,200</span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  <date>2-Jan-2020</date>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="">
-                                  005856556
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <!--end::Table-->
-                      </div>
-                    </div>
-                    <!--end::Body-->
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
-          <!--Content area here-->
         </div>
-
-        <!--end::Content-->
-
-        <?php include("../../partials/_footer.php"); ?>
       </div>
-
-      <!--end::Wrapper-->
+      <!--Content area here-->
     </div>
+
+    <!--end::Content-->
+
+    <?php include("../../partials/_footer.php"); ?>
+  </div>
+
+  <!--end::Wrapper-->
+  </div>
 
   </div>
   <?php

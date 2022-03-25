@@ -1,5 +1,6 @@
 <?php
 include_once('../checkUsersSession.php');
+include_once('../db_connection.php');
 ?>
 <!DOCTYPE html>
 

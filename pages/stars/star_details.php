@@ -1,5 +1,6 @@
 <?php
-  include_once("../login_signup/check_session.php");
+include_once("../login_signup/check_session.php");
+include_once("../login_signup/db_connection.php");
 ?>
 
 <!DOCTYPE html>
@@ -34,9 +35,9 @@
 
 <body id="kt_body"
   class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-  <?php 
-  include("../../partials/_header-mobile.php"); 
-?>
+  <?php
+  include("../../partials/_header-mobile.php");
+  ?>
 
   <div class="d-flex flex-column flex-root">
 
@@ -1764,7 +1765,7 @@
   </div>
   <?php include("../../partials/_extras/offcanvas/quick-user.php") ?>
   <?php
-    include("../../partials/jslinks.php");
+  include("../../partials/jslinks.php");
   ?>
 
 

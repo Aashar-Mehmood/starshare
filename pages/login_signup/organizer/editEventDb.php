@@ -33,7 +33,7 @@ if (!isset($_POST['updateEvent'])) {
     updateEvent('time', $time);
   }
   if (!empty($ticketPrice)) {
-    $ticketUpdate = mysqli_query($conn, "UPDATE `tickets` SET `price` = $ticketPrice WHERE `event_id` = $eventId;");
+    $ticketUpdate = mysqli_query($conn, "UPDATE `tickets` SET `price` = $ticketPrice WHERE `event_id` = $eventId AND `buyer_id`=NULL;");
     if ($ticketUpdate) {
       $message .= "ticketPrice, ";
     }
