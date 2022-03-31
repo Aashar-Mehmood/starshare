@@ -8,6 +8,8 @@ $contact = $_POST['contact'];
 $address = $_POST['address'];
 $uploadOk = true;
 
+$newPwd = $_POST['newPwd'];
+$confirmNewPwd = $_POST['confirmNewPwd'];
 
 
 if (isset($_FILES['profile_avatar'])) {
@@ -46,6 +48,16 @@ if ($contact !== "") {
 if ($address !== "") {
 
   updateField($conn, 'address', $address);
+}
+
+if(!empty($newPwd) && !empty($confirmNewPwd)){
+  if($confirmNewPwd !== $newPwd){
+    $message = "The password and its confirm are not same";
+  }
+  else{
+    $hashedPwd = password_hash($newPwd, PASSWORD_DEFAULT);
+    updateField($conn, 'password', $hashedPwd);
+  }
 }
 
 function updateField($conn, $column, $val)

@@ -133,7 +133,7 @@ include_once("../login_signup/check_session.php");
                       <span class="text-muted mt-3 font-weight-bold font-size-sm">List of all registered stars on the
                         website</span>
                     </h3>
-                    <div class="card-toolbar">
+                    <!-- <div class="card-toolbar">
                       <div class="btn-group">
                         <button type="button" class="btn btn-info  dropdown-toggle" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">Filter by category</button>
@@ -165,7 +165,7 @@ include_once("../login_signup/check_session.php");
 
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <!--end::Header-->
                   <!--begin::Body-->

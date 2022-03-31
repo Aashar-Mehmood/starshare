@@ -149,7 +149,7 @@ include_once("../login_signup/check_session.php");
                               <th style="min-width: 100px;">Email</th>
                               <th style="min-width: 100px;">Contact</th>
                               <th style="min-width: 100px;">Address</th>
-                              <th style="min-width: 130px;">Events Organized</th>
+                              <th style="min-width: 130px;">Events Participated</th>
                               <th style="min-width: 130px;">Action</th>
                             </tr>
                           </thead>
