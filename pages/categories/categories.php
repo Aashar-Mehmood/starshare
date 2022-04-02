@@ -142,10 +142,7 @@ include_once("../login_signup/db_connection.php");
                                       <i class='
                                         fas fa-edit text-primary' aria-hidden='true'></i>
                                     </a>
-                                    <a href='pages/categories/deleteCategory.php?id=$categoryId' title='Delete' class='btn btn-icon btn-light btn-hover-danger btn-sm'>
-                                    <i class='
-                                      fas fa-trash text-danger' aria-hidden='true'></i>
-                                    </a>
+                                    
                                   </td>
                                 </tr>
                                 ";

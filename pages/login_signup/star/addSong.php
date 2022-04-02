@@ -18,9 +18,9 @@ if (!isset($_POST['addSong'])) {
   ) {
     $message =  "All fields are required";
   } else {
-    $originalPath = "assets/media/songs/" . rand(10, 1000) . $_FILES['original']['name'];
-    $samplePath = "assets/media/songs/" . rand(10, 1000)  . $_FILES['sample']['name'];
-    $bannerPath = "assets/media/banners/" . rand(10, 1000)  . $_FILES['banner']['name'];
+    $originalPath = "assets/media/songs/" . $_FILES['original']['name'];
+    $samplePath = "assets/media/songs/"  . $_FILES['sample']['name'];
+    $bannerPath = "assets/media/banners/"  . $_FILES['banner']['name'];
 
     $uploadOk1 = handleBanner($_FILES['banner'], $bannerPath);
     $uploadOk2 = handleAudio($_FILES['original'], $originalPath);
@@ -57,8 +57,9 @@ function handleBanner($fileArray, $path)
   $destination = '../../../' . $path;
   $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
   $size = filesize($fileArray['tmp_name']);
-
-  if (!in_array($extension, $allowedImg)) {
+  if (file_exists($destination)) {
+    $message =  "File already exists.";
+  } else if (!in_array($extension, $allowedImg)) {
     $message =  "Only jpg, jpeg, png, svg, jfif and gif files are allowed";
   } else if ($size > 1100000) {
     $message =  "Files upto 1 MB are allowed only";
@@ -78,8 +79,9 @@ function handleAudio($fileArray, $path)
 
   $destination = '../../../' . $path;
   $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-
-  if (!in_array($extension, $allowedAudio)) {
+  if (file_exists($destination)) {
+    $message =  "File already exists.";
+  } else if (!in_array($extension, $allowedAudio)) {
     $message = "Only mp3, mp4, ogg, webm, aac, and wav files are allowed";
     alertMessage($message);
   } else {

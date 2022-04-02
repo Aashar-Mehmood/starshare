@@ -111,7 +111,12 @@ $prevBanner = $dataArr['banner'];
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Previous Song</h5>
+                <h5 class="modal-title">
+                  Previous Song
+                </h5>
+                <h1 aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">
+                  &times;
+                </h1>
               </div>
               <div class="modal-body">
                 <audio controls>
@@ -132,6 +137,9 @@ $prevBanner = $dataArr['banner'];
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Previous Sample</h5>
+                <h1 aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">
+                  &times;
+                </h1>
               </div>
               <div class="modal-body">
                 <audio controls>
@@ -153,6 +161,9 @@ $prevBanner = $dataArr['banner'];
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title">Previous Banner</h5>
+                <h1 aria-hidden="true" data-dismiss="modal" style="cursor: pointer;">
+                  &times;
+                </h1>
               </div>
               <div class="modal-body p-4">
                 <img class="w-100" src="<?php echo $prevBanner ?>" alt="">
@@ -185,8 +196,9 @@ $prevBanner = $dataArr['banner'];
                       <div class="form-group">
                         <label class="d-flex justify-content-between pr-2">
                           Change Song
-                          <span><a href="javascript;" data-target="#previousOriginal" data-toggle="modal">Play
-                              Previous</a></span>
+                          <span><a href="javascript;" data-target="#previousOriginal" data-toggle="modal">
+                            Play Previous Song
+                            </a></span>
                         </label>
                         <div></div>
                         <div class="custom-file">
@@ -197,8 +209,9 @@ $prevBanner = $dataArr['banner'];
                       <div class="form-group">
                         <label class="d-flex justify-content-between pr-2">
                           Change Sample
-                          <span><a href="javascript;" data-target="#previousSample" data-toggle="modal">Play
-                              Previous</a></span>
+                          <span><a href="javascript;" data-target="#previousSample" data-toggle="modal">
+                            Play Previous Sample
+                          </a></span>
                         </label>
                         <div></div>
                         <div class="custom-file">
@@ -210,7 +223,7 @@ $prevBanner = $dataArr['banner'];
                         <label class="d-flex justify-content-between pr-2">
                           Change Banner
                           <span><a href="javascript;" data-target="#previousBanner" data-toggle="modal">
-                              View Previous
+                              View Previous Banner
                             </a></span>
                         </label>
                         <div></div>
@@ -220,9 +233,10 @@ $prevBanner = $dataArr['banner'];
                         </div>
                       </div>
                       <div class="d-flex w-md-50 justify-content-between mt-12">
-                        <input type="submit" name="editSong" value="Save Changes" class="btn btn-primary">
-
-                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Reset</button>
+                        <input type="submit" name="editSong" value="Update" class="btn btn-primary">
+                        <a href="pages/login_signup/star/details.php?parentId=star">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </a>
                       </div>
 
                     </form>
