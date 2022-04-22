@@ -15,7 +15,7 @@ $countQuery = "SELECT * FROM `organizers`;";
 
 if (isset($_POST['search']) && !empty($_POST['searchedText'])) {
   $searchText = $_POST['searchedText'];
-  $countQuery = "SELECT * FROM `organizers` WHERE `address` LIKE '%$searchText';";
+  $countQuery = "SELECT * FROM `organizers` WHERE `name` LIKE '%$searchText%' OR `email` LIKE '%$searchText%' OR `contact` LIKE '%$searchText%';";
 }
 
 $result = mysqli_query($conn, $countQuery);
@@ -28,7 +28,7 @@ $limitSelect = "SELECT * FROM `organizers` LIMIT $recordPerPage OFFSET $offset;"
 
 if (isset($_POST['search']) && !empty($_POST['searchedText'])) {
   $searchText = $_POST['searchedText'];
-  $limitSelect = "SELECT * FROM `organizers` WHERE `name` LIKE '$searchText%' OR `email` LIKE '$searchText%' OR `contact` LIKE '$searchText%' LIMIT $recordPerPage OFFSET $offset;";
+  $limitSelect = "SELECT * FROM `organizers` WHERE `name` LIKE '%$searchText%' OR `email` LIKE '%$searchText%' OR `contact` LIKE '%$searchText%' LIMIT $recordPerPage OFFSET $offset;";
 }
 
 $limitResult = mysqli_query($conn, $limitSelect);

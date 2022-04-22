@@ -21,8 +21,8 @@ $totalProducts = mysqli_num_rows($productData);
     <meta charset="utf-8" />
     <title>Supplier Details</title>
     <?php
-  include("../../../partials/csslinks.php");
-  ?>
+    include("../../../partials/csslinks.php");
+    ?>
     <link rel="stylesheet" href="assets/css/custom/responsive_nav.css">
     <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
     <link rel="stylesheet" href="assets/css/custom/user_details.css">
@@ -54,8 +54,8 @@ $totalProducts = mysqli_num_rows($productData);
 <body id="kt_body"
     class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
-  include("../../../partials/_header-mobile.php");
-  ?>
+    include("../../../partials/_header-mobile.php");
+    ?>
 
     <div class="d-flex flex-column flex-root">
 
@@ -124,7 +124,8 @@ $totalProducts = mysqli_num_rows($productData);
 
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
-                        <div class="tab-pane fade " id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel"
+                            aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -348,8 +349,7 @@ $totalProducts = mysqli_num_rows($productData);
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_2">
+                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                             <div class="modal fade" id="newStarCategory" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -420,17 +420,18 @@ $totalProducts = mysqli_num_rows($productData);
                                                         </thead>
                                                         <tbody>
                                                             <?php
-                              if ($totalProducts == 0) {
-                                echo '<tr>
+                                                            if ($totalProducts == 0) {
+                                                                echo '<tr>
                                         <td colspan="4">
                                           <h1 style = "text-align:center;">No Products added yet</h1>
                                         </td>
                                       </tr> ';
-                              } else {
+                                                            } else {
 
-                                while ($productArr = mysqli_fetch_assoc($productData)) {
-                                  echo
-                                  '<tr>
+                                                                while ($productArr = mysqli_fetch_assoc($productData)) {
+                                                                    $pId = $productArr['id'];
+                                                                    echo
+                                                                    '<tr>
                                       <td>
                                           <p
                                               class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
@@ -450,9 +451,8 @@ $totalProducts = mysqli_num_rows($productData);
                                               </span>
                                       </td>
                                       <td>
-                                          <a href="javascript:void(0)" title="Edit"
-                                              data-target="#newStarCategory"
-                                              data-toggle="modal"
+                                          <a href="pages/login_signup/supplier/editProduct.php?pId=' . $pId . '" title="Edit"
+                                              
                                               class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                               <span
                                                   class="svg-icon svg-icon-md svg-icon-primary">
@@ -481,7 +481,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                   <!--end::Svg Icon-->
                                               </span>
                                           </a>
-                                          <a href="#" title="Delete"
+                                          <a href="pages/login_signup/supplier/deleteProduct.php?pId=' . $pId . '" title="Delete"
                                               class="btn btn-icon btn-light btn-hover-danger btn-sm">
                                               <span
                                                   class="svg-icon svg-icon-md svg-icon-danger">
@@ -510,10 +510,10 @@ $totalProducts = mysqli_num_rows($productData);
                                       </td>
                                   </tr>  
                               ';
-                                }
-                              }
+                                                                }
+                                                            }
 
-                              ?>
+                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1081,8 +1081,8 @@ $totalProducts = mysqli_num_rows($productData);
     </div>
     <?php include("../../../partials/_extras/offcanvas/quick-supplier.php") ?>
     <?php
-  include("../../../partials/jslinks.php");
-  ?>
+    include("../../../partials/jslinks.php");
+    ?>
 
     <script>
     const editSettingsBtn = document.getElementById("editSettings");

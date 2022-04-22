@@ -14,7 +14,7 @@ $countQuery = "SELECT * FROM `stars`;";
 
 if (isset($_POST['search']) && !empty($_POST['searchedText'])) {
   $searchedText = $_POST['searchedText'];
-  $countQuery = "SELECT * FROM `stars` WHERE `address` LIKE '%$searchedText';";
+  $countQuery = "SELECT * FROM `stars` WHERE `name` LIKE '%$searchedText%' OR `email` LIKE '%$searchedText%'  OR `contact` LIKE '%$searchedText%';";
 }
 
 $result = mysqli_query($conn, $countQuery);
@@ -27,7 +27,7 @@ $limitSelect = "SELECT * FROM `stars` LIMIT $recordPerPage OFFSET $offset;";
 
 if (isset($_POST['search']) && !empty($_POST['searchedText'])) {
   $searchedText = $_POST['searchedText'];
-  $limitSelect = "SELECT * FROM `stars` WHERE `name` LIKE '$searchedText%' OR `email` LIKE '$searchedText%'  OR `contact` LIKE '$searchedText%' LIMIT $recordPerPage OFFSET $offset;";
+  $limitSelect = "SELECT * FROM `stars` WHERE `name` LIKE '%$searchedText%' OR `email` LIKE '%$searchedText%'  OR `contact` LIKE '%$searchedText%' LIMIT $recordPerPage OFFSET $offset;";
 }
 
 $limitResult = mysqli_query($conn, $limitSelect);

@@ -1,8 +1,13 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
+$productId = $_GET['pId'];
+$supplierId = $_SESSION['id'];
 
-
+$prevData = mysqli_query($conn, "SELECT * FROM `products` WHERE `id` = $productId AND `supplier_id` = $supplierId;");
+$dataArr = mysqli_fetch_assoc($prevData);
+$prevName = $dataArr['name'];
+$prevPrice = $dataArr['price'];
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +114,9 @@ include_once('../db_connection.php');
                                         <h2 class="card-title">Edit Product</h2>
                                     </div>
                                     <div class="card-body">
-                                        <form class="form" action="" method="POST">
+                                        <form class="form"
+                                            action="pages/login_signup/supplier/editProductDb.php?pId=<?php echo "$productId" ?>"
+                                            method="POST">
                                             <div class="form-group">
                                                 <label>Change Name :</label>
                                                 <input placeholder="<?php echo $prevName; ?>" type="text" name="name"
