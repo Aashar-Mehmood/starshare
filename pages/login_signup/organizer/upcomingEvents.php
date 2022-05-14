@@ -132,7 +132,7 @@ $sellerEmail = 'kiran3saba-facilitator@gmail.com';
                   
                   <!--begin::all events list-->
 
-                      <div class="col-md-6 col-xl-4">
+                  <div class="col-md-6 col-xl-4">
                     <div class="card card-custom gutter-b">
                       <!--begin::Body-->
                       <div class="card-body">
