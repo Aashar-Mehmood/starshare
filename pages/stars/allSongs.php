@@ -137,10 +137,11 @@ if (!isset($_GET['starId'])) {
                                 <?php
                 if (mysqli_num_rows($songData) == 0) {
                   echo  '<div class="row">
-                            <h2 class="text-align-center">No Songs Uploaded by this Artist</h2>
+                            <h2 class="text-align-center">No Songs Uploaded by the Star</h2>
                           </div>';
                 } else {
                   echo '<h2 class="pl-8">Latest Songs</h2>';
+                  echo '<div class="row">';
                   while ($songArr = mysqli_fetch_assoc($songData)) {
                     $songId =   "playSong" . $songArr['id'];
                     echo '<div class="modal fade" id="' . $songId . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -166,7 +167,7 @@ if (!isset($_GET['starId'])) {
                               </div>
                             </div>';
                     $banner = $songArr['banner'];
-                    echo '<div class="row">
+                    echo '
                               <div class="col-md-6 col-xl-4">
                                 <div class="card card-custom gutter-b">
                                   <!--begin::Body-->
@@ -221,14 +222,14 @@ if (!isset($_GET['starId'])) {
                                             <div class="d-flex flex-column flex-grow-1">
                                               <p
                                                 class="text-dark-75 mb-1 font-size-lg font-weight-bolder">
-                                                Upload Date
+                                                Price
                                               </p>
                                             </div>
                                             <!--end::Text-->
                                             <!--begin::label-->
                                             <span
                                               class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                              ' . $songArr['upload_date'] . '
+                                              ' . $songArr['price'] . '
                                               </span>
                                             <!--end::label-->
                                           </div>
@@ -293,8 +294,9 @@ if (!isset($_GET['starId'])) {
                                   <!--end::Body-->
                                 </div>
                               </div>                 
-                            </div>';
+                            ';
                   }
+                  echo '</div>';
                 }
                 ?>
 

@@ -9,6 +9,7 @@ if (!isset($_POST['addSong'])) {
 } else {
   $star_id = $_SESSION['id'];
   $title = $_POST['title'];
+  $price = $_POST['price'];
   $originalSize = $_FILES['original']['size'];
   $sampleSize = $_FILES['sample']['size'];
   $bannerSize = $_FILES['banner']['size'];
@@ -26,10 +27,10 @@ if (!isset($_POST['addSong'])) {
     $uploadOk2 = handleAudio($_FILES['original'], $originalPath);
     $uploadOk3 = handleAudio($_FILES['sample'], $samplePath);
     if ($uploadOk1 && $uploadOk2 && $uploadOk3) {
-      $query = "INSERT INTO `songs` (`star_id`, `title`, `original`, `sample`, `banner`) VALUES (?, ?, ?, ?, ?);";
+      $query = "INSERT INTO `songs` (`star_id`, `title`, `original`, `sample`, `banner`, `price`) VALUES (?, ?, ?, ?, ?, ?);";
       $stmt = mysqli_stmt_init($conn);
       mysqli_stmt_prepare($stmt, $query);
-      mysqli_stmt_bind_param($stmt, "issss", $star_id, $title, $originalPath, $samplePath, $bannerPath);
+      mysqli_stmt_bind_param($stmt, "issssi", $star_id, $title, $originalPath, $samplePath, $bannerPath, $price);
       $executed = mysqli_stmt_execute($stmt);
       if ($executed) {
         $message =  "New song added";
@@ -41,7 +42,7 @@ if (!empty($message)) {
   alertMessage($message);
 }
 
-header("Refresh:0; URL=./details.php?parentId=star");
+// header("Refresh:0; URL=./details.php?parentId=star");
 
 
 function alertMessage($msg)

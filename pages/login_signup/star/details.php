@@ -363,6 +363,11 @@ $description = $_SESSION['star_description'];
                                                     <input type="text" name="title"
                                                         class="form-control form-control-solid" />
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Price :</label>
+                                                    <input type="number" name="price"
+                                                        class="form-control form-control-solid" />
+                                                </div>
 
                                                 <div class="form-group">
                                                     <label>Upload Song</label>
@@ -431,7 +436,7 @@ $description = $_SESSION['star_description'];
                                                             <thead class="thead-dark">
                                                                 <tr>
                                                                     <th style="min-width: 150px;">Song Title</th>
-                                                                    <th style="min-width: 150px;">Star Name</th>
+                                                                    <th style="min-width: 150px;">Price</th>
                                                                     <th style="min-width: 150px;">Downloads</th>
                                                                     <th style="min-width:200px; padding-left:1.75rem">
                                                                         Action</th>
@@ -446,6 +451,7 @@ $description = $_SESSION['star_description'];
                                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                                     $songId = $row['id'];
                                                                     $status = $row['status'];
+                                                                    $songPrice = $row['price'];
                                                                     if ($status == "published") {
                                                                         $icon = "fas fa-trash text-danger";
                                                                         $title = "unpublish";
@@ -467,8 +473,8 @@ $description = $_SESSION['star_description'];
                                                                         </td>
                                                                         <td>
                                                                             <span class='text-dark-75 font-weight-bolder d-block font-size-lg'>" .
-                                                                        $_SESSION['star_name'] .
-                                                                        "</span>
+                                                                        $songPrice .
+                                                                        "&nbsp;$</span>
                                                                         </td>
                                                                         <td>
                                                                             <span class='text-dark-75 font-weight-bolder d-block font-size-lg'>" .
