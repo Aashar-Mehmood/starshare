@@ -527,252 +527,124 @@ $totalProducts = mysqli_num_rows($productData);
                             <!-- End Main Container -->
 
                         </div>
+                        <?php
+                        // all quotations
+                        $quotesData = mysqli_query(
+                            $conn,
+                            "SELECT `quotations`.`id`, `organizer_quotation`, `organizer_quotation_amount` AS `amount`,`title`, `banner`, `date`
+                            FROM quotations INNER JOIN events ON quotations.event_id = events.id 
+                            WHERE `supplier_id` = $id AND `status` = 'pending';"
+                        ) or die(mysqli_error($conn));
+                        ?>
                         <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-6 col-xl-4">
-                                        <div class="card card-custom gutter-b">
-                                            <!--begin::Body-->
-                                            <div class="card-body">
-                                                <!--begin::Wrapper-->
-                                                <div class="d-flex justify-content-between flex-column h-100">
-                                                    <!--begin::Container-->
-                                                    <div class="h-100">
-                                                        <!--begin::Header-->
-                                                        <div class="d-flex flex-column flex-center">
-                                                            <!--begin::Image-->
-                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                                                style="background-image: url(assets/media/stock-600x400/img-16.jpg)">
-                                                            </div>
-                                                            <!--end::Image-->
-                                                            <!--begin::Title-->
-                                                            <p
-                                                                class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
-                                                                Event Title
-                                                            </p>
-                                                            <!--end::Title-->
-                                                            <!--begin::Text-->
-                                                            <!--end::Text-->
-                                                        </div>
-                                                        <!--end::Header-->
-                                                        <!--begin::Body-->
-                                                        <div class="pt-1">
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <i class="fas fa-dollar-sign"></i>
-                                                                    </span>
+                                    <?php
+                                    if (mysqli_num_rows($quotesData) < 1) {
+                                        echo ' <div class="col-12 pl-8 pl-md-12 ">
+                                            <h2>No quotes received yet</h2>
+                                        </div>
+                                        ';
+                                    } else {
+                                        while ($quotesArr = mysqli_fetch_assoc($quotesData)) {
+                                            echo '<div class="col-md-6 col-xl-4">
+                                            <div class="card card-custom gutter-b">
+                                                <!--begin::Body-->
+                                                <div class="card-body">
+                                                    <!--begin::Wrapper-->
+                                                    <div class="d-flex justify-content-between flex-column h-100">
+                                                        <!--begin::Container-->
+                                                        <div class="h-100">
+                                                            <!--begin::Header-->
+                                                            <div class="d-flex flex-column flex-center">
+                                                                <!--begin::Image-->
+                                                                <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url(' . $quotesArr['banner'] . ')">
                                                                 </div>
-                                                                <!--end::Symbol-->
+                                                                <!--end::Image-->
+                                                                <!--begin::Title-->
+                                                                <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
+                                                                    ' . $quotesArr['title'] . '
+                                                                </p>
+                                                                <!--end::Title-->
                                                                 <!--begin::Text-->
-                                                                <div class="flex-grow-1">
-                                                                    <p
-                                                                        class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                                                        Quote Amount
-                                                                    </p>
-                                                                </div>
-                                                                <span
-                                                                    class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                                                    400$
-                                                                </span>
                                                                 <!--end::Text-->
                                                             </div>
-                                                            <div class="d-flex pb-9">
-                                                                <p>Description of the quotation ...
-                                                                </p>
-                                                                <a href="" class="ml-6">read more</a>
+                                                            <!--end::Header-->
+                                                            <!--begin::Body-->
+                                                            <div class="pt-1">
+                                                            <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <i class="fas fa-clock"></i>
+                                                                </span>
                                                             </div>
-                                                        </div>
-                                                        <!--end::Body-->
-                                                    </div>
-                                                    <!--eng::Container-->
-                                                    <!--begin::Footer-->
-                                                    <div class="d-flex align-items-center justify-content-between">
-
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Accept
-                                                            </button>
-                                                        </a>
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-secondary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Reject
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                                    <!--end::Footer-->
-                                                </div>
-                                                <!--end::Wrapper-->
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <div class="card card-custom gutter-b">
-                                            <!--begin::Body-->
-                                            <div class="card-body">
-                                                <!--begin::Wrapper-->
-                                                <div class="d-flex justify-content-between flex-column h-100">
-                                                    <!--begin::Container-->
-                                                    <div class="h-100">
-                                                        <!--begin::Header-->
-                                                        <div class="d-flex flex-column flex-center">
-                                                            <!--begin::Image-->
-                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                                                style="background-image: url(assets/media/stock-600x400/img-51.jpg)">
-                                                            </div>
-                                                            <!--end::Image-->
-                                                            <!--begin::Title-->
-                                                            <p
-                                                                class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
-                                                                Event Title
-                                                            </p>
-                                                            <!--end::Title-->
+                                                            <!--end::Symbol-->
                                                             <!--begin::Text-->
+                                                            <div class="flex-grow-1">
+                                                                <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                  Event Date
+                                                                </p>
+                                                            </div>
+                                                            <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                                                ' . $quotesArr['date'] . ' 
+                                                            </span>
                                                             <!--end::Text-->
                                                         </div>
-                                                        <!--end::Header-->
-                                                        <!--begin::Body-->
-                                                        <div class="pt-1">
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <i class="fas fa-dollar-sign"></i>
+                                                                <!--begin::Item-->
+                                                                <div class="d-flex align-items-center pb-9">
+                                                                    <!--begin::Symbol-->
+                                                                    <div class="symbol symbol-45 symbol-light mr-4">
+                                                                        <span class="symbol-label">
+                                                                            <i class="fas fa-dollar-sign"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <!--end::Symbol-->
+                                                                    <!--begin::Text-->
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                            Quote Amount
+                                                                        </p>
+                                                                    </div>
+                                                                    <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                                                        ' . $quotesArr['amount'] . ' $
                                                                     </span>
+                                                                    <!--end::Text-->
                                                                 </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="flex-grow-1">
-                                                                    <p
-                                                                        class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                                                        Quote Amount
-                                                                    </p>
+                                                                
+                                                                <div class="d-flex pb-9">
+                                                                    ' . $quotesArr['organizer_quotation'] . '
+                                                                    
                                                                 </div>
-                                                                <span
-                                                                    class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                                                    400$
-                                                                </span>
-                                                                <!--end::Text-->
                                                             </div>
-                                                            <div class="d-flex pb-9">
-                                                                <p>Description of the quotation ...
-                                                                </p>
-                                                                <a href="" class="ml-6">read more</a>
-                                                            </div>
+                                                            <!--end::Body-->
                                                         </div>
-                                                        <!--end::Body-->
+                                                        <!--eng::Container-->
+                                                        <!--begin::Footer-->
+                                                        <div class="d-flex align-items-center justify-content-between">
+    
+                                                            <a href="pages/login_signup/supplier/responseToQuote.php?quoteId=' . $quotesArr["id"] . '">
+                                                                <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
+                                                                    Respond
+                                                                </button>
+                                                            </a>
+                                                            <a href="pages/login_signup/supplier/rejectQuote.php?quoteId=' . $quotesArr["id"] . '">
+                                                                <button class="btn btn-secondary font-weight-bolder font-size-sm py-3 px-8">
+                                                                    Reject
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                        <!--end::Footer-->
                                                     </div>
-                                                    <!--eng::Container-->
-                                                    <!--begin::Footer-->
-                                                    <div class="d-flex align-items-center justify-content-between">
-
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Accept
-                                                            </button>
-                                                        </a>
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-secondary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Reject
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                                    <!--end::Footer-->
+                                                    <!--end::Wrapper-->
                                                 </div>
-                                                <!--end::Wrapper-->
+                                                <!--end::Body-->
                                             </div>
-                                            <!--end::Body-->
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <div class="card card-custom gutter-b">
-                                            <!--begin::Body-->
-                                            <div class="card-body">
-                                                <!--begin::Wrapper-->
-                                                <div class="d-flex justify-content-between flex-column h-100">
-                                                    <!--begin::Container-->
-                                                    <div class="h-100">
-                                                        <!--begin::Header-->
-                                                        <div class="d-flex flex-column flex-center">
-                                                            <!--begin::Image-->
-                                                            <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100"
-                                                                style="background-image: url(assets/media/stock-600x400/img-52.jpg)">
-                                                            </div>
-                                                            <!--end::Image-->
-                                                            <!--begin::Title-->
-                                                            <p
-                                                                class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
-                                                                Event Title
-                                                            </p>
-                                                            <!--end::Title-->
-                                                            <!--begin::Text-->
-                                                            <!--end::Text-->
-                                                        </div>
-                                                        <!--end::Header-->
-                                                        <!--begin::Body-->
-                                                        <div class="pt-1">
-                                                            <!--begin::Item-->
-                                                            <div class="d-flex align-items-center pb-9">
-                                                                <!--begin::Symbol-->
-                                                                <div class="symbol symbol-45 symbol-light mr-4">
-                                                                    <span class="symbol-label">
-                                                                        <i class="fas fa-dollar-sign"></i>
-                                                                    </span>
-                                                                </div>
-                                                                <!--end::Symbol-->
-                                                                <!--begin::Text-->
-                                                                <div class="flex-grow-1">
-                                                                    <p
-                                                                        class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                                                        Quote Amount
-                                                                    </p>
-                                                                </div>
-                                                                <span
-                                                                    class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                                                    400$
-                                                                </span>
-                                                                <!--end::Text-->
-                                                            </div>
-                                                            <div class="d-flex pb-9">
-                                                                <p>Description of the quotation ...
-                                                                </p>
-                                                                <a href="" class="ml-6">read more</a>
-                                                            </div>
-                                                        </div>
-                                                        <!--end::Body-->
-                                                    </div>
-                                                    <!--eng::Container-->
-                                                    <!--begin::Footer-->
-                                                    <div class="d-flex align-items-center justify-content-between">
+                                        </div>';
+                                        }
+                                    }
+                                    ?>
 
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Accept
-                                                            </button>
-                                                        </a>
-                                                        <a href="">
-                                                            <button
-                                                                class="btn btn-secondary font-weight-bolder font-size-sm py-3 px-8">
-                                                                Reject
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                                    <!--end::Footer-->
-                                                </div>
-                                                <!--end::Wrapper-->
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

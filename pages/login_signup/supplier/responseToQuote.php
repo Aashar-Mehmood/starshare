@@ -1,13 +1,8 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
-$productId = $_GET['pId'];
 $supplierId = $_SESSION['id'];
-
-$prevData = mysqli_query($conn, "SELECT * FROM `products` WHERE `id` = $productId AND `supplier_id` = $supplierId;");
-$dataArr = mysqli_fetch_assoc($prevData);
-$prevName = $dataArr['name'];
-$prevPrice = $dataArr['price'];
+$quoteId = $_GET['quoteId'];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +15,7 @@ $prevPrice = $dataArr['price'];
     <base href="../../../">
     <meta charset="utf-8" />
     <title>
-        Edit Product
+        Response to Quote
     </title>
     <?php
     include("../../../partials/csslinks.php");
@@ -111,29 +106,29 @@ $prevPrice = $dataArr['price'];
                             <div class="col-md-6 ">
                                 <div class="card card-rounded">
                                     <div class="card-header">
-                                        <h2 class="card-title">Edit Product</h2>
+                                        <h2 class="card-title">Quote Response</h2>
                                     </div>
                                     <div class="card-body">
-                                        <form class="form"
-                                            action="pages/login_signup/supplier/editProductDb.php?pId=<?php echo "$productId" ?>"
+                                        <form class="form" action="pages/login_signup/supplier/processResponse.php"
                                             method="POST">
+                                            <input type="hidden" name="quoteId" value="<?php echo $quoteId ?>">
                                             <div class="form-group">
-                                                <label>Change Name :</label>
-                                                <input placeholder="<?php echo $prevName; ?>" type="text" name="name"
+                                                <label>Quote Amount :</label>
+                                                <input type="text" name="supplierQuoteAmount"
                                                     class="form-control form-control-solid" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label>
-                                                    Change Price
+                                                    Description
                                                 </label>
-                                                <input placeholder="<?php echo $prevPrice; ?>" type="number"
-                                                    name="price" class="form-control form-control-solid" />
 
+                                                <textarea rows="6" name="supplierQuote"
+                                                    class="form-control form-control-solid"></textarea>
                                             </div>
 
                                             <div class="d-flex w-md-50 justify-content-between mt-12">
-                                                <input type="submit" name="editProduct" value="Update"
+                                                <input type="submit" name="responded" value="Respond"
                                                     class="btn btn-primary">
                                                 <a href="pages/login_signup/supplier/details.php?parentId=supplier">
                                                     <button type="button" class="btn btn-secondary"

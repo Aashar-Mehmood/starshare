@@ -13,8 +13,8 @@ include_once("../login_signup/db_connection.php");
     <meta charset="utf-8" />
     <title>Transactions</title>
     <?php
-  include("./../../partials/csslinks.php");
-  ?>
+    include("./../../partials/csslinks.php");
+    ?>
     <style>
     div.col-xl-6 {
         padding: 5rem 3rem;
@@ -39,8 +39,8 @@ include_once("../login_signup/db_connection.php");
 <body id="kt_body"
     class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
-  include("./../../partials/_header-mobile.php");
-  ?>
+    include("./../../partials/_header-mobile.php");
+    ?>
 
     <div class="d-flex flex-column flex-root">
 
@@ -83,180 +83,58 @@ include_once("../login_signup/db_connection.php");
                                             <thead class="bg-primary">
                                                 <tr class="text-left">
                                                     <th style="min-width: 120px">
-                                                        <span class="text-dark">transaction id</span>
+                                                        <span class="text-dark">Transaction Id</span>
+                                                    </th>
+
+                                                    <th style="min-width: 110px">
+                                                        <span class="text-dark">Product</span>
                                                     </th>
                                                     <th style="min-width: 110px">
-                                                        <span class="text-dark">Agent</span>
-                                                    </th>
-                                                    <th style="min-width: 110px">
-                                                        <span class="text-dark">Date</span>
+                                                        <span class="text-dark">Amount</span>
                                                     </th>
                                                     <th style="min-width: 120px">
-                                                        <span class="text-dark">Amount withdraw Req</span>
+                                                        <span class="text-dark">Date</span>
                                                     </th>
 
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <?php
+                                                $transactionData = mysqli_query(
+                                                    $conn,
+                                                    "SELECT * FROM transactions LIMIT 20 OFFSET 0;"
+                                                );
+                                                while ($transactionArr = mysqli_fetch_assoc($transactionData)) {
+                                                    echo '<tr>
                                                     <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">56037-XDER</a>
+                                                        <a
+                                                            class="text-dark-75 font-weight-bolder  font-size-lg">
+                                                            ' . $transactionArr["id"] . '
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed
-                                                            Khan</span>
-                                                        <span class="text-muted font-weight-bold">Star</span>
+                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                            ' . $transactionArr["product_name"] . '
+                                                            </span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">05/28/2020</span>
+                                                            class="text-info font-weight-bolder d-block font-size-lg">
+                                                            ' . $transactionArr["amount"] . '
+                                                            </span>
                                                     </td>
                                                     <td>
                                                         <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$900</span>
+                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                            ' . $transactionArr["date"] . '
+                                                            </span>
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder font-size-lg">05822-FXSP</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Belarus</span>
-                                                        <span class="text-muted font-weight-bold">Supplier</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">02/04/2020</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$560</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  ont-size-lg">00347-BCLQ</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Phillipines</span>
-                                                        <span class="text-muted font-weight-bold">Event Organizer</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">23/12/2020</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$155</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">4472-QREX</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Argentina</span>
-                                                        <span class="text-muted font-weight-bold">Supplier</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">17/09/2021</span>
+                                                </tr>';
+                                                }
+                                                ?>
 
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$200</span>
-                                                    </td>
-                                                </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">56037-XDER</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Ahmed
-                                                            Khan</span>
-                                                        <span class="text-muted font-weight-bold">Star</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">05/28/2020</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$900</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">05822-FXSP</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Belarus</span>
-                                                        <span class="text-muted font-weight-bold">Supplier</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">02/04/2020</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$560</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  ont-size-lg">00347-BCLQ</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Phillipines</span>
-                                                        <span class="text-muted font-weight-bold">Event Organizer</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">23/12/2020</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$155</span>
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a href="#"
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">4472-QREX</a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">Argentina</span>
-                                                        <span class="text-muted font-weight-bold">Supplier</span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">17/09/2021</span>
-
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">$200</span>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -276,9 +154,9 @@ include_once("../login_signup/db_connection.php");
 
         </div>
         <?php
-    include("../../partials/_extras/offcanvas/quick-user.php");
-    include("../../partials/jslinks.php");
-    ?>
+        include("../../partials/_extras/offcanvas/quick-user.php");
+        include("../../partials/jslinks.php");
+        ?>
 
 </body>
 

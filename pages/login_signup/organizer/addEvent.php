@@ -45,6 +45,7 @@ if (!isset($_POST['add_event'])) {
     } else {
       // get the id of currently created event to be inserted in tickets
       $result2 = mysqli_query($conn, "SELECT `id` FROM `events` WHERE `star_id` = $starId AND `title`= '$title';");
+
       $record  = mysqli_fetch_assoc($result2);
       $eventId = $record['id'];
 
