@@ -47,8 +47,7 @@ if (!isset($_GET['organizerId'])) {
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php
   include("../../partials/_header-mobile.php");
   ?>
@@ -70,19 +69,15 @@ if (!isset($_GET['organizerId'])) {
             <!--begin::Header Menu Wrapper-->
             <!--begin::Header Menu-->
 
-            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-              style="border: none; font-size: 1.12rem;">
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link"
-                  href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
+                <a class="nav-link" href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active"
-                  href="pages/organizers/allEvents.php?organizerId=<?php echo $id ?>">Events</a>
+                <a class="nav-link active" href="pages/organizers/allEvents.php?organizerId=<?php echo $id ?>">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"
-                  href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
+                <a class="nav-link" href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
               </li>
             </ul>
             <!--end::Header Menu-->
@@ -93,8 +88,7 @@ if (!isset($_GET['organizerId'])) {
             <div class="topbar">
               <!--begin::User-->
               <div class="topbar-item">
-                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                  id="kt_quick_user_toggle">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                   <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                     <?php echo $_SESSION['name'] ?>
@@ -188,7 +182,7 @@ if (!isset($_GET['organizerId'])) {
                                 <div class="d-flex flex-column flex-grow-1">
                                   <p
                                     class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                    Scheduled date : ' . date('d-M-Y', strtotime($eventArr['date'])) . ' <br>
+                                    Date : ' . date('d-M-Y', strtotime($eventArr['date'])) . ' <br>
                                     Time : ' . date('h-i-s : A', strtotime($eventArr['time'])) . '
                                     
                                   </p>
@@ -261,12 +255,12 @@ if (!isset($_GET['organizerId'])) {
   include("../../partials/jslinks.php");
   ?>
   <script>
-  const pageNum = document.URL.split('page=')[1];
-  var activePage = document.getElementById(`page${pageNum}`);
-  if (!activePage) {
-    activePage = document.querySelectorAll('a.paginationBtn')[0];
-  }
-  activePage.classList.add('active');
+    const pageNum = document.URL.split('page=')[1];
+    var activePage = document.getElementById(`page${pageNum}`);
+    if (!activePage) {
+      activePage = document.querySelectorAll('a.paginationBtn')[0];
+    }
+    activePage.classList.add('active');
   </script>
 
 </body>

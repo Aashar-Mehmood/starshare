@@ -8,6 +8,41 @@ if (!isset($_GET['starId'])) {
   $totalSongs = mysqli_num_rows(mysqli_query($conn, "SELECT `id` FROM `songs` WHERE `star_id` = $id;"));
   $totalEvents = mysqli_num_rows(mysqli_query($conn, "SELECT `id` FROM `events` WHERE `star_id` = $id"));
 
+  $totalEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS total_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'song';"
+  );
+  $totalArr = mysqli_fetch_assoc($totalEarningsData);
+  $totalEarnings = $totalArr['total_earnings'];
+  if (empty($totalEarnings)) {
+    $totalEarnings = '0';
+  }
+
+  $currentMonth = date('Y-m');
+  $monthlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS monthly_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'song' AND date LIKE '$currentMonth%';"
+  );
+  $monthlyEarningsArr = mysqli_fetch_assoc($monthlyEarningsData);
+  $monthlyEarnings = $monthlyEarningsArr['monthly_earnings'];
+  if (empty($monthlyEarnings)) {
+    $monthlyEarnings = '0';
+  }
+
+  $currentYear = date('Y');
+  $yearlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS yearly_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'song' AND date LIKE '$currentYear%';"
+  );
+  $yearlyEarningsArr = mysqli_fetch_assoc($yearlyEarningsData);
+  $yearlyEarnings = $yearlyEarningsArr['yearly_earnings'];
+  if (empty($yearlyEarnings)) {
+    $yearlyEarnings = '0';
+  }
+
   $starData = mysqli_query($conn, "SELECT * FROM `stars` WHERE `u_id` = $id");
   $arr = mysqli_fetch_array($starData);
   $name = $arr['name'];
@@ -94,15 +129,14 @@ if (!isset($_GET['starId'])) {
             <div class="topbar">
               <!--begin::User-->
               <div class="topbar-item">
-                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                  id="kt_quick_user_toggle">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                   <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                     <?php echo $_SESSION['name'] ?>
                   </span>
                   <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
                     <span class="symbol-label font-size-h5 font-weight-bold">
-                    <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
                     </span>
                   </span>
                 </div>
@@ -164,6 +198,32 @@ if (!isset($_GET['starId'])) {
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45 symbol-light mr-4">
                                   <span class="symbol-label">
+
+                                    <i class="fas fa-dollar-sign svg-icon svg-icon-2x svg-icon-dark-50"></i>
+                                  </span>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Text-->
+                                <div class="d-flex flex-column flex-grow-1">
+                                  <a class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                    Earnings
+                                  </a>
+                                </div>
+                                <!--end::Text-->
+                                <!--begin::label-->
+                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                  <?php
+                                  echo $totalEarnings . " &dollar;";
+                                  ?>
+                                </span>
+                                <!--end::label-->
+                              </div>
+                              <!--end::Item-->
+                              <!--begin::Item-->
+                              <div class="d-flex align-items-center pb-9">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-45 symbol-light mr-4">
+                                  <span class="symbol-label">
                                     <span class="svg-icon svg-icon-2x svg-icon-dark-50">
                                       <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
                                       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -186,28 +246,21 @@ if (!isset($_GET['starId'])) {
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="d-flex flex-column flex-grow-1">
-                                  <a href="#" class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                    Reviews
+                                  <a class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                    Events Performed
                                   </a>
                                 </div>
                                 <!--end::Text-->
                                 <!--begin::label-->
-                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
+                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                  <?php
+                                  echo $totalEvents;
+                                  ?>
+                                </span>
                                 <!--end::label-->
                               </div>
                               <!--end::Item-->
-                              <!--begin::Item-->
-                              <div class="d-flex align-items-center justify-content-center pb-9">
-                                <!--begin::Symbol-->
-                                <div class="d-flex">
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                </div>
-                                <!--end::Symbol-->
-                              </div>
-                              <!--end::Item-->
+
                             </div>
                             <!--end::Body-->
                           </div>
@@ -240,14 +293,18 @@ if (!isset($_GET['starId'])) {
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 py-5" style="background-color: #3699ff;">
-                        <h2 class="font-weight-bolder text-dark">Today Earning</h2>
+                        <h2 class="font-weight-bolder text-dark">Total Earnings</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#3699ff80 ">
-                          <h2>100$</h2>
+                          <h1>
+                            <?php
+                            echo $totalEarnings . ' &dollar;';
+                            ?>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>
@@ -278,14 +335,16 @@ if (!isset($_GET['starId'])) {
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 bg-success py-5">
-                        <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
+                        <h2 class="font-weight-bolder text-dark">This Month Earnings</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #1bc5bd80;">
-                          <h2>1000$</h2>
+                          <h1>
+                            <?php echo $monthlyEarnings . ' &dollar;' ?>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>
@@ -300,14 +359,18 @@ if (!isset($_GET['starId'])) {
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 py-5" style="background-color: #7f4ac8;">
-                        <h2 class="font-weight-bolder text-dark">Last Year Earning</h2>
+                        <h2 class="font-weight-bolder text-dark">This Year Earnings</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#7f4ac880 ">
-                          <h2>1000$</h2>
+                          <h2>
+                            <?php
+                            echo $yearlyEarnings . ' &dollar;';
+                            ?>
+                          </h2>
                         </div>
                         <!--end::Chart-->
                       </div>

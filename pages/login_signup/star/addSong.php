@@ -19,15 +19,15 @@ if (!isset($_POST['addSong'])) {
   ) {
     $message =  "All fields are required";
   } else {
-    $originalPath = "assets/media/songs/" . $_FILES['original']['name'];
-    $samplePath = "assets/media/songs/"  . $_FILES['sample']['name'];
-    $bannerPath = "assets/media/banners/"  . $_FILES['banner']['name'];
+    $originalPath = "assets/media/songs/" . rand(1, 1000) . $_FILES['original']['name'];
+    $samplePath = "assets/media/songs/"  . rand(2, 1000) . $_FILES['sample']['name'];
+    $bannerPath = "assets/media/banners/" . rand(3, 1000) . $_FILES['banner']['name'];
 
     $uploadOk1 = handleBanner($_FILES['banner'], $bannerPath);
     $uploadOk2 = handleAudio($_FILES['original'], $originalPath);
     $uploadOk3 = handleAudio($_FILES['sample'], $samplePath);
     if ($uploadOk1 && $uploadOk2 && $uploadOk3) {
-      $query = "INSERT INTO `songs` (`star_id`, `title`, `original`, `sample`, `banner`, `price`) VALUES (?, ?, ?, ?, ?, ?);";
+      $query = "INSERT INTO `songs`(`star_id`, `title`, `original`, `sample`, `banner`, `price`) VALUES (?, ?, ?, ?, ?, ?);";
       $stmt = mysqli_stmt_init($conn);
       mysqli_stmt_prepare($stmt, $query);
       mysqli_stmt_bind_param($stmt, "issssi", $star_id, $title, $originalPath, $samplePath, $bannerPath, $price);
@@ -35,6 +35,8 @@ if (!isset($_POST['addSong'])) {
       if ($executed) {
         $message =  "New song added";
       }
+    } else {
+      $message = "Song not added";
     }
   }
 }
@@ -42,7 +44,7 @@ if (!empty($message)) {
   alertMessage($message);
 }
 
-// header("Refresh:0; URL=./details.php?parentId=star");
+header("Refresh:0; URL=./details.php?parentId=star");
 
 
 function alertMessage($msg)

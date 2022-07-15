@@ -36,6 +36,18 @@ if ($submitError == true) {
 
   include_once('./db_connection.php');
 
+  $existingEmails = mysqli_num_rows(
+    mysqli_query(
+      $conn,
+      "SELECT id FROM users WHERE email = '$email';"
+    )
+  );
+  if ($existingEmails > 0) {
+    echo "<script>alert('Email already used')</script>";
+    header('Refresh:0; URL=./login_signup.php?register=failed');
+    exit();
+  }
+
   $hashedPwd = password_hash($userPwd, PASSWORD_DEFAULT);
 
   $query = "INSERT INTO `users`(`name`, `email`, `password`) VALUES (?, ?, ?);";

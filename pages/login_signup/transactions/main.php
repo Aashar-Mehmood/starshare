@@ -3,10 +3,10 @@ include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
 if (isset($_GET["roleTransaction"])) {
-  $roleTransaction = $_GET["roleTransaction"];
-  $title = substr($roleTransaction, 0,  strpos($roleTransaction, "Transaction"));
+    $roleTransaction = $_GET["roleTransaction"];
+    $title = substr($roleTransaction, 0,  strpos($roleTransaction, "Transaction"));
 } else {
-  $roleTransaction = "starTransactions";
+    $roleTransaction = "starTransactions";
 }
 $uName = $title . "_name";
 
@@ -30,22 +30,22 @@ $data2 = mysqli_query($conn, "SELECT * FROM `transactions` WHERE `buyer_id` = $i
     <meta charset="utf-8" />
     <title><?php echo "$title transactions" ?></title>
     <?php
-  include("../../../partials/csslinks.php");
-  ?>
+    include("../../../partials/csslinks.php");
+    ?>
     <style>
-    div.col-xl-6 {
-        padding: 5rem 3rem;
-    }
-
-    div.col-xl-6:nth-child(3) {
-        padding-top: 0;
-    }
-
-    @media screen and (min-width:700px) {
-        div.table-responsive {
-            overflow-x: hidden;
+        div.col-xl-6 {
+            padding: 5rem 3rem;
         }
-    }
+
+        div.col-xl-6:nth-child(3) {
+            padding-top: 0;
+        }
+
+        @media screen and (min-width:700px) {
+            div.table-responsive {
+                overflow-x: hidden;
+            }
+        }
     </style>
 </head>
 
@@ -53,11 +53,10 @@ $data2 = mysqli_query($conn, "SELECT * FROM `transactions` WHERE `buyer_id` = $i
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
-  include("../../../partials/_header-mobile.php");
-  ?>
+    include("../../../partials/_header-mobile.php");
+    ?>
 
     <div class="d-flex flex-column flex-root">
 
@@ -94,12 +93,9 @@ $data2 = mysqli_query($conn, "SELECT * FROM `transactions` WHERE `buyer_id` = $i
 
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION["$uName"]; ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -140,9 +136,9 @@ $data2 = mysqli_query($conn, "SELECT * FROM `transactions` WHERE `buyer_id` = $i
 
         </div>
         <?php
-    include("../../../partials/_extras/offcanvas/quick-" . $title . ".php");
-    include("../../../partials/jslinks.php");
-    ?>
+        include("../../../partials/_extras/offcanvas/quick-" . $title . ".php");
+        include("../../../partials/jslinks.php");
+        ?>
 
 </body>
 

@@ -1,6 +1,12 @@
 <?php
 include_once("../login_signup/check_session.php");
 include_once("../login_signup/db_connection.php");
+
+$data1 = mysqli_query(
+    $conn,
+    "SELECT * FROM transactions LIMIT 20 OFFSET 0"
+);
+
 ?>
 <!DOCTYPE html>
 
@@ -16,19 +22,19 @@ include_once("../login_signup/db_connection.php");
     include("./../../partials/csslinks.php");
     ?>
     <style>
-    div.col-xl-6 {
-        padding: 5rem 3rem;
-    }
-
-    div.col-xl-6:nth-child(3) {
-        padding-top: 0;
-    }
-
-    @media screen and (min-width:700px) {
-        div.table-responsive {
-            overflow-x: hidden;
+        div.col-xl-6 {
+            padding: 5rem 3rem;
         }
-    }
+
+        div.col-xl-6:nth-child(3) {
+            padding-top: 0;
+        }
+
+        @media screen and (min-width:700px) {
+            div.table-responsive {
+                overflow-x: hidden;
+            }
+        }
     </style>
 </head>
 
@@ -36,8 +42,7 @@ include_once("../login_signup/db_connection.php");
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
     include("./../../partials/_header-mobile.php");
     ?>
@@ -77,63 +82,58 @@ include_once("../login_signup/db_connection.php");
                                 <!--begin::Body-->
                                 <div class="card-body">
                                     <!--begin::Table-->
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-head-custom table-vertical-center"
-                                            id="kt_advance_table_widget_4">
+                                    <div class="table-responsive ">
+                                        <table class="table table-bordered table-head-custom table-vertical-center" id="kt_advance_table_widget_4">
                                             <thead class="bg-primary">
-                                                <tr class="text-left">
-                                                    <th style="min-width: 120px">
-                                                        <span class="text-dark">Transaction Id</span>
-                                                    </th>
+                                                <th class="pl-10" style="min-width: 120px">
+                                                    <span class="text-dark">Transaction id</span>
+                                                </th>
 
-                                                    <th style="min-width: 110px">
-                                                        <span class="text-dark">Product</span>
-                                                    </th>
-                                                    <th style="min-width: 110px">
-                                                        <span class="text-dark">Amount</span>
-                                                    </th>
-                                                    <th style="min-width: 120px">
-                                                        <span class="text-dark">Date</span>
-                                                    </th>
-
-                                                </tr>
+                                                <th style="min-width: 120px">
+                                                    <span class="text-dark">Product</span>
+                                                </th>
+                                                <th style="min-width: 120px">
+                                                    <span class="text-dark">Amount</span>
+                                                </th>
+                                                <th style="min-width: 110px">
+                                                    <span class="text-dark">Date</span>
+                                                </th>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $transactionData = mysqli_query(
-                                                    $conn,
-                                                    "SELECT * FROM transactions LIMIT 20 OFFSET 0;"
-                                                );
-                                                while ($transactionArr = mysqli_fetch_assoc($transactionData)) {
-                                                    echo '<tr>
-                                                    <td>
-                                                        <a
-                                                            class="text-dark-75 font-weight-bolder  font-size-lg">
-                                                            ' . $transactionArr["id"] . '
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                                            ' . $transactionArr["product_name"] . '
-                                                            </span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-info font-weight-bolder d-block font-size-lg">
-                                                            ' . $transactionArr["amount"] . '
-                                                            </span>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="text-dark-75 font-weight-bolder d-block font-size-lg">
-                                                            ' . $transactionArr["date"] . '
-                                                            </span>
-                                                    </td>
-                                                </tr>';
-                                                }
-                                                ?>
+                                                // transactions as seller
+                                                if (mysqli_num_rows($data1) > 0) {
 
+                                                    while ($row1 = mysqli_fetch_assoc($data1)) {
+                                                        echo '<tr>
+                                                            <td class="pl-10">
+                                                                <span
+                                                                    class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">
+                                                                    ' . $row1['id'] . '
+                                                                    </span>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                                ' . $row1['product_name'] . '
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="text-info font-weight-bolder d-block font-size-lg">
+                                                                ' . $row1['amount'] . '&nbsp;&dollar;
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                                ' . $row1['date'] . '
+                                                                </span>
+                                                            </td>
+
+                                                    </tr>';
+                                                    }
+                                                }
+
+                                                ?>
 
                                             </tbody>
                                         </table>

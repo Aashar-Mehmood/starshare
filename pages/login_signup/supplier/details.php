@@ -8,6 +8,36 @@ $_SESSION["message"] = 'Product Created';
 $productData = mysqli_query($conn, "SELECT * FROM `products` WHERE `supplier_id` = $id;");
 $totalProducts = mysqli_num_rows($productData);
 
+$currentMonth = date('Y-m');
+$currentYear = date('Y');
+
+$totalProducts = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM products WHERE supplier_id = $id;"
+    )
+);
+
+$monthlyProducts = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM products WHERE supplier_id = $id AND upload_date LIKE '$currentMonth%';"
+    )
+);
+$yearlyProducts = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM products WHERE supplier_id = $id AND upload_date LIKE '$currentYear%';"
+    )
+);
+
+$totalEvents = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM quotations WHERE supplier_id = $id AND status = 'accepted';"
+    )
+);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,23 +57,23 @@ $totalProducts = mysqli_num_rows($productData);
     <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
     <link rel="stylesheet" href="assets/css/custom/user_details.css">
     <style>
-    @media screen and (max-width:425px) {
-        .form-group.row {
-            margin-bottom: 0 !important;
+        @media screen and (max-width:425px) {
+            .form-group.row {
+                margin-bottom: 0 !important;
+            }
+
+            div.col-lg-6 {
+                padding: 1rem;
+            }
         }
 
-        div.col-lg-6 {
-            padding: 1rem;
-        }
-    }
+        @media screen and (max-width: 355px) {
 
-    @media screen and (max-width: 355px) {
-
-        ul.nav li:nth-child(4),
-        ul.nav li:nth-child(4) a {
-            margin-left: 0 !important;
+            ul.nav li:nth-child(4),
+            ul.nav li:nth-child(4) a {
+                margin-left: 0 !important;
+            }
         }
-    }
     </style>
 </head>
 
@@ -51,8 +81,7 @@ $totalProducts = mysqli_num_rows($productData);
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
     include("../../../partials/_header-mobile.php");
     ?>
@@ -74,8 +103,7 @@ $totalProducts = mysqli_num_rows($productData);
                         <!--begin::Header Menu Wrapper-->
                         <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
                             </li>
@@ -98,12 +126,9 @@ $totalProducts = mysqli_num_rows($productData);
                         <div class="topbar">
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION['supplier_name'] ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -124,8 +149,7 @@ $totalProducts = mysqli_num_rows($productData);
 
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -139,23 +163,19 @@ $totalProducts = mysqli_num_rows($productData);
                                                         <!--begin::Header-->
                                                         <div class="d-flex flex-column flex-center">
                                                             <!--begin::Symbol-->
-                                                            <div
-                                                                class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
+                                                            <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
                                                                 <span class="symbol-label">
-                                                                    <img src="<?php echo $_SESSION['supplier_profile_img'] ?>"
-                                                                        class="h-75 align-self-end" alt="">
+                                                                    <img src="<?php echo $_SESSION['supplier_profile_img'] ?>" class="h-75 align-self-end" alt="">
                                                                 </span>
                                                             </div>
                                                             <!--end::Symbol-->
                                                             <!--begin::Username-->
-                                                            <p
-                                                                class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
+                                                            <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
                                                                 <?php echo $_SESSION['supplier_name'] ?>
                                                             </p>
                                                             <!--end::Username-->
                                                             <!--begin::Info-->
-                                                            <div
-                                                                class="font-weight-bold text-dark-50 font-size-sm pb-6">
+                                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-6">
                                                                 <?php echo $_SESSION['supplier_email'] ?>
                                                             </div>
                                                             <!--end::Info-->
@@ -164,8 +184,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                         <!--begin::Body-->
                                                         <div class="pt-1">
                                                             <!--begin::Text-->
-                                                            <p
-                                                                class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
+                                                            <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
                                                                 <?php echo $_SESSION['supplier_description'] ?>
                                                             </p>
                                                             <!--end::Text-->
@@ -174,29 +193,18 @@ $totalProducts = mysqli_num_rows($productData);
                                                                 <!--begin::Symbol-->
                                                                 <div class="symbol symbol-45 symbol-light mr-4">
                                                                     <span class="symbol-label">
-                                                                        <span
-                                                                            class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
                                                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                width="24px" height="24px"
-                                                                                viewBox="0 0 24 24" version="1.1">
-                                                                                <g stroke="none" stroke-width="1"
-                                                                                    fill="none" fill-rule="evenodd">
-                                                                                    <rect x="0" y="0" width="24"
-                                                                                        height="24"></rect>
-                                                                                    <rect fill="#000000" opacity="0.3"
-                                                                                        x="13" y="4" width="3"
-                                                                                        height="16" rx="1.5">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                                                                    <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="8" y="9"
-                                                                                        width="3" height="11" rx="1.5">
+                                                                                    <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="18" y="11"
-                                                                                        width="3" height="9" rx="1.5">
+                                                                                    <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="3" y="13"
-                                                                                        width="3" height="7" rx="1.5">
+                                                                                    <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5">
                                                                                     </rect>
                                                                                 </g>
                                                                             </svg>
@@ -207,31 +215,24 @@ $totalProducts = mysqli_num_rows($productData);
                                                                 <!--end::Symbol-->
                                                                 <!--begin::Text-->
                                                                 <div class="d-flex flex-column flex-grow-1">
-                                                                    <a href="#"
-                                                                        class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                    <a href="#" class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
                                                                         Reviews
                                                                     </a>
                                                                 </div>
                                                                 <!--end::Text-->
                                                                 <!--begin::label-->
-                                                                <span
-                                                                    class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
+                                                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
                                                                 <!--end::label-->
                                                             </div>
                                                             <!--end::Item-->
                                                             <!--begin::Item-->
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-center pb-9">
+                                                            <div class="d-flex align-items-center justify-content-center pb-9">
                                                                 <!--begin::Symbol-->
                                                                 <div class="d-flex">
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
                                                                 </div>
                                                                 <!--end::Symbol-->
                                                             </div>
@@ -250,16 +251,21 @@ $totalProducts = mysqli_num_rows($productData);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-danger py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Month Activity</h2>
+                                                <h2 class="font-weight-bolder text-dark">
+                                                    Total
+                                                </h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color: #f64e6080;">
-                                                    <h2>100</h2>
-                                                    <h2>Products Supplied in last month</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style=" background-color: #f64e6080;">
+                                                    <h1>
+                                                        <?php
+                                                        echo $totalProducts;
+                                                        ?>
+                                                    </h1>
+                                                    <h2>Products uploaded</h2>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -268,16 +274,21 @@ $totalProducts = mysqli_num_rows($productData);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 py-5" style="background-color: #3699ff;">
-                                                <h2 class="font-weight-bolder text-dark">Today Earning</h2>
+                                                <h2 class="font-weight-bolder text-dark">
+                                                    This year
+                                                </h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color:#3699ff80 ">
-                                                    <h2>100$</h2>
-                                                    <h2>Earned today</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style=" background-color:#3699ff80 ">
+                                                    <h1>
+                                                        <?php
+                                                        echo $yearlyProducts;
+                                                        ?>
+                                                    </h1>
+                                                    <h2>Products uploaded</h2>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -290,16 +301,21 @@ $totalProducts = mysqli_num_rows($productData);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-warning py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Year Activity</h2>
+                                                <h2 class="font-weight-bolder text-dark">
+                                                    This month
+                                                </h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color:#ffa80080">
-                                                    <h2>3000</h2>
-                                                    <h2>Products Supplied last year.</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style=" background-color:#ffa80080">
+                                                    <h1>
+                                                        <?php
+                                                        echo $monthlyProducts;
+                                                        ?>
+                                                    </h1>
+                                                    <h2>Products uploaded</h2>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -308,16 +324,22 @@ $totalProducts = mysqli_num_rows($productData);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-success py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
+                                                <h2 class="font-weight-bolder text-dark">
+                                                    Total
+                                                </h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style="background-color: #1bc5bd80;">
-                                                    <h2>1000$</h2>
-                                                    <h2>Earned in Last month </h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #1bc5bd80;">
+                                                    <h1>
+                                                        <?php
+                                                        echo $totalEvents;
+                                                        ?>
+
+                                                    </h1>
+                                                    <h2>Events Participated</h2>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -325,33 +347,13 @@ $totalProducts = mysqli_num_rows($productData);
                                         </div>
 
                                     </div>
-                                    <div class="col-md-6 col-xl-4">
-                                        <div class="card card-custom bg-gray-100 card-stretch gutter-b">
-                                            <!--begin::Header-->
-                                            <div class="card-header border-0 bg-primary py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Year Earning</h2>
-                                            </div>
-                                            <!--end::Header-->
-                                            <!--begin::Body-->
-                                            <div class="card-body p-0 position-relative overflow-hidden">
-                                                <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color:#3699ff80 ">
-                                                    <h2>1000$</h2>
-                                                    <h2>Earned in Last year</h2>
-                                                </div>
-                                                <!--end::Chart-->
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-                            <div class="modal fade" id="newStarCategory" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="newStarCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -361,24 +363,19 @@ $totalProducts = mysqli_num_rows($productData);
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form class="form" action="pages/login_signup/supplier/addProduct.php"
-                                                method="POST">
+                                            <form class="form" action="pages/login_signup/supplier/addProduct.php" method="POST">
 
                                                 <div class="form-group">
                                                     <label> Name :</label>
-                                                    <input type="text" name="name"
-                                                        class="form-control form-control-solid" />
+                                                    <input type="text" name="name" class="form-control form-control-solid" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label> Price :</label>
-                                                    <input type="number" name="price"
-                                                        class="form-control form-control-solid" />
+                                                    <input type="number" name="price" class="form-control form-control-solid" />
                                                 </div>
                                                 <div class="d-flex w-md-50 justify-content-between mt-12">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <input type="submit" name="create" value="Create"
-                                                        class="btn btn-primary" />
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input type="submit" name="create" value="Create" class="btn btn-primary" />
 
                                                 </div>
 
@@ -397,8 +394,7 @@ $totalProducts = mysqli_num_rows($productData);
                                         <!--begin::Header-->
                                         <div class="card-header d-flex align-items-center">
                                             <h2 class="card-title">Products</h2>
-                                            <button class="btn btn-primary btn-large" data-target="#newStarCategory"
-                                                data-toggle="modal">
+                                            <button class="btn btn-primary btn-large" data-target="#newStarCategory" data-toggle="modal">
                                                 Add Product
                                             </button>
                                         </div>
@@ -535,6 +531,14 @@ $totalProducts = mysqli_num_rows($productData);
                             FROM quotations INNER JOIN events ON quotations.event_id = events.id 
                             WHERE `supplier_id` = $id AND `status` = 'pending';"
                         ) or die(mysqli_error($conn));
+
+                        $sentQuotes = mysqli_query(
+                            $conn,
+                            "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,
+                            `organizer_quotation_amount` AS `organizer_amount`,`title`, `banner`, `date`
+                            FROM quotations INNER JOIN events ON quotations.event_id = events.id 
+                            WHERE `supplier_id` = $id AND `status` = 'responded';"
+                        ) or die(mysqli_error($conn));
                         ?>
                         <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
@@ -546,8 +550,12 @@ $totalProducts = mysqli_num_rows($productData);
                                         </div>
                                         ';
                                     } else {
+                                        echo '<div class="col-12">
+                                        <h2>Received Quotes<h2/>
+                                        </div>';
                                         while ($quotesArr = mysqli_fetch_assoc($quotesData)) {
                                             echo '<div class="col-md-6 col-xl-4">
+                                            
                                             <div class="card card-custom gutter-b">
                                                 <!--begin::Body-->
                                                 <div class="card-body">
@@ -646,6 +654,121 @@ $totalProducts = mysqli_num_rows($productData);
                                     ?>
 
                                 </div>
+                                <div class="row">
+                                    <?php
+                                    if (mysqli_num_rows($sentQuotes) > 0) {
+                                        echo '<div class="col-12">
+                                        <h2>Response Sent<h2/>
+                                        </div>';
+                                        while ($sentQuotesArr = mysqli_fetch_assoc($sentQuotes)) {
+                                            echo '<div class="col-md-6 col-xl-4">
+                                            <div class="card card-custom gutter-b">
+                                                <!--begin::Body-->
+                                                <div class="card-body">
+                                                    <!--begin::Wrapper-->
+                                                    <div class="d-flex justify-content-between flex-column h-100">
+                                                        <!--begin::Container-->
+                                                        <div class="h-100">
+                                                            <!--begin::Header-->
+                                                            <div class="d-flex flex-column flex-center">
+                                                                <!--begin::Image-->
+                                                                <div class="bgi-no-repeat bgi-size-cover rounded min-h-180px w-100" style="background-image: url(' . $sentQuotesArr['banner'] . ')">
+                                                                </div>
+                                                                <!--end::Image-->
+                                                                <!--begin::Title-->
+                                                                <p class="card-title font-weight-bolder text-dark-75  font-size-h4 m-0 pt-7 pb-1">
+                                                                    ' . $sentQuotesArr['title'] . '
+                                                                </p>
+                                                                <!--end::Title-->
+                                                                <!--begin::Text-->
+                                                                <!--end::Text-->
+                                                            </div>
+                                                            <!--end::Header-->
+                                                            <!--begin::Body-->
+                                                            <div class="pt-1">
+                                                            <div class="d-flex align-items-center pb-9">
+                                                            <!--begin::Symbol-->
+                                                            <div class="symbol symbol-45 symbol-light mr-4">
+                                                                <span class="symbol-label">
+                                                                    <i class="fas fa-clock"></i>
+                                                                </span>
+                                                            </div>
+                                                            <!--end::Symbol-->
+                                                            <!--begin::Text-->
+                                                            <div class="flex-grow-1">
+                                                                <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                  Event Date
+                                                                </p>
+                                                            </div>
+                                                            <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                                                ' . $sentQuotesArr['date'] . ' 
+                                                            </span>
+                                                            <!--end::Text-->
+                                                        </div>
+                                                                <!--begin::Item-->
+                                                                
+                                                                <div class="d-flex align-items-center pb-9">
+                                                                    <!--begin::Symbol-->
+                                                                    <div class="symbol symbol-45 symbol-light mr-4">
+                                                                        <span class="symbol-label">
+                                                                            <i class="fas fa-dollar-sign"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <!--end::Symbol-->
+                                                                    <!--begin::Text-->
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                            Organizer Quote Amount
+                                                                        </p>
+                                                                    </div>
+                                                                    <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                                                        ' . $sentQuotesArr['organizer_amount'] . ' $
+                                                                    </span>
+                                                                    <!--end::Text-->
+                                                                </div>
+
+                                                                <div class="d-flex align-items-center pb-9">
+                                                                    <!--begin::Symbol-->
+                                                                    <div class="symbol symbol-45 symbol-light mr-4">
+                                                                        <span class="symbol-label">
+                                                                            <i class="fas fa-dollar-sign"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <!--end::Symbol-->
+                                                                    <!--begin::Text-->
+                                                                    <div class="flex-grow-1">
+                                                                        <p class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                                                            Your Quote Amount
+                                                                        </p>
+                                                                    </div>
+                                                                    <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                                                        ' . $sentQuotesArr['amount'] . ' $
+                                                                    </span>
+                                                                    <!--end::Text-->
+                                                                </div>
+                                                                
+                                                                <div class="d-flex pb-9">
+                                                                    ' . $sentQuotesArr['supplier_quotation'] . '
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Body-->
+                                                        </div>
+                                                        <!--eng::Container-->
+                                                        <!--begin::Footer-->
+                                                        
+                                                        <!--end::Footer-->
+                                                    </div>
+                                                    <!--end::Wrapper-->
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                        </div>';
+                                        }
+                                    }
+                                    ?>
+
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_5">
@@ -661,26 +784,17 @@ $totalProducts = mysqli_num_rows($productData);
                                                     <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x">
                                                         <!--begin::Item-->
                                                         <li class="nav-item mr-3">
-                                                            <a class="nav-link active" data-toggle="tab"
-                                                                href="#kt_user_edit_tab_1">
+                                                            <a class="nav-link active" data-toggle="tab" href="#kt_user_edit_tab_1">
                                                                 <span class="nav-icon">
                                                                     <span class="svg-icon">
                                                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="24px" height="24px"
-                                                                            viewBox="0 0 24 24" version="1.1">
-                                                                            <g stroke="none" stroke-width="1"
-                                                                                fill="none" fill-rule="evenodd">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                                 <polygon points="0 0 24 0 24 24 0 24">
                                                                                 </polygon>
-                                                                                <path
-                                                                                    d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z"
-                                                                                    fill="#000000" fill-rule="nonzero">
+                                                                                <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero">
                                                                                 </path>
-                                                                                <path
-                                                                                    d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z"
-                                                                                    fill="#000000" opacity="0.3"></path>
+                                                                                <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
                                                                             </g>
                                                                         </svg>
                                                                         <!--end::Svg Icon-->
@@ -691,8 +805,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                         </li>
                                                         <!--end::Item-->
                                                         <li class="nav-item mr-3">
-                                                            <a class="nav-link" data-toggle="tab"
-                                                                href="#kt_user_edit_tab_2">
+                                                            <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2">
                                                                 <span class="nav-icon">
                                                                     <span class="svg-icon">
                                                                         <i class="fa fa-key" aria-hidden="true"></i>
@@ -724,13 +837,10 @@ $totalProducts = mysqli_num_rows($productData);
                                             <!--end::Card header-->
                                             <!--begin::Card body-->
                                             <div class="card-body">
-                                                <form class="form" id="kt_form"
-                                                    action="pages/login_signup/updateRoleSettings/update.php?role=supplier"
-                                                    method="POST" enctype="multipart/form-data">
+                                                <form class="form" id="kt_form" action="pages/login_signup/updateRoleSettings/update.php?role=supplier" method="POST" enctype="multipart/form-data">
                                                     <div class="tab-content">
                                                         <!--begin::Tab-->
-                                                        <div class="tab-pane show px-md-7 active"
-                                                            id="kt_user_edit_tab_1" role="tabpanel">
+                                                        <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
                                                             <!--begin::Row-->
                                                             <div class="row">
                                                                 <div class="col-xl-7 my-2">
@@ -738,8 +848,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                                     <div class="row">
                                                                         <label class="col-md-3"></label>
                                                                         <div class="col-md-9">
-                                                                            <h6
-                                                                                class="text-dark font-weight-bold mb-10">
+                                                                            <h6 class="text-dark font-weight-bold mb-10">
                                                                                 Supplier Info:</h6>
                                                                         </div>
                                                                     </div>
@@ -749,38 +858,18 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3  ">Profile
                                                                             Image</label>
                                                                         <div class="col-md-9">
-                                                                            <div class="image-input image-input-empty image-input-outline"
-                                                                                id="kt_user_edit_avatar"
-                                                                                style="background-image: url(<?php echo $_SESSION['supplier_profile_img'] ?>)">
+                                                                            <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url(<?php echo $_SESSION['supplier_profile_img'] ?>)">
                                                                                 <div class="image-input-wrapper"></div>
-                                                                                <label
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="change"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Change avatar">
-                                                                                    <i
-                                                                                        class="fa fa-pen icon-sm text-muted"></i>
-                                                                                    <input type="file"
-                                                                                        name="profile_avatar"
-                                                                                        accept=".png, .jpg, .jpeg">
-                                                                                    <input type="hidden"
-                                                                                        name="profile_avatar_remove">
+                                                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                                                    <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+                                                                                    <input type="hidden" name="profile_avatar_remove">
                                                                                 </label>
-                                                                                <span
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="cancel"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Cancel avatar">
-                                                                                    <i
-                                                                                        class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
                                                                                 </span>
-                                                                                <span
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="remove"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Remove avatar">
-                                                                                    <i
-                                                                                        class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                                                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
                                                                                 </span>
                                                                             </div>
                                                                         </div>
@@ -791,10 +880,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3  ">Full
                                                                             Name</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="fullName"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="text"
-                                                                                placeholder="<?php echo $_SESSION['supplier_name'] ?>">
+                                                                            <input name="fullName" class="form-control form-control-lg form-control-solid" type="text" placeholder="<?php echo $_SESSION['supplier_name'] ?>">
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Group-->
@@ -803,16 +889,13 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3  ">Email
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
                                                                                         <i class="la la-at"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input name="email" type="email"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['supplier_email'] ?>">
+                                                                                <input name="email" type="email" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['supplier_email'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -822,16 +905,13 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3">Contact
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
                                                                                         <i class="la la-phone"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input name="contact" type="text"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['supplier_contact'] ?>">
+                                                                                <input name="contact" type="text" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['supplier_contact'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -841,17 +921,13 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3">Address
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
-                                                                                        <i
-                                                                                            class="fa fa-map-marker-alt"></i>
+                                                                                        <i class="fa fa-map-marker-alt"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input type="text" name="address"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['supplier_address'] ?>">
+                                                                                <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['supplier_address'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -859,17 +935,11 @@ $totalProducts = mysqli_num_rows($productData);
 
                                                                     <!--begin::Group-->
                                                                     <div class="form-group row">
-                                                                        <label
-                                                                            class="col-form-label col-md-3">Description
+                                                                        <label class="col-form-label col-md-3">Description
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
-                                                                                <textarea name="description"
-                                                                                    class="form-control"
-                                                                                    style="border: none !important;"
-                                                                                    rows="3" spellcheck="false"
-                                                                                    placeholder="<?php echo $_SESSION['supplier_description'] ?>"></textarea>
+                                                                            <div class="input-group input-group-lg input-group-solid">
+                                                                                <textarea name="description" class="form-control" style="border: none !important;" rows="3" spellcheck="false" placeholder="<?php echo $_SESSION['supplier_description'] ?>"></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -879,8 +949,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                             <!--end::Row-->
                                                         </div>
                                                         <!--end::Tab-->
-                                                        <div class="tab-pane px-md-7" id="kt_user_edit_tab_2"
-                                                            role="tabpanel">
+                                                        <div class="tab-pane px-md-7" id="kt_user_edit_tab_2" role="tabpanel">
                                                             <!--begin::Row-->
                                                             <div class="row">
                                                                 <div class="col-xl-7 my-2">
@@ -888,8 +957,7 @@ $totalProducts = mysqli_num_rows($productData);
                                                                     <div class="row">
                                                                         <label class="col-md-3"></label>
                                                                         <div class="col-md-9">
-                                                                            <h6
-                                                                                class="text-dark font-weight-bold mb-10">
+                                                                            <h6 class="text-dark font-weight-bold mb-10">
                                                                                 Change Password:</h6>
                                                                         </div>
                                                                     </div>
@@ -900,19 +968,14 @@ $totalProducts = mysqli_num_rows($productData);
                                                                         <label class="col-form-label col-md-3  ">New
                                                                             Password</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="newPwd"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="password"
-                                                                                autocomplete="new-password">
+                                                                            <input name="newPwd" class="form-control form-control-lg form-control-solid" type="password" autocomplete="new-password">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-3  ">Confirm
                                                                             Password</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="confirmNewPwd"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="password">
+                                                                            <input name="confirmNewPwd" class="form-control form-control-lg form-control-solid" type="password">
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Group-->
@@ -957,15 +1020,15 @@ $totalProducts = mysqli_num_rows($productData);
     ?>
 
     <script>
-    const editSettingsBtn = document.getElementById("editSettings");
-    const resetBtn = document.getElementById("resetBtn");
-    const settingsForm = document.getElementById("kt_form");
-    editSettingsBtn.addEventListener('click', () => {
-        settingsForm.submit();
-    });
-    resetBtn.addEventListener('click', () => {
-        settingsForm.reset();
-    });
+        const editSettingsBtn = document.getElementById("editSettings");
+        const resetBtn = document.getElementById("resetBtn");
+        const settingsForm = document.getElementById("kt_form");
+        editSettingsBtn.addEventListener('click', () => {
+            settingsForm.submit();
+        });
+        resetBtn.addEventListener('click', () => {
+            settingsForm.reset();
+        });
     </script>
 
 </body>

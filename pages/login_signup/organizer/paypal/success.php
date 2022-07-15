@@ -10,11 +10,12 @@ include_once '../../db_connection.php';
 (int)$pricePerTicket = $_SESSION['pricePerTicket'];
 (int)$totalTickets = $_COOKIE['totalTicketsBought'];
 $total =  $pricePerTicket *  $totalTickets;
+$currentTime = date('Y-m-d h:i:s');
 
 // update the tickets table 
 $updateTicket = mysqli_query(
     $conn,
-    "UPDATE `tickets` SET `buyer_id` = $buyerId, `status` = 'soldOut' 
+    "UPDATE `tickets` SET `buyer_id` = $buyerId, `status` = 'soldOut', `buying_time`='$currentTime' 
     WHERE `event_id` = $eventId AND `id` >= $firstTicketId LIMIT $totalTickets;"
 );
 
@@ -63,22 +64,21 @@ if (mysqli_num_rows($myEvents) < 1) {
 
 </head>
 <style>
-@media screen and (max-width:425px) {
-    .form-group.row {
-        margin-bottom: 0 !important;
-    }
+    @media screen and (max-width:425px) {
+        .form-group.row {
+            margin-bottom: 0 !important;
+        }
 
-    div.col-lg-6 {
-        padding: 1rem;
+        div.col-lg-6 {
+            padding: 1rem;
+        }
     }
-}
 </style>
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Main-->
 
     <?php include("../../../../partials/_header-mobile.php"); ?>
@@ -118,12 +118,9 @@ if (mysqli_num_rows($myEvents) < 1) {
 
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION["name"]; ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">

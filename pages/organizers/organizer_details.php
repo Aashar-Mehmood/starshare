@@ -17,8 +17,55 @@ if (!isset($_GET['organizerId'])) {
   $description = $arr['description'];
   $profile_img = $arr['profile_img'];
 
-  $eventQuery = "SELECT `id` FROM events WHERE organizer_id = $id;";
-  $totalEvents = mysqli_num_rows(mysqli_query($conn, $eventQuery));
+  $totalEvents = mysqli_num_rows(
+    mysqli_query(
+      $conn,
+      "SELECT id FROM events WHERE organizer_id = $id;"
+    )
+  );
+
+  $suppliersHired = mysqli_num_rows(
+    mysqli_query(
+      $conn,
+      "SELECT id FROM quotations 
+      WHERE organizer_id = $id AND status = 'accepted';"
+    )
+  );
+
+  $totalEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS total_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'ticket';"
+  );
+  $totalArr = mysqli_fetch_assoc($totalEarningsData);
+  $totalEarnings = $totalArr['total_earnings'];
+  if (empty($totalEarnings)) {
+    $totalEarnings = '0';
+  }
+
+  $currentMonth = date('Y-m');
+  $monthlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS monthly_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'ticket' AND date LIKE '$currentMonth%';"
+  );
+  $monthlyEarningsArr = mysqli_fetch_assoc($monthlyEarningsData);
+  $monthlyEarnings = $monthlyEarningsArr['monthly_earnings'];
+  if (empty($monthlyEarnings)) {
+    $monthlyEarnings = '0';
+  }
+
+  $currentYear = date('Y');
+  $yearlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS yearly_earnings  FROM transactions 
+    WHERE seller_id = $id AND product_name = 'ticket' AND date LIKE '$currentYear%';"
+  );
+  $yearlyEarningsArr = mysqli_fetch_assoc($yearlyEarningsData);
+  $yearlyEarnings = $yearlyEarningsArr['yearly_earnings'];
+  if (empty($yearlyEarnings)) {
+    $yearlyEarnings = '0';
+  }
 }
 
 ?>
@@ -43,8 +90,7 @@ if (!isset($_GET['organizerId'])) {
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php
   include("../../partials/_header-mobile.php");
   ?>
@@ -66,18 +112,15 @@ if (!isset($_GET['organizerId'])) {
             <!--begin::Header Menu Wrapper-->
             <!--begin::Header Menu-->
 
-            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-              style="border: none; font-size: 1.12rem;">
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link active"
-                  href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
+                <a class="nav-link active" href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="pages/organizers/allEvents.php?organizerId=<?php echo $id ?>">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"
-                  href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
+                <a class="nav-link" href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
               </li>
             </ul>
             <!--end::Header Menu-->
@@ -88,8 +131,7 @@ if (!isset($_GET['organizerId'])) {
             <div class="topbar">
               <!--begin::User-->
               <div class="topbar-item">
-                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                  id="kt_quick_user_toggle">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                   <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
                   <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                     <?php echo $_SESSION['name'] ?>
@@ -158,14 +200,39 @@ if (!isset($_GET['organizerId'])) {
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-45 symbol-light mr-4">
                                   <span class="symbol-label">
+                                    <i class="fas fa-dollar-sign svg-icon svg-icon-2x svg-icon-dark-50">
+
+                                    </i>
+                                  </span>
+                                </div>
+                                <!--end::Symbol-->
+                                <!--begin::Text-->
+                                <div class="d-flex flex-column flex-grow-1">
+                                  <a class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                    Earnings
+                                  </a>
+                                </div>
+                                <!--end::Text-->
+                                <!--begin::label-->
+                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                  <?php
+                                  echo $totalEarnings . " &dollar;";
+                                  ?>
+                                </span>
+                                <!--end::label-->
+                              </div>
+                              <!--end::Item-->
+                              <!--begin::Item-->
+                              <div class="d-flex align-items-center pb-9">
+                                <!--begin::Symbol-->
+                                <div class="symbol symbol-45 symbol-light mr-4">
+                                  <span class="symbol-label">
                                     <span class="svg-icon svg-icon-2x svg-icon-dark-50">
                                       <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
-                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                           <rect x="0" y="0" width="24" height="24"></rect>
-                                          <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16"
-                                            rx="1.5">
+                                          <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5">
                                           </rect>
                                           <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5"></rect>
                                           <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5"></rect>
@@ -179,29 +246,21 @@ if (!isset($_GET['organizerId'])) {
                                 <!--end::Symbol-->
                                 <!--begin::Text-->
                                 <div class="d-flex flex-column flex-grow-1">
-                                  <a href="#" class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
-                                    Reviews
+                                  <a class="text-dark-75  mb-1 font-size-lg font-weight-bolder">
+                                    Events Organized
                                   </a>
                                 </div>
                                 <!--end::Text-->
                                 <!--begin::label-->
-                                <span
-                                  class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
+                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
+                                  <?php
+                                  echo $totalEvents;
+                                  ?>
+                                </span>
                                 <!--end::label-->
                               </div>
                               <!--end::Item-->
-                              <!--begin::Item-->
-                              <div class="d-flex align-items-center justify-content-center pb-9">
-                                <!--begin::Symbol-->
-                                <div class="d-flex">
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                  <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
-                                </div>
-                                <!--end::Symbol-->
-                              </div>
-                              <!--end::Item-->
+
                             </div>
                             <!--end::Body-->
                           </div>
@@ -216,22 +275,43 @@ if (!isset($_GET['organizerId'])) {
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 py-5" style="background-color: #24bd76;">
-                        <h2 class="font-weight-bolder text-dark">Total Events</h2>
+                        <h2 class="font-weight-bolder text-dark">Total Events Organized</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #24bd7680;">
-                          <h2>
+                          <h1>
                             <?php echo $totalEvents ?>
-                          </h2>
-                          <h2>Events Organized</h2>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>
                       <!--end::Body-->
                     </div>
+                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
+                      <!--begin::Header-->
+                      <div class="card-header border-0 bg-success py-5">
+                        <h2 class="font-weight-bolder text-dark">Total Earnings</h2>
+                      </div>
+
+                      <div class="card-body p-0 position-relative overflow-hidden">
+                        <!--begin::Chart-->
+                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #1bc5bd80;">
+                          <h1>
+                            <?php
+                            echo $totalEarnings . ' &dollar;';
+                            ?>
+                          </h1>
+                        </div>
+                        <!--end::Chart-->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-xl-4">
+
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 bg-warning py-5">
@@ -242,40 +322,33 @@ if (!isset($_GET['organizerId'])) {
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#ffa80080">
-                          <h2>30 Suppliers</h2>
+                          <h1>
+                            <?php
+                            echo $suppliersHired;
+                            ?>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>
                       <!--end::Body-->
                     </div>
-                  </div>
 
-                  <div class="col-md-6 col-xl-4">
-                    <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
-                      <!--begin::Header-->
-                      <div class="card-header border-0 bg-success py-5">
-                        <h2 class="font-weight-bolder text-dark">Today Earning</h2>
-                      </div>
 
-                      <div class="card-body p-0 position-relative overflow-hidden">
-                        <!--begin::Chart-->
-                        <div class="card-rounded-bottom pt-10 pl-8" style="background-color: #1bc5bd80;">
-                          <h2>600$</h2>
-                        </div>
-                        <!--end::Chart-->
-                      </div>
-                    </div>
                     <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 bg-primary py-5">
-                        <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
+                        <h2 class="font-weight-bolder text-dark">This Month Earning</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#3699ff80 ">
-                          <h2>1000$</h2>
+                          <h1>
+                            <?php
+                            echo $monthlyEarnings . ' &dollar;';
+                            ?>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>
@@ -287,14 +360,18 @@ if (!isset($_GET['organizerId'])) {
                     <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                       <!--begin::Header-->
                       <div class="card-header border-0 py-5" style="background-color: #e52a6f;">
-                        <h2 class="font-weight-bolder text-dark">Today Earning</h2>
+                        <h2 class="font-weight-bolder text-dark">This year earnings</h2>
                       </div>
                       <!--end::Header-->
                       <!--begin::Body-->
                       <div class="card-body p-0 position-relative overflow-hidden">
                         <!--begin::Chart-->
                         <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#e52a6f80; ">
-                          <h2>100$</h2>
+                          <h1>
+                            <?php
+                            echo $yearlyEarnings . ' &dollar;';
+                            ?>
+                          </h1>
                         </div>
                         <!--end::Chart-->
                       </div>

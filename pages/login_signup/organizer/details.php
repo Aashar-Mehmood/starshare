@@ -3,6 +3,56 @@ include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 $uId = $_SESSION['id'];
 
+$totalEvents = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM events WHERE organizer_id = $uId;"
+    )
+);
+
+$suppliersHired = mysqli_num_rows(
+    mysqli_query(
+        $conn,
+        "SELECT id FROM quotations WHERE organizer_id = $uId AND status = 'accepted';"
+    )
+);
+
+$totalEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS total_earnings  FROM transactions 
+    WHERE seller_id = $uId AND product_name = 'ticket';"
+);
+$totalArr = mysqli_fetch_assoc($totalEarningsData);
+$totalEarnings = $totalArr['total_earnings'];
+if (empty($totalEarnings)) {
+    $totalEarnings = '0';
+}
+
+$currentMonth = date('Y-m');
+$monthlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS monthly_earnings  FROM transactions 
+    WHERE seller_id = $uId AND product_name = 'ticket' AND date LIKE '$currentMonth%';"
+);
+$monthlyEarningsArr = mysqli_fetch_assoc($monthlyEarningsData);
+$monthlyEarnings = $monthlyEarningsArr['monthly_earnings'];
+if (empty($monthlyEarnings)) {
+    $monthlyEarnings = '0';
+}
+
+$currentYear = date('Y');
+$yearlyEarningsData = mysqli_query(
+    $conn,
+    "SELECT SUM(amount) AS yearly_earnings  FROM transactions 
+    WHERE seller_id = $uId AND product_name = 'ticket' AND date LIKE '$currentYear%';"
+);
+$yearlyEarningsArr = mysqli_fetch_assoc($yearlyEarningsData);
+$yearlyEarnings = $yearlyEarningsArr['yearly_earnings'];
+if (empty($yearlyEarnings)) {
+    $yearlyEarnings = '0';
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -16,8 +66,8 @@ $uId = $_SESSION['id'];
     <meta charset="utf-8" />
     <title>Organizer Details</title>
     <?php
-  include("../../../partials/csslinks.php");
-  ?>
+    include("../../../partials/csslinks.php");
+    ?>
     <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
     <link rel="stylesheet" href="assets/css/custom/user_details.css">
 
@@ -31,11 +81,10 @@ $uId = $_SESSION['id'];
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
-  include("../../../partials/_header-mobile.php");
-  ?>
+    include("../../../partials/_header-mobile.php");
+    ?>
 
     <div class="d-flex flex-column flex-root">
 
@@ -54,8 +103,7 @@ $uId = $_SESSION['id'];
                         <!--begin::Header Menu Wrapper-->
                         <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
                             </li>
@@ -78,12 +126,9 @@ $uId = $_SESSION['id'];
                         <div class="topbar">
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION['organizer_name'] ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -103,8 +148,7 @@ $uId = $_SESSION['id'];
                 <!-- Begin Content -->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -118,23 +162,19 @@ $uId = $_SESSION['id'];
                                                         <!--begin::Header-->
                                                         <div class="d-flex flex-column flex-center">
                                                             <!--begin::Symbol-->
-                                                            <div
-                                                                class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
+                                                            <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
                                                                 <span class="symbol-label">
-                                                                    <img src="assets/media/svg/avatars/007-boy-2.svg"
-                                                                        class="h-75 align-self-end" alt="">
+                                                                    <img src="assets/media/svg/avatars/007-boy-2.svg" class="h-75 align-self-end" alt="">
                                                                 </span>
                                                             </div>
                                                             <!--end::Symbol-->
                                                             <!--begin::Username-->
-                                                            <p
-                                                                class="card-title font-weight-bolder text-dark-75 font-size-h4 m-0 pt-7 pb-1">
+                                                            <p class="card-title font-weight-bolder text-dark-75 font-size-h4 m-0 pt-7 pb-1">
                                                                 <?php echo $_SESSION['organizer_name'] ?>
                                                             </p>
                                                             <!--end::Username-->
                                                             <!--begin::Info-->
-                                                            <div
-                                                                class="font-weight-bold text-dark-50 font-size-sm pb-6">
+                                                            <div class="font-weight-bold text-dark-50 font-size-sm pb-6">
                                                                 <?php echo $_SESSION['organizer_email'] ?>
                                                             </div>
                                                             <!--end::Info-->
@@ -143,8 +183,7 @@ $uId = $_SESSION['id'];
                                                         <!--begin::Body-->
                                                         <div class="pt-1">
                                                             <!--begin::Text-->
-                                                            <p
-                                                                class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
+                                                            <p class="text-dark-75 font-weight-nirmal font-size-lg m-0 pb-7">
                                                                 <?php echo $_SESSION['organizer_description'] ?>
                                                             </p>
                                                             <!--end::Text-->
@@ -153,29 +192,18 @@ $uId = $_SESSION['id'];
                                                                 <!--begin::Symbol-->
                                                                 <div class="symbol symbol-45 symbol-light mr-4">
                                                                     <span class="symbol-label">
-                                                                        <span
-                                                                            class="svg-icon svg-icon-2x svg-icon-dark-50">
+                                                                        <span class="svg-icon svg-icon-2x svg-icon-dark-50">
                                                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Equalizer.svg-->
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                width="24px" height="24px"
-                                                                                viewBox="0 0 24 24" version="1.1">
-                                                                                <g stroke="none" stroke-width="1"
-                                                                                    fill="none" fill-rule="evenodd">
-                                                                                    <rect x="0" y="0" width="24"
-                                                                                        height="24"></rect>
-                                                                                    <rect fill="#000000" opacity="0.3"
-                                                                                        x="13" y="4" width="3"
-                                                                                        height="16" rx="1.5">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                                                                    <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="8" y="9"
-                                                                                        width="3" height="11" rx="1.5">
+                                                                                    <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="18" y="11"
-                                                                                        width="3" height="9" rx="1.5">
+                                                                                    <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5">
                                                                                     </rect>
-                                                                                    <rect fill="#000000" x="3" y="13"
-                                                                                        width="3" height="7" rx="1.5">
+                                                                                    <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5">
                                                                                     </rect>
                                                                                 </g>
                                                                             </svg>
@@ -186,31 +214,24 @@ $uId = $_SESSION['id'];
                                                                 <!--end::Symbol-->
                                                                 <!--begin::Text-->
                                                                 <div class="d-flex flex-column flex-grow-1">
-                                                                    <p
-                                                                        class="text-dark-75 mb-1 font-size-lg font-weight-bolder">
+                                                                    <p class="text-dark-75 mb-1 font-size-lg font-weight-bolder">
                                                                         Reviews
                                                                     </p>
                                                                 </div>
                                                                 <!--end::Text-->
                                                                 <!--begin::label-->
-                                                                <span
-                                                                    class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
+                                                                <span class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">60</span>
                                                                 <!--end::label-->
                                                             </div>
                                                             <!--end::Item-->
                                                             <!--begin::Item-->
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-center pb-9">
+                                                            <div class="d-flex align-items-center justify-content-center pb-9">
                                                                 <!--begin::Symbol-->
                                                                 <div class="d-flex">
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
-                                                                    <i class="fas fa-star fa-2x"
-                                                                        style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
+                                                                    <i class="fas fa-star fa-2x" style="color: #3edf3e;"></i>
                                                                 </div>
                                                                 <!--end::Symbol-->
                                                             </div>
@@ -229,16 +250,18 @@ $uId = $_SESSION['id'];
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 py-5" style="background-color: #24bd76;">
-                                                <h2 class="font-weight-bolder text-dark">Total Events</h2>
+                                                <h2 class="font-weight-bolder text-dark">Total Events Organized</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color: #24bd7680;">
-                                                    <h2>100</h2>
-                                                    <h2>Events Organized in total</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style=" background-color: #24bd7680;">
+                                                    <h1>
+                                                        <?php
+                                                        echo $totalEvents;
+                                                        ?>
+                                                    </h1>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -247,16 +270,18 @@ $uId = $_SESSION['id'];
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 py-5" style="background-color: #e52a6f;">
-                                                <h2 class="font-weight-bolder text-dark">Today Earning</h2>
+                                                <h2 class="font-weight-bolder text-dark">Total Earnings</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style="background-color:#e52a6f80; ">
-                                                    <h2>100$</h2>
-                                                    <h2>Earned today</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#e52a6f80; ">
+                                                    <h1>
+                                                        <?php
+                                                        echo $totalEarnings . ' &dollar;'
+                                                        ?>
+                                                    </h1>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -274,10 +299,12 @@ $uId = $_SESSION['id'];
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style=" background-color:#ffa80080">
-                                                    <h2>30</h2>
-                                                    <h2>Total Suppliers hired</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style=" background-color:#ffa80080">
+                                                    <h1>
+                                                        <?php
+                                                        echo $suppliersHired;
+                                                        ?>
+                                                    </h1>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -287,16 +314,18 @@ $uId = $_SESSION['id'];
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-success py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Month Earning</h2>
+                                                <h2 class="font-weight-bolder text-dark">This Month Earnings</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style="height:100%;  background-color: #1bc5bd80;">
-                                                    <h2>1000$</h2>
-                                                    <h2>Earned in Last month </h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style="height:100%;  background-color: #1bc5bd80;">
+                                                    <h1>
+                                                        <?php
+                                                        echo $monthlyEarnings . ' &dollar;'
+                                                        ?>
+                                                    </h1>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -307,16 +336,18 @@ $uId = $_SESSION['id'];
                                         <div class="card card-custom bg-gray-100 card-stretch gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-primary py-5">
-                                                <h2 class="font-weight-bolder text-dark">Last Year Earning</h2>
+                                                <h2 class="font-weight-bolder text-dark">This Year Earnings</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
                                             <div class="card-body p-0 position-relative overflow-hidden">
                                                 <!--begin::Chart-->
-                                                <div class="card-rounded-bottom pt-10 pl-8"
-                                                    style="background-color:#3699ff80 ">
-                                                    <h2>1000$</h2>
-                                                    <h2>Earned in Last year</h2>
+                                                <div class="card-rounded-bottom pt-10 pl-8" style="background-color:#3699ff80 ">
+                                                    <h1>
+                                                        <?php
+                                                        echo $yearlyEarnings . ' &dollar;'
+                                                        ?>
+                                                    </h1>
                                                 </div>
                                                 <!--end::Chart-->
                                             </div>
@@ -327,8 +358,7 @@ $uId = $_SESSION['id'];
                             </div>
                         </div>
                         <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-                            <div class="modal fade" id="newEvent" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="newEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -339,19 +369,16 @@ $uId = $_SESSION['id'];
                                         </div>
                                         <div class="modal-body">
 
-                                            <form class="form" action="pages/login_signup/organizer/addEvent.php"
-                                                method="POST" enctype="multipart/form-data">
+                                            <form class="form" action="pages/login_signup/organizer/addEvent.php" method="POST" enctype="multipart/form-data">
 
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label>Title :</label>
-                                                        <input type="text" name="title"
-                                                            class="form-control form-control-solid" />
+                                                        <input type="text" name="title" class="form-control form-control-solid" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label>Description :</label>
-                                                        <textarea name="description"
-                                                            class="form-control form-control-solid" rows="3">
+                                                        <textarea name="description" class="form-control form-control-solid" rows="3">
                             </textarea>
                                                     </div>
                                                 </div>
@@ -359,13 +386,11 @@ $uId = $_SESSION['id'];
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label>Location :</label>
-                                                        <input name="location" type="text"
-                                                            class="form-control form-control-solid" />
+                                                        <input name="location" type="text" class="form-control form-control-solid" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label>Total Seats :</label>
-                                                        <input name="total_seats" type="number"
-                                                            class="form-control form-control-solid" />
+                                                        <input name="total_seats" type="number" class="form-control form-control-solid" />
                                                     </div>
 
                                                 </div>
@@ -374,13 +399,11 @@ $uId = $_SESSION['id'];
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label for="eventDate">Date :</label>
-                                                        <input name="date" class="form-control form-control-solid"
-                                                            type="date" id="eventDate" />
+                                                        <input name="date" class="form-control form-control-solid" type="date" id="eventDate" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label for="eventTime">Time :</label>
-                                                        <input name="time" class="form-control form-control-solid"
-                                                            type="time" id="eventTime" />
+                                                        <input name="time" class="form-control form-control-solid" type="time" id="eventTime" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -389,32 +412,30 @@ $uId = $_SESSION['id'];
                                                             Select Star
                                                         </label>
 
-                                                        <select name="star_performing"
-                                                            class="form-control form-control-solid" id="selectStar">
+                                                        <select name="star_performing" class="form-control form-control-solid" id="selectStar">
                                                             <option selected></option>
                                                             <?php
-                              $currentUserId = $_SESSION['id'];
-                              $selectStars = "SELECT `u_id`, `name` FROM `stars` WHERE NOT `u_id` = $currentUserId LIMIT 20";
-                              $selectResult = mysqli_query($conn, $selectStars);
-                              while ($row = mysqli_fetch_assoc($selectResult)) {
-                                $sId = $row['u_id'];
-                                $sName = $row['name'];
-                                $rating = rand(1, 5);
-                                $reviews = rand(1, 100);
-                                echo "
+                                                            $currentUserId = $_SESSION['id'];
+                                                            $selectStars = "SELECT `u_id`, `name` FROM `stars` WHERE NOT `u_id` = $currentUserId LIMIT 20";
+                                                            $selectResult = mysqli_query($conn, $selectStars);
+                                                            while ($row = mysqli_fetch_assoc($selectResult)) {
+                                                                $sId = $row['u_id'];
+                                                                $sName = $row['name'];
+                                                                $rating = rand(1, 5);
+                                                                $reviews = rand(1, 100);
+                                                                echo "
                                   <option value='$sId'>
                                     $sName &nbsp;&nbsp;&nbsp; Rating : $rating stars &nbsp;&nbsp;&nbsp; Total Reviews : $reviews    
                                   </option>";
-                              }
-                              ?>
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label>Banner Image</label>
                                                         <div></div>
                                                         <div class="custom-file">
-                                                            <input name="banner" type="file" class="custom-file-input"
-                                                                id="customFile" />
+                                                            <input name="banner" type="file" class="custom-file-input" id="customFile" />
                                                             <label class="custom-file-label" for="customFile">Choose
                                                                 Image</label>
                                                         </div>
@@ -423,19 +444,15 @@ $uId = $_SESSION['id'];
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label for="ticketPrice">Ticket Price $ :</label>
-                                                        <input name="ticketPrice"
-                                                            class="form-control form-control-solid" type="number"
-                                                            id="ticketPrice" />
+                                                        <input name="ticketPrice" class="form-control form-control-solid" type="number" id="ticketPrice" />
 
                                                     </div>
                                                 </div>
 
                                                 <div class="d-flex col-md-6 mt-12 px-6">
-                                                    <input type="submit" name="add_event" value="Add Event"
-                                                        class="btn btn-primary" />
+                                                    <input type="submit" name="add_event" value="Add Event" class="btn btn-primary" />
 
-                                                    <button type="button" class="btn btn-secondary ml-12"
-                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary ml-12" data-dismiss="modal">Close</button>
                                                 </div>
 
                                             </form>
@@ -452,8 +469,7 @@ $uId = $_SESSION['id'];
                                             <!--begin::Header-->
                                             <div class="card-header d-flex align-items-center">
                                                 <h2 class="card-title">Events</h2>
-                                                <button class="btn btn-primary btn-large" data-target="#newEvent"
-                                                    data-toggle="modal">
+                                                <button class="btn btn-primary btn-large" data-target="#newEvent" data-toggle="modal">
                                                     Add Event
                                                 </button>
                                             </div>
@@ -475,12 +491,12 @@ $uId = $_SESSION['id'];
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                $organizerId = $_SESSION['id'];
-                                $selectEvents = "SELECT * FROM `events` WHERE `organizer_id` = $organizerId;";
-                                $eventResult = mysqli_query($conn, $selectEvents);
-                                while ($record = mysqli_fetch_assoc($eventResult)) {
-                                  $eventId = $record['id'];
-                                  echo '<tr>
+                                                                $organizerId = $_SESSION['id'];
+                                                                $selectEvents = "SELECT * FROM `events` WHERE `organizer_id` = $organizerId;";
+                                                                $eventResult = mysqli_query($conn, $selectEvents);
+                                                                while ($record = mysqli_fetch_assoc($eventResult)) {
+                                                                    $eventId = $record['id'];
+                                                                    echo '<tr>
                                   <td>
                                     <p
                                       class="text-dark-75 font-weight-bolder mb-1 font-size-lg">
@@ -531,8 +547,8 @@ $uId = $_SESSION['id'];
                                     </a>
                                   </td>
                                 </tr>';
-                                }
-                                ?>
+                                                                }
+                                                                ?>
 
 
                                                             </tbody>
@@ -548,26 +564,26 @@ $uId = $_SESSION['id'];
                             </div>
                         </div>
                         <?php
-            // select the quotes with status = responded
-            $quotesData = mysqli_query(
-              $conn,
-              "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,`title`, `banner`, `date`
+                        // select the quotes with status = responded
+                        $quotesData = mysqli_query(
+                            $conn,
+                            "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,`title`, `banner`, `date`
               FROM quotations INNER JOIN events ON quotations.event_id = events.id 
               WHERE `status` = 'responded' AND `quotations`.`organizer_id` = $uId;"
-            ) or die(mysqli_error($conn));
-            ?>
+                        ) or die(mysqli_error($conn));
+                        ?>
                         <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
                                     <?php
-                  if (mysqli_num_rows($quotesData) < 1) {
-                    echo ' <div class="col-12 pl-8 pl-md-12 ">
+                                    if (mysqli_num_rows($quotesData) < 1) {
+                                        echo ' <div class="col-12 pl-8 pl-md-12 ">
                                             <h2>No response received yet</h2>
                                         </div>
                                         ';
-                  } else {
-                    while ($quotesArr = mysqli_fetch_assoc($quotesData)) {
-                      echo '<div class="col-md-6 col-xl-4">
+                                    } else {
+                                        while ($quotesArr = mysqli_fetch_assoc($quotesData)) {
+                                            echo '<div class="col-md-6 col-xl-4">
                                             <div class="card card-custom gutter-b">
                                                 <!--begin::Body-->
                                                 <div class="card-body">
@@ -661,9 +677,9 @@ $uId = $_SESSION['id'];
                                                 <!--end::Body-->
                                             </div>
                                         </div>';
-                    }
-                  }
-                  ?>
+                                        }
+                                    }
+                                    ?>
 
                                 </div>
                             </div>
@@ -681,26 +697,17 @@ $uId = $_SESSION['id'];
                                                     <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x">
                                                         <!--begin::Item-->
                                                         <li class="nav-item mr-3">
-                                                            <a class="nav-link active" data-toggle="tab"
-                                                                href="#kt_user_edit_tab_1">
+                                                            <a class="nav-link active" data-toggle="tab" href="#kt_user_edit_tab_1">
                                                                 <span class="nav-icon">
                                                                     <span class="svg-icon">
                                                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="24px" height="24px"
-                                                                            viewBox="0 0 24 24" version="1.1">
-                                                                            <g stroke="none" stroke-width="1"
-                                                                                fill="none" fill-rule="evenodd">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                                                 <polygon points="0 0 24 0 24 24 0 24">
                                                                                 </polygon>
-                                                                                <path
-                                                                                    d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z"
-                                                                                    fill="#000000" fill-rule="nonzero">
+                                                                                <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero">
                                                                                 </path>
-                                                                                <path
-                                                                                    d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z"
-                                                                                    fill="#000000" opacity="0.3"></path>
+                                                                                <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
                                                                             </g>
                                                                         </svg>
                                                                         <!--end::Svg Icon-->
@@ -711,8 +718,7 @@ $uId = $_SESSION['id'];
                                                         </li>
                                                         <!--end::Item-->
                                                         <li class="nav-item mr-3">
-                                                            <a class="nav-link" data-toggle="tab"
-                                                                href="#kt_user_edit_tab_2">
+                                                            <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_2">
                                                                 <span class="nav-icon">
                                                                     <span class="svg-icon">
                                                                         <i class="fa fa-key" aria-hidden="true"></i>
@@ -733,8 +739,7 @@ $uId = $_SESSION['id'];
                                                     <!--end::Button-->
                                                     <!--begin::Dropdown-->
                                                     <div class="btn-group ml-2">
-                                                        <button type="button" name="editSettings" id="editSettings"
-                                                            class="btn btn-primary font-weight-bold
+                                                        <button type="button" name="editSettings" id="editSettings" class="btn btn-primary font-weight-bold
                               btn-sm px-3 font-size-base
                               ml-14 ml-md-0 mb-6 mb-md-0">
                                                             Save Changes
@@ -747,13 +752,10 @@ $uId = $_SESSION['id'];
                                             <!--end::Card header-->
                                             <!--begin::Card body-->
                                             <div class="card-body">
-                                                <form class="form" id="kt_form"
-                                                    action="pages/login_signup/updateRoleSettings/update.php?role=organizer"
-                                                    method="POST" enctype="multipart/form-data">
+                                                <form class="form" id="kt_form" action="pages/login_signup/updateRoleSettings/update.php?role=organizer" method="POST" enctype="multipart/form-data">
                                                     <div class="tab-content">
                                                         <!--begin::Tab-->
-                                                        <div class="tab-pane show px-md-7 active"
-                                                            id="kt_user_edit_tab_1" role="tabpanel">
+                                                        <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
                                                             <!--begin::Row-->
                                                             <div class="row">
                                                                 <div class="col-xl-7 my-2">
@@ -761,8 +763,7 @@ $uId = $_SESSION['id'];
                                                                     <div class="row">
                                                                         <label class="col-md-3"></label>
                                                                         <div class="col-md-9">
-                                                                            <h6
-                                                                                class="text-dark font-weight-bold mb-10">
+                                                                            <h6 class="text-dark font-weight-bold mb-10">
                                                                                 Organizer Info:</h6>
                                                                         </div>
                                                                     </div>
@@ -772,38 +773,18 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3  ">Profile
                                                                             Image</label>
                                                                         <div class="col-md-9">
-                                                                            <div class="image-input image-input-empty image-input-outline"
-                                                                                id="kt_user_edit_avatar"
-                                                                                style="background-image: url(<?php echo $_SESSION['organizer_profile_img'] ?>)">
+                                                                            <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url(<?php echo $_SESSION['organizer_profile_img'] ?>)">
                                                                                 <div class="image-input-wrapper"></div>
-                                                                                <label
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="change"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Change avatar">
-                                                                                    <i
-                                                                                        class="fa fa-pen icon-sm text-muted"></i>
-                                                                                    <input type="file"
-                                                                                        name="profile_avatar"
-                                                                                        accept=".png, .jpg, .jpeg">
-                                                                                    <input type="hidden"
-                                                                                        name="profile_avatar_remove">
+                                                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+                                                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                                                    <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+                                                                                    <input type="hidden" name="profile_avatar_remove">
                                                                                 </label>
-                                                                                <span
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="cancel"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Cancel avatar">
-                                                                                    <i
-                                                                                        class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
+                                                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
                                                                                 </span>
-                                                                                <span
-                                                                                    class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                                                                    data-action="remove"
-                                                                                    data-toggle="tooltip" title=""
-                                                                                    data-original-title="Remove avatar">
-                                                                                    <i
-                                                                                        class="ki ki-bold-close icon-xs text-muted"></i>
+                                                                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
+                                                                                    <i class="ki ki-bold-close icon-xs text-muted"></i>
                                                                                 </span>
                                                                             </div>
                                                                         </div>
@@ -814,10 +795,7 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3  ">Full
                                                                             Name</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="fullName"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="text"
-                                                                                placeholder="<?php echo $_SESSION['organizer_name'] ?>">
+                                                                            <input name="fullName" class="form-control form-control-lg form-control-solid" type="text" placeholder="<?php echo $_SESSION['organizer_name'] ?>">
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Group-->
@@ -826,16 +804,13 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3  ">Email
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
                                                                                         <i class="la la-at"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input name="email" type="email"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['organizer_email'] ?>">
+                                                                                <input name="email" type="email" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['organizer_email'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -845,16 +820,13 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3">Contact
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
                                                                                         <i class="la la-phone"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input name="contact" type="text"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['organizer_contact'] ?>">
+                                                                                <input name="contact" type="text" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['organizer_contact'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -864,17 +836,13 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3  ">Address
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
+                                                                            <div class="input-group input-group-lg input-group-solid">
                                                                                 <div class="input-group-prepend">
                                                                                     <span class="input-group-text">
-                                                                                        <i
-                                                                                            class="fa fa-map-marker-alt"></i>
+                                                                                        <i class="fa fa-map-marker-alt"></i>
                                                                                     </span>
                                                                                 </div>
-                                                                                <input type="text" name="address"
-                                                                                    class="form-control form-control-lg form-control-solid"
-                                                                                    placeholder="<?php echo $_SESSION['organizer_address'] ?>">
+                                                                                <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION['organizer_address'] ?>">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -882,17 +850,11 @@ $uId = $_SESSION['id'];
 
                                                                     <!--begin::Group-->
                                                                     <div class="form-group row">
-                                                                        <label
-                                                                            class="col-form-label col-md-3">Description
+                                                                        <label class="col-form-label col-md-3">Description
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div
-                                                                                class="input-group input-group-lg input-group-solid">
-                                                                                <textarea name="description"
-                                                                                    class="form-control"
-                                                                                    style="border: none !important;"
-                                                                                    rows="3" spellcheck="false"
-                                                                                    placeholder="<?php echo $_SESSION['organizer_description'] ?>"></textarea>
+                                                                            <div class="input-group input-group-lg input-group-solid">
+                                                                                <textarea name="description" class="form-control" style="border: none !important;" rows="3" spellcheck="false" placeholder="<?php echo $_SESSION['organizer_description'] ?>"></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -902,8 +864,7 @@ $uId = $_SESSION['id'];
                                                             <!--end::Row-->
                                                         </div>
                                                         <!--end::Tab-->
-                                                        <div class="tab-pane px-md-7" id="kt_user_edit_tab_2"
-                                                            role="tabpanel">
+                                                        <div class="tab-pane px-md-7" id="kt_user_edit_tab_2" role="tabpanel">
                                                             <!--begin::Row-->
                                                             <div class="row">
                                                                 <div class="col-xl-7 my-2">
@@ -911,8 +872,7 @@ $uId = $_SESSION['id'];
                                                                     <div class="row">
                                                                         <label class="col-md-3"></label>
                                                                         <div class="col-md-9">
-                                                                            <h6
-                                                                                class="text-dark font-weight-bold mb-10">
+                                                                            <h6 class="text-dark font-weight-bold mb-10">
                                                                                 Change Password:</h6>
                                                                         </div>
                                                                     </div>
@@ -923,19 +883,14 @@ $uId = $_SESSION['id'];
                                                                         <label class="col-form-label col-md-3  ">New
                                                                             Password</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="newPwd"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="password"
-                                                                                autocomplete="new-password">
+                                                                            <input name="newPwd" class="form-control form-control-lg form-control-solid" type="password" autocomplete="new-password">
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-3  ">Confirm
                                                                             Password</label>
                                                                         <div class="col-md-9">
-                                                                            <input name="confirmNewPwd"
-                                                                                class="form-control form-control-lg form-control-solid"
-                                                                                type="password">
+                                                                            <input name="confirmNewPwd" class="form-control form-control-lg form-control-solid" type="password">
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Group-->
@@ -979,18 +934,18 @@ $uId = $_SESSION['id'];
     </div>
     <?php include("../../../partials/_extras/offcanvas/quick-organizer.php") ?>
     <?php
-  include("../../../partials/jslinks.php");
-  ?>
+    include("../../../partials/jslinks.php");
+    ?>
     <script>
-    const editSettingsBtn = document.getElementById("editSettings");
-    const resetBtn = document.getElementById("resetBtn");
-    const settingsForm = document.getElementById("kt_form");
-    editSettingsBtn.addEventListener('click', () => {
-        settingsForm.submit();
-    });
-    resetBtn.addEventListener('click', () => {
-        settingsForm.reset();
-    });
+        const editSettingsBtn = document.getElementById("editSettings");
+        const resetBtn = document.getElementById("resetBtn");
+        const settingsForm = document.getElementById("kt_form");
+        editSettingsBtn.addEventListener('click', () => {
+            settingsForm.submit();
+        });
+        resetBtn.addEventListener('click', () => {
+            settingsForm.reset();
+        });
     </script>
 
 </body>
