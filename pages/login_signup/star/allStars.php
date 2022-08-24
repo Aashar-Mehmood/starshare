@@ -19,7 +19,7 @@ if (isset($_POST['search']) && !empty($_POST['searchedText'])) {
 
 $result = mysqli_query($conn, $countQuery);
 $totalRows = mysqli_num_rows($result);
-$recordPerPage = 9;
+$recordPerPage = 6;
 $totalPages = ceil($totalRows / $recordPerPage);
 $offset = ($page - 1) * $recordPerPage;
 
