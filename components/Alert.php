@@ -1,3 +1,26 @@
+<style>
+    .pr {
+        position: relative;
+    }
+
+    #alert {
+        width: clamp(260px, 100%, 460px);
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+        position: absolute;
+        top: 25px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #alert.show {
+        opacity: 1;
+    }
+
+    #alert #close {
+        cursor: pointer;
+    }
+</style>
 <?php
 $alert_type = '';
 $alert_description = '';
@@ -12,21 +35,7 @@ if (!empty($_SESSION['error_msg'])) {
     unset($_SESSION['success_msg']);
 }
 ?>
-<style>
-    #alert {
-        min-width: 260px;
-        opacity: 0;
-        transition: opacity 0.4s ease-in-out;
-    }
 
-    #alert.show {
-        opacity: 1;
-    }
-
-    #alert #close {
-        cursor: pointer;
-    }
-</style>
 <!--begin::Alert-->
 <div id="alert" class="alert d-flex align-items-center p-5 <?php echo $alert_type ?>">
 

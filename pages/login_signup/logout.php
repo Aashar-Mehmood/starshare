@@ -1,6 +1,5 @@
-<?php
-session_start();
-unset($_SESSION);
-setcookie(session_name(), session_id(), time() - 1000, "/");
+<?php session_start();
 session_destroy();
+session_start();
+$_SESSION['success_msg'] = 'Logged Out';
 header("Location: ./login_signup.php");

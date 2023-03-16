@@ -1,16 +1,11 @@
-<?php
+<?php session_start();
 include_once('./db_connection.php');
-session_start([
-  'cookie_lifetime' => 86400, // 1 day
-  'use_strict_mode' => 1,
-  'cookie_httponly' => 1
-]);
 if (
   !isset($_SESSION["id"]) ||
   !isset($_SESSION["name"])
 ) {
-
-  header("location: ./login_signup.php");
+  $_SESSION['error_msg'] = 'You are not logged In';
+  header("Location: ./login_signup.php");
 }
 $today = date('Y-m-d', time());
 
@@ -64,7 +59,11 @@ $today = date('Y-m-d', time());
 
           <!--begin::Container-->
           <div class="container-fluid d-flex align-items-stretch justify-content-between">
-
+            <?php
+            if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+              include_once('../../components/Alert.php');
+            }
+            ?>
             <!--begin::Header Menu Wrapper-->
             <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 
@@ -291,6 +290,7 @@ $today = date('Y-m-d', time());
 
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
           <!--content start-->
           <div class="container">
             <div class="row">

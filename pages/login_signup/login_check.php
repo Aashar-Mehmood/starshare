@@ -1,7 +1,10 @@
-<?php
+<?php session_start();
 include_once("./db_connection.php");
+$errorMsg = '';
+$successMsg = '';
 $email =  $_POST['email'];
 $pwd = $_POST['password'];
+$dashboard = './dashboard.php';
 
 $query = "SELECT * FROM `users` WHERE `email` = ?;";
 $stmt = mysqli_stmt_init($conn);
@@ -12,20 +15,15 @@ $result = mysqli_stmt_get_result($stmt);
 
 
 if (mysqli_num_rows($result) < 1) {
-  header("Refresh:0; URL = ./login_signup.php");
-  echo "<script>alert('Invalid Credentials')</script>";
+  $errorMsg = 'Invalid Credentials';
 } else {
   $row = mysqli_fetch_assoc($result);
   $hashedPwd = $row['password'];
   if (!password_verify($pwd, $hashedPwd)) {
-    header("Refresh:0; URL = ./login_signup.php");
-    echo "<script>alert('Invalid Credentials')</script>";
+    $errorMsg = 'Invalid Credentials';
   } else {
-    session_start([
-      'cookie_lifetime' => 86400, // 1 day
-      'use_strict_mode' => 1,
-      'cookie_httponly' => 1
-    ]);
+    $successMsg = 'Logged in Successfully';
+
     $_SESSION['id'] = $row['id'];
     $_SESSION['name'] = $row['name'];
     $_SESSION['email'] = $row['email'];
@@ -36,7 +34,7 @@ if (mysqli_num_rows($result) < 1) {
     if ($row['is_admin']) {
       $_SESSION['is_admin'] = true;
       $_SESSION['is_fan'] = false;
-      header("location: ../../index.php");
+      $dashboard = '../../index.php';
     } else if ($row['is_fan']) {
       $_SESSION['is_admin'] = false;
       $_SESSION['is_fan'] = true;
@@ -49,8 +47,6 @@ if (mysqli_num_rows($result) < 1) {
       if ($row['is_supplier']) {
         setSessionVars($conn, 'supplier');
       }
-
-      header("location: ./dashboard.php");
     }
   }
 }
@@ -80,4 +76,12 @@ function setSessionVars($conn, $role)
   $_SESSION["$desc"] = $record["description"];
   $_SESSION["$profile"] = $record["profile_img"];
   $_SESSION["$isRole"] = true;
+}
+
+if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+  header("Location:./login_signup.php");
+} else if (!empty($successMsg)) {
+  $_SESSION['success_msg'] = $successMsg;
+  header("Location:" . "$dashboard");
 }

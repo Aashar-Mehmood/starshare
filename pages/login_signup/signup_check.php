@@ -45,6 +45,8 @@ if (!isset($_POST["signup"])) {
         $newUserArr = mysqli_fetch_assoc($newUser);
         $_SESSION['id'] = $newUserArr["id"];
         $_SESSION['name'] = $newUserArr["name"];
+        $_SESSION['email'] = $newUserArr["email"];
+        $_SESSION['profile_img'] = $newUserArr["profile_img"];
         $_SESSION['is_star'] = false;
         $_SESSION['is_organizer'] = false;
         $_SESSION['is_supplier'] = false;
@@ -60,6 +62,5 @@ if (!empty($errorMsg)) {
   header('Location:./login_signup.php?signUpActive=true');
 } else if (!empty($successMsg)) {
   $_SESSION['success_msg'] = $successMsg;
-  // include_once('../../components/Alert.php');
   header('Location:./dashboard.php');
 }

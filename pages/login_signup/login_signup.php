@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start();
 if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
   $signUpActive = true;
 }
@@ -69,7 +68,7 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
       </div>
       <!--begin::Aside-->
       <!--begin::Content-->
-      <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
+      <div class="login-content flex-row-fluid d-flex flex-column justify-content-center pr overflow-hidden p-7 mx-auto">
         <!--begin::Content body-->
         <?php
         if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
@@ -92,7 +91,7 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
             <!--begin::Form group-->
             <div class="form-group">
               <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value="ali@gmail.com" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value="ali@gmail.co" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
@@ -253,12 +252,7 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
       signupForm.submit();
     });
 
-    const url = document.URL;
-    const ktLogin = document.getElementById("kt_login");
-    if (url.includes('?register=failed')) {
-      console.log("register Failed");
-      ktLogin.classList.add("login-signup-on")
-    }
+
 
     //hide extra error boxes;
     const nameInput = document.querySelector("#registerName");
