@@ -1,3 +1,17 @@
+<?php
+$alert_type = '';
+$alert_description = '';
+
+if (!empty($_SESSION['error_msg'])) {
+    $alert_type = 'alert-danger';
+    $alert_description = $_SESSION['error_msg'];
+    unset($_SESSION['error_msg']);
+} else if (!empty($_SESSION['success_msg'])) {
+    $alert_type = 'alert-success';
+    $alert_description = $_SESSION['success_msg'];
+    unset($_SESSION['success_msg']);
+}
+?>
 <style>
     #alert {
         min-width: 260px;

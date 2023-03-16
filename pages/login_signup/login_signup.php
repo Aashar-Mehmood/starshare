@@ -1,19 +1,5 @@
 <?php
 session_start();
-$alert_type = '';
-$alert_description = '';
-$signUpActive = false;
-
-if (isset($_SESSION['error_msg']) && !empty($_SESSION['error_msg'])) {
-  $alert_type = 'alert-danger';
-  $alert_description = $_SESSION['error_msg'];
-  unset($_SESSION['error_msg']);
-} else if (isset($_SESSION['success_msg']) && !empty($_SESSION['success_msg'])) {
-  $alert_type = 'alert-success';
-  $alert_description = $_SESSION['success_msg'];
-  unset($_SESSION['success_msg']);
-}
-
 if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
   $signUpActive = true;
 }
@@ -86,11 +72,11 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
       <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
         <!--begin::Content body-->
         <?php
-        if (!empty($alert_type)) {
+        if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
           include_once('../../components/Alert.php');
-          $alert_type = '';
-          $alert_description = '';
         }
+
+
         ?>
         <div class="login-form login-signin">
           <!--begin::Form-->
