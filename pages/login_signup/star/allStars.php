@@ -275,14 +275,14 @@ $limitResult = mysqli_query($conn, $limitSelect);
   <!--end::Main-->
   <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
   <?php include("../../../partials/jslinks.php"); ?>
-  <script>
+  <!-- <script>
     const pageNum = document.URL.split('page=')[1];
     var activePage = document.getElementById(`page${pageNum}`);
     if (!activePage) {
       activePage = document.querySelectorAll('a.paginationBtn')[0];
     }
     activePage.classList.add('active');
-  </script>
+  </script> -->
 </body>
 
 <!--end::Body-->

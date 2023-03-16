@@ -4,10 +4,10 @@ $user = "root";
 $pwd = "";
 $db = "starshare";
 
-// $host = "sql100.epizy.com";
-// $user = "epiz_32164986";
-// $pwd = "ouABtsvb5NCeN8";
-// $db = "epiz_32164986_starshare";
+// $host = "localhost";
+// $user = "id19811089_aashar";
+// $pwd = 'T9YHS%)aOOxM-JAq';
+// $db = "id19811089_starshare";
 
 $conn = mysqli_connect($host, $user, $pwd, $db);
 if (!$conn) {

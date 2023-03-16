@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id();
 include_once("../db_connection.php");
 
 $message = "";

@@ -52,7 +52,7 @@
         </div>
         <!--end::Aside Top-->
         <!--begin::Aside Bottom-->
-        <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/media/svg/illustrations/login-visual-1.svg)"></div>
+        <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/media/svg/login-visual-1.svg)"></div>
         <!--end::Aside Bottom-->
       </div>
       <!--begin::Aside-->
@@ -75,7 +75,7 @@
               <!--begin::Form group-->
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" />
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value ="ali@gmail.com" />
               </div>
               <!--end::Form group-->
               <!--begin::Form group-->
@@ -84,7 +84,7 @@
                   <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
 
                 </div>
-                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="password" name="password" autocomplete="off" />
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="password" name="password" autocomplete="off" value="ali" />
               </div>
               <!--end::Form group-->
               <!--begin::Action-->

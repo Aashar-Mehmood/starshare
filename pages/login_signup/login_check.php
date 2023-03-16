@@ -12,16 +12,20 @@ $result = mysqli_stmt_get_result($stmt);
 
 
 if (mysqli_num_rows($result) < 1) {
-  echo "<script>alert('Invalid email')</script>";
   header("Refresh:0; URL = ./login_signup.php");
+  echo "<script>alert('Invalid Credentials')</script>";
 } else {
   $row = mysqli_fetch_assoc($result);
   $hashedPwd = $row['password'];
   if (!password_verify($pwd, $hashedPwd)) {
-    echo "<script>alert('Wrong Password')</script>";
     header("Refresh:0; URL = ./login_signup.php");
+    echo "<script>alert('Invalid Credentials')</script>";
   } else {
-    session_start();
+    session_start([
+      'cookie_lifetime' => 86400, // 1 day
+      'use_strict_mode' => 1,
+      'cookie_httponly' => 1
+    ]);
     $_SESSION['id'] = $row['id'];
     $_SESSION['name'] = $row['name'];
     $_SESSION['email'] = $row['email'];

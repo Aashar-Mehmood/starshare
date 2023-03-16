@@ -2,6 +2,7 @@
 
 
 $submitError = false;
+$errorMsg = '';
 
 if (!isset($_POST["signup"])) {
   echo "<script>alert('Error occured while submitting form')</script>";
@@ -56,11 +57,19 @@ if ($submitError == true) {
   $bind = mysqli_stmt_bind_param($stmt, "sss", $name, $email, $hashedPwd);
   $executed = mysqli_stmt_execute($stmt);
   mysqli_stmt_close($stmt);
+  $newUser = mysqli_query($conn, "SELECT * FROM users WHERE email = '$email';");
 
-  if (!$executed) {
+  if (mysqli_num_rows($newUser) < 1) {
     echo "<script>alert('Registration Failed')</script>";
   } else {
+    $newUserArr = mysqli_fetch_assoc($newUser);
+    $_SESSION['id'] = $newUserArr["id"];
+    $_SESSION['name'] = $newUserArr["name"];
+    $_SESSION['is_star'] = false;
+    $_SESSION['is_organizer'] = false;
+    $_SESSION['is_supplier'] = false;
+    $_SESSION['is_admin'] = false;
     echo "<script>alert('Registered successfully')</script>";
-    header('Refresh:0; URL=./login_signup.php?register=succeeded');
+    header('Refresh:0; URL=./dashboard.php');
   }
 }

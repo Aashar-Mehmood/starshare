@@ -1,10 +1,15 @@
 <?php
 include_once('./db_connection.php');
-session_start();
+session_start([
+  'cookie_lifetime' => 86400, // 1 day
+  'use_strict_mode' => 1,
+  'cookie_httponly' => 1
+]);
 if (
   !isset($_SESSION["id"]) ||
   !isset($_SESSION["name"])
 ) {
+
   header("location: ./login_signup.php");
 }
 $today = date('Y-m-d', time());

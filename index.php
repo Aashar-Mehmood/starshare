@@ -1,10 +1,12 @@
 <?php
-session_start();
+include_once('./pages/login_signup/check_session.php');
+
 if (
-    !isset($_SESSION["id"]) ||
+    !isset($_SESSION["id"])   ||
     !isset($_SESSION["name"]) ||
     $_SESSION["is_admin"] !== true
 ) {
+
     header("location: pages/login_signup/login_signup.php");
 }
 include_once('./pages/login_signup/db_connection.php');
