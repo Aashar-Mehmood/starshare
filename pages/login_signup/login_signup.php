@@ -1,3 +1,18 @@
+<?php
+session_start();
+$msg = '';
+if (isset($_SESSION['error_msg']) && !empty($_SESSION['erro_msg'])) {
+  $msg = $_SESSION['error_msg'];
+  unset($_SESSION['error_msg']);
+} else if (isset($_SESSION['success_msg']) && !empty($_SESSION['success_msg'])) {
+  $msg = $_SESSION['success_msg'];
+  unset($_SESSION['success_msg']);
+}
+if (!empty($msg)) {
+  echo "<script>alert($msg)</script>";
+  $msg = '';
+}
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -75,7 +90,7 @@
               <!--begin::Form group-->
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value ="ali@gmail.com" />
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value="ali@gmail.com" />
               </div>
               <!--end::Form group-->
               <!--begin::Form group-->

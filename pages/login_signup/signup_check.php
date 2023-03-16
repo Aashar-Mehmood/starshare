@@ -1,12 +1,10 @@
 <?php
+session_start();
 
-
-$submitError = false;
 $errorMsg = '';
 
 if (!isset($_POST["signup"])) {
-  echo "<script>alert('Error occured while submitting form')</script>";
-  $submitError = true;
+  $errorMsg = "Error occured while submitting form";
 } else {
   $name = $_POST['fullname'];
   $email = $_POST['email'];
@@ -14,25 +12,19 @@ if (!isset($_POST["signup"])) {
   $confirmUserPwd = $_POST['cpassword'];
 
   if (
-    $name == '' || $email  == '' ||
-    $userPwd  == '' || $confirmUserPwd == ''
+    empty($name) || empty($email) || empty($userPwd) || empty($confirmUserPwd)
   ) {
-    echo "<script>alert('Fill all the fields')</script>";
-    $submitError = true;
-  } else {
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      echo "<script>alert('Enter a valid email address')</script>";
-      $submitError = true;
-    }
-    if ($userPwd !== $confirmUserPwd) {
-      echo "<script>alert('Passwords does not match')</script>";
-      $submitError = true;
-    }
+    $errorMsg = 'Fill all the fields';
+  } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errorMsg = 'Enter a valid email address';
+  } else if ($userPwd !== $confirmUserPwd) {
+    $errorMsg = 'Passwords does not match';
   }
 }
 
-if ($submitError == true) {
-  header('Refresh:0; URL=./login_signup.php?register=failed');
+if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+  header('Refresh:0; URL=./login_signup.php');
 } else {
 
   include_once('./db_connection.php');
