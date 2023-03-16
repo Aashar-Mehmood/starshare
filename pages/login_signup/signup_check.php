@@ -24,7 +24,7 @@ if (!isset($_POST["signup"])) {
 
 if (!empty($errorMsg)) {
   $_SESSION['error_msg'] = $errorMsg;
-  header('Refresh:0; URL=./login_signup.php');
+  header('Location:./login_signup.php?signUpActive=true');
 } else {
 
   include_once('./db_connection.php');

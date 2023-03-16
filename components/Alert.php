@@ -1,0 +1,43 @@
+<style>
+    #alert {
+        min-width: 260px;
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+    }
+
+    #alert.show {
+        opacity: 1;
+    }
+
+    #alert #close {
+        cursor: pointer;
+    }
+</style>
+<!--begin::Alert-->
+<div id="alert" class="alert d-flex align-items-center p-5 <?php echo $alert_type ?>">
+
+    <h3>
+        <?php echo $alert_description ?>
+    </h3>
+    <h1 class="ml-auto" id="close">
+        &times;
+    </h1>
+
+</div>
+<!--end::Alert-->
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const alert_box = document.getElementById('alert');
+        const close = document.getElementById('close');
+        setTimeout(() => {
+            alert_box.classList.add('show');
+        }, 150);
+        close.addEventListener('click', () => {
+            alert_box.classList.remove('show');
+        });
+        setTimeout(() => {
+            alert_box.classList.contains('show') && alert_box.classList.remove('show');
+        }, 2500);
+    });
+</script>
