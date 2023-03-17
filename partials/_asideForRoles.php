@@ -304,7 +304,7 @@
         parentItem.classList.add("menu-item-open");
       }
     }
-    activeItem.parentElement.classList.add("menu-item-active");
+    activeItem?.parentElement?.classList.add("menu-item-active");
 
   });
 </script>

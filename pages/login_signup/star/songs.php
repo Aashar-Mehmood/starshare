@@ -29,10 +29,10 @@ if (!isset($_GET['starId'])) {
 <!--begin::Head-->
 
 <head>
-    <base href="../../../">
-    <meta charset="utf-8" />
-    <title>Songs by Star</title>
-    <?php include("../../../partials/csslinks.php"); ?>
+  <base href="../../../">
+  <meta charset="utf-8" />
+  <title>Songs by Star</title>
+  <?php include("../../../partials/csslinks.php"); ?>
 
 </head>
 
@@ -40,74 +40,68 @@ if (!isset($_GET['starId'])) {
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  <!--begin::Main-->
 
-    <?php include("../../../partials/_header-mobile.php"); ?>
-    <div class="d-flex flex-column flex-root">
+  <?php include("../../../partials/_header-mobile.php"); ?>
+  <div class="d-flex flex-column flex-root">
 
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
+    <!--begin::Page-->
+    <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../partials/_asideForRoles.php"); ?>
+      <?php include("../../../partials/_asideForRoles.php"); ?>
 
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+      <!--begin::Wrapper-->
+      <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                <div id="kt_header" class="header header-fixed">
+        <div id="kt_header" class="header header-fixed">
 
-                    <!--begin::Container-->
-                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+          <!--begin::Container-->
+          <div class="container-fluid d-flex align-items-stretch justify-content-between">
 
-                        <!--begin::Header Menu Wrapper-->
-                        <!--begin::Header Menu-->
+            <!--begin::Header Menu Wrapper-->
+            <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
 
-                        </ul>
-                        <!--end::Header Menu-->
+            </ul>
+            <!--end::Header Menu-->
 
-                        <!--end::Header Menu Wrapper-->
+            <!--end::Header Menu Wrapper-->
 
-                        <!--begin::Topbar-->
-                        <div class="topbar">
-                            <!--begin::User-->
-                            <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                                        <?php echo $_SESSION['name'] ?>
-                                    </span>
-                                    <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                        <span class="symbol-label font-size-h5 font-weight-bold">
-                                            <?php echo substr($_SESSION['name'], 0, 1)  ?>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!--end::User-->
-                        </div>
-
-                        <!--end::Topbar-->
-                    </div>
-
-                    <!--end::Container-->
+            <!--begin::Topbar-->
+            <div class="topbar">
+              <!--begin::User-->
+              <div class="topbar-item">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                  <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                    <?php echo $_SESSION['name'] ?>
+                  </span>
+                  <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+                    <span class="symbol-label font-size-h5 font-weight-bold">
+                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                    </span>
+                  </span>
                 </div>
+              </div>
 
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
+              <!--end::User-->
+            </div>
 
-                        <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_2">
-                            <div class="container">
-                                <?php
+            <!--end::Topbar-->
+          </div>
+
+          <!--end::Container-->
+        </div>
+
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+          <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
+
+            <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+              <div class="container">
+                <?php
                 if (mysqli_num_rows($songData) == 0) {
                   echo  '<div class="row d-flex flex-center">
                             <h2>No Songs Uploaded by the Star</h2>
@@ -126,19 +120,19 @@ if (!isset($_GET['starId'])) {
                       $songPath = $songArr['original'];
                       $btnContainer =
                         '<div class="d-flex justify-content-center">
-                        <a href="javascript;" data-target="#' . $songId . '" data-toggle="modal" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
+                        <a href="javascript;" data-target="#' . $songId . '" data-toggle="modal" class="btn btn-primary font-weight-bolder font-size-sm py-3">
                           Play Song
                         </a >
                       </div>';
                     } else {
                       $songPath = $songArr['sample'];
                       $btnContainer = '<div class="d-flex justify-content-between">
-                      <a href="javascript;" data-target="#' . $songId . '" data-toggle="modal" class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
+                      <a href="javascript;" data-target="#' . $songId . '" data-toggle="modal" class="btn btn-primary font-weight-bolder font-size-sm py-3">
                       Play Sample
                       </a >
                       <a href="pages/login_signup/star/paypal/preview.php?sId=' . $songArr['id'] . '">
                               <button
-                                  class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
+                                  class="btn btn-primary font-weight-bolder font-size-sm py-3">
                                   Buy Song
                               </button>
                           </a>
@@ -158,10 +152,8 @@ if (!isset($_GET['starId'])) {
                                     </h1>
                                   </div>
                                   <div class="modal-body">
-                                    <audio controls>
-                                      <source src="' . $songPath . '"
-                                        >
-                                      Your browser does not support the audio element.
+                                    <audio src=' . $songPath . ' controls>
+                                    Your browser does not support the audio element.
                                     </audio>
                                   </div>
                                 </div>
@@ -297,8 +289,8 @@ if (!isset($_GET['starId'])) {
                 }
                 ?>
 
-                            </div>
-                            <?php
+              </div>
+              <?php
               if (mysqli_num_rows($songData) > 0) {
                 echo '<div class="d-flex justify-content-center align-items-center flex-wrap mt-12">
                   <div class="d-flex flex-wrap py-2 px-6 justify-content-center"
@@ -323,21 +315,21 @@ if (!isset($_GET['starId'])) {
                     class='ki ki-bold-arrow-next icon-xs'></i></a>";
               }
               ?>
-                        </div>
-
-                    </div>
-                </div>
             </div>
 
-            <!--end::Wrapper-->
+          </div>
         </div>
+      </div>
 
-        <!--end::Page-->
+      <!--end::Wrapper-->
     </div>
 
-    <!--end::Main-->
-    <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
-    <?php include("../../../partials/jslinks.php"); ?>
+    <!--end::Page-->
+  </div>
+
+  <!--end::Main-->
+  <?php include("../../../partials/_extras/offcanvas/quick-user.php") ?>
+  <?php include("../../../partials/jslinks.php"); ?>
 </body>
 
 <!--end::Body-->

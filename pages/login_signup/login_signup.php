@@ -29,6 +29,8 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
   <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
   <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
   <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="assets/media/myImages/starshare_icon.png" type="image/x-icon">
+
   <style>
     .form-control.form-control-solid {
       border: 0.2px solid black;
@@ -91,7 +93,7 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
             <!--begin::Form group-->
             <div class="form-group">
               <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value="ali@gmail.co" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg" type="text" name="email" autocomplete="off" value="ali@gmail.com" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
