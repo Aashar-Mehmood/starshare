@@ -108,7 +108,11 @@ function getRows($table)
 
 <body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Main-->
-
+    <?php
+    if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+        include_once('./components/Alert.php');
+    }
+    ?>
     <?php include("partials/_header-mobile.php"); ?>
     <div class="d-flex flex-column flex-root">
 

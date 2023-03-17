@@ -10,6 +10,7 @@
         position: absolute;
         top: 25px;
         left: 50%;
+        z-index: 100;
         transform: translateX(-50%);
     }
 
