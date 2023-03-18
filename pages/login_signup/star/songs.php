@@ -222,7 +222,7 @@ if (!isset($_GET['starId'])) {
                                             <!--begin::label-->
                                             <span
                                               class="font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                              ' . $songArr['price'] . '
+                                              ' . $songArr['price'] . '$
                                               </span>
                                             <!--end::label-->
                                           </div>

@@ -4,13 +4,13 @@ include_once('./checkUsersSession.php');
 include_once('./db_connection.php');
 
 $uId = $_SESSION['id'];
-$message = "";
-$submitError = false;
+$errorMsg = "";
+$successMsg = "";
 $role = $_GET['role'];
 
+
 if (!isset($_POST["submit"])) {
-  $message = "Form not submitted";
-  $submitError = true;
+  $errorMsg = "Form not submitted";
 } else {
   $name = $_POST['fullName'];
   $email = $_POST['email'];
@@ -29,17 +29,13 @@ if (!isset($_POST["submit"])) {
     empty($name) || empty($email) || empty($contact) ||
     empty($address) || empty($description) || $profileSize == 0
   ) {
-    $message = "All fields are required.";
-    $submitError = true;
+    $errorMsg = "All fields are required.";
   } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $message = "Enter a valid email address";
-    $submitError = true;
+    $errorMsg = "Enter a valid email address";
   } else if (!in_array($extension, $allowedImg)) {
-    $message = "Only jpg, jpeg, png, svg, gif, and jfif files are allowed";
-    $submitError = true;
+    $errorMsg = "Only jpg, jpeg, png, svg, gif, and jfif files are allowed";
   } else if ($profileSize > 1100000) {
-    $message = "Files upto 1.1 Mb are allowed";
-    $submitError = true;
+    $errorMsg = "Files upto 1.1 Mb are allowed";
   } else {
     $random = rand(10, 1000);
     $path = "assets/media/profiles/" . $random . $profileName;
@@ -56,7 +52,7 @@ if (!isset($_POST["submit"])) {
 
     // check if data is inserted
     if (!$inserted) {
-      $message = "Error occured while registering";
+      $errorMsg = "Error occured while registering";
     } else {
       $columnName = "is_" . $role;
       $updateQuery = "UPDATE `users` SET `$columnName` = 1 WHERE `id` = $uId;";
@@ -64,21 +60,21 @@ if (!isset($_POST["submit"])) {
       $updated = mysqli_query($conn, $updateQuery);
 
       if ($updated) {
-        $submitError = false;
         setSessionVars($conn, $role);
-        $message = "Registered Successfully";
+        $successMsg = "Registered Successfully";
       }
     }
   }
 }
 mysqli_close($conn);
 
-echo "<script>alert('$message')</script>";
 
-if ($submitError) {
-  header("Refresh:0; URL=./signupForRole.php?role=$role");
-} else {
-  header("Refresh:0; URL=./$role/details.php");
+if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+  header("Location:./signupForRole.php?role=$role");
+} else if (!empty($successMsg)) {
+  $_SESSION['success_msg'] = $successMsg;
+  header("Location:./$role/details.php");
 }
 
 

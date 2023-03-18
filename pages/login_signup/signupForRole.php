@@ -2,6 +2,7 @@
 include_once('./checkUsersSession.php');
 include_once('./db_connection.php');
 
+
 if (isset($_GET["role"])) {
   $role = $_GET["role"];
 } else {
@@ -23,27 +24,26 @@ $actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
 
 </head>
 <style>
-.form-group input,
-.form-group textarea,
-.form-group .custom-file label {
-  border: 0.2px solid black;
-}
+  .form-group input,
+  .form-group textarea,
+  .form-group .custom-file label {
+    border: 0.2px solid black;
+  }
 
-.form-group .custom-file input {
-  border: none;
-}
-
+  .form-group .custom-file input {
+    border: none;
+  }
 </style>
 
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <!--begin::Main-->
+  <?php
 
-  <?php include("../../partials/_header-mobile.php"); ?>
+  include("../../partials/_header-mobile.php"); ?>
   <div class="d-flex flex-column flex-root">
 
     <!--begin::Page-->
@@ -61,7 +61,12 @@ $actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-8 col-xl-6">
-                <div class="card card-custom">
+
+                <div class="card card-custom pr">
+                  <?php
+                  if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+                    include_once('../../components/Alert.php');
+                  } ?>
                   <div class="card-header">
                     <h3 class="card-title">
                       Become <?php echo $role ?>
@@ -72,31 +77,35 @@ $actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name <span class="text-danger">*</span></label>
-                        <input type="text" name="fullName" class="form-control" placeholder="Enter full name" />
+                        <input type="text" name="fullName" class="form-control" value="<?php echo htmlspecialchars($_POST['fullName'] ?? '', ENT_QUOTES); ?>
+" placeholder="Enter full name" />
                       </div>
                       <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter email" />
+                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES); ?>
+" placeholder="Enter email" />
                       </div>
                       <div class="form-group">
                         <label>Contact <span class="text-danger">*</span></label>
-                        <input type="number" name="contact" class="form-control" placeholder="Enter phone number" />
+                        <input type="number" name="contact" class="form-control" value="<?php echo htmlspecialchars($_POST['contact'] ?? '', ENT_QUOTES); ?>
+" placeholder="Enter phone number" />
                       </div>
 
                       <div class="form-group">
                         <label>Address <span class="text-danger">*</span></label>
-                        <input type="text" name="address" class="form-control" placeholder="Enter your address" />
+                        <input type="text" name="address" class="form-control" value="<?php echo htmlspecialchars($_POST['name'] ?? '', ENT_QUOTES); ?>" placeholder="Enter your address" />
                       </div>
                       <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
-                        <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                        <textarea name="description" class="form-control" id="description" rows="3">
+                        <?php echo htmlspecialchars($_POST['description'] ?? '', ENT_QUOTES); ?>
+                        </textarea>
                       </div>
                       <div class="form-group">
                         <label>Profile Image <span class="text-danger">*</span></label>
                         <div></div>
                         <div class="custom-file">
-                          <input name="profile_img" type="file" accept=".png, .jpg, .jpeg" class="custom-file-input"
-                            id="customFile" />
+                          <input name="profile_img" type="file" accept=".png, .jpg, .jpeg" class="custom-file-input" id="customFile" />
                           <label class="custom-file-label" for="customFile">Choose Image</label>
                         </div>
                       </div>

@@ -389,7 +389,7 @@ $totalEvents = mysqli_num_rows(
 
                             <!-- Start Main Container -->
                             <div class="container">
-                                <div class="col-lg-10 col-xl-8 px-md-10 pt-md-8">
+                                <div class="col-12 col-lg-10 col-xl-8 px-0 px-md-10 pt-md-8">
                                     <div class="card card-custom gutter-b">
                                         <!--begin::Header-->
                                         <div class="card-header d-flex align-items-center">
@@ -402,14 +402,14 @@ $totalEvents = mysqli_num_rows(
                                         <!--begin::Body-->
                                         <div class="card-body pt-2 pb-0 mt-n3">
                                             <div class="tab-content mt-5" id="myTabTables11">
-                                                <div class="table-responsive">
+                                                <div class="table table-responsive">
                                                     <table class="table table-vertical-center table-bordered">
                                                         <thead class="thead-dark">
                                                             <tr>
-                                                                <th style="min-width: 150px;"> Id</th>
-                                                                <th style="min-width: 150px;"> Name</th>
-                                                                <th style="min-width: 150px;"> Price</th>
-                                                                <th style="min-width:200px; padding-left:1.75rem">Action
+                                                                <th> Id</th>
+                                                                <th> Name</th>
+                                                                <th> Price</th>
+                                                                <th style="padding-left:1.75rem; min-width:120px;">Action
                                                                 </th>
 
                                                             </tr>

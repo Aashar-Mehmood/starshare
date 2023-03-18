@@ -46,6 +46,7 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
   <!-- end::Alert -->
   <!--begin::Main-->
   <div class="d-flex flex-column flex-root">
+    <?php print_r($_POST) ?>
     <!--begin::Login-->
     <div class="login login-1 <?php echo $signUpActive ? 'login-signup-on' : 'login-signin-on'   ?> d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
       <!--begin::Aside-->
