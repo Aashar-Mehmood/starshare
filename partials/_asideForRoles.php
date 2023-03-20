@@ -293,10 +293,20 @@
 
 <!--end::Aside-->
 <script>
-  window.addEventListener('load', () => {
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    var parentId = 'dashboard';
+
+    if (params.has('parentId')) {
+      parentId = params.get('parentId');
+    }
+
     var activeLink = document.URL.split("starshare/")[1];
-    var parentId = document.URL.split('parentId=')[1];
-    var activeItem = document.querySelector(String('a[href="' + `${activeLink}` + '"]'));
+
+    var activeItem = document.querySelector(`a[href="${activeLink}"]`);
     var parentItem = document.getElementById(`${parentId}`);
     if (parentItem) {
       parentItem.classList.add("menu-item-active");

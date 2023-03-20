@@ -105,11 +105,12 @@
 
 <!--end::Aside-->
 <script>
-  var parentId = '';
-  if (document.URL.match(/starshare\/pages/gi)) {
-    parentId = document.URL.split("starshare/pages/")[1].split("/")[0];
-  } else {
-    parentId = document.URL.split("starshare/")[1].split(".php")[0];
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+  var parentId = 'dashboard';
+
+  if (params.has('parentId')) {
+    parentId = params.get('parentId');
   }
   var parentItem = document.getElementById(`${parentId}`);
   parentItem.classList.add("menu-item-active");

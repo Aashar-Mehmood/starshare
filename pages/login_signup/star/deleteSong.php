@@ -8,8 +8,10 @@ $status = $_GET['setStatus'];
 $query = "UPDATE `songs` SET `status` = '$status' WHERE `id` = $songId AND `star_id` = $starId;";
 $executed = mysqli_query($conn, $query);
 if (!$executed) {
-  echo "<script>alert('Song not $status')</script>";
+  $_SESSION['error_msg'] = "Failed to $status song";
 } else {
-  echo "<script>alert('Song $status')</script>";
+  $_SESSION['success_msg'] = "Song $status successfully";
 }
-header("Refresh:0; URL = ./details.php");
+
+
+header("Location: ./details.php?parentId=star&activeTab=2");

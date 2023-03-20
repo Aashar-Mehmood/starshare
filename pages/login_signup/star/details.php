@@ -2,10 +2,15 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
+
+
 if (!$_SESSION['is_star']) {
     header("location:../signupForRole.php?role=star");
     exit();
 }
+
+$activeTab  = $_GET['activeTab'] ?? '1';
+
 $role = "Star";
 $profile = $_SESSION['star_profile_img'];
 
@@ -60,7 +65,13 @@ $eventData = mysqli_query($conn, $upComingEvents);
 
         <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../partials/_asideForRoles.php"); ?>
+            <?php
+            include_once("../../../partials/_asideForRoles.php");
+            if (isset($_SESSION['success_msg']) || isset($_SESSION['error_msg'])) {
+
+                include_once("../../../components/Alert.php");
+            }
+            ?>
 
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
@@ -75,17 +86,17 @@ $eventData = mysqli_query($conn, $upComingEvents);
 
                         <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
+                                <a class="nav-link <?php echo $activeTab == '1' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " data-toggle="tab" href="#kt_tab_pane_2">Songs</a>
+                                <a class="nav-link <?php echo $activeTab == '2' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_2">Songs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Events</a>
+                                <a class="nav-link <?php echo $activeTab == '3' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_3">Events</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
+                                <a class="nav-link <?php echo $activeTab == '4' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
                             </li>
                         </ul>
                         <!--end::Header Menu-->
@@ -121,7 +132,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade <?php echo $activeTab == '1' ? 'show active' : '' ?>" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -381,7 +392,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade " id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                        <div class="tab-pane fade<?php echo $activeTab == '2' ? ' show active' : '' ?>" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                             <div class="modal fade" id="newSong" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
@@ -394,19 +405,19 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                             <form class="form" action="pages/login_signup/star/addSong.php" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label>Title :</label>
-                                                    <input type="text" name="title" class="form-control form-control-solid" />
+                                                    <input type="text" name="title" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($_SESSION['form_data']['title'] ?? '', ENT_QUOTES); ?>" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Price :</label>
-                                                    <input type="number" name="price" class="form-control form-control-solid" />
+                                                    <input type="number" name="price" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($_SESSION['form_data']['price'] ?? '', ENT_QUOTES); ?>" />
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Upload Song</label>
                                                     <div></div>
                                                     <div class="custom-file">
-                                                        <input name="original" type="file" class="custom-file-input" id="customFile" />
-                                                        <label class="custom-file-label" for="customFile">Choose
+                                                        <input name="original" type="file" accept="audio/*" class="custom-file-input" id="Song" required />
+                                                        <label class="custom-file-label" for="Song">Choose
                                                             Song</label>
                                                     </div>
                                                 </div>
@@ -414,18 +425,21 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                     <label>Upload Sample</label>
                                                     <div></div>
                                                     <div class="custom-file">
-                                                        <input name="sample" type="file" class="custom-file-input" id="customFile" />
-                                                        <label class="custom-file-label" for="customFile">Choose
-                                                            Sample</label>
+                                                        <input name="sample" type="file" accept="audio/*" class="custom-file-input" id="Sample" required />
+                                                        <label class="custom-file-label" for="Sample">
+                                                            Choose
+                                                            Sample
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Upload Banner</label>
                                                     <div></div>
                                                     <div class="custom-file">
-                                                        <input name="banner" type="file" class="custom-file-input" id="customFile" />
-                                                        <label class="custom-file-label" for="customFile">Choose
-                                                            Banner</label>
+                                                        <input name="banner" type="file" accept="image/*" class="custom-file-input" id="Banner" required />
+                                                        <label class="custom-file-label" for="Banner">
+                                                            Choose Banner
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="d-flex w-md-50 justify-content-between mt-12">
@@ -460,18 +474,28 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                     <div class="table-responsive">
                                                         <table class="table table-vertical-center table-bordered">
                                                             <thead class="thead-dark">
-                                                                <tr>
-                                                                    <th style="min-width: 150px;">Song Title</th>
-                                                                    <th style="min-width: 150px;">Price</th>
-                                                                    <th style="min-width: 150px;">Downloads</th>
-                                                                    <th style="min-width:200px; padding-left:1.75rem">
-                                                                        Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
                                                                 <?php
                                                                 $query = "SELECT * FROM `songs` WHERE `star_id` = $star_id;";
                                                                 $result = mysqli_query($conn, $query);
+                                                                if (mysqli_num_rows($result) < 1) {
+                                                                    echo '<tr>
+                                                                            <th colspan="4" class="text-center py-4">No songs Added Yet</th>
+                                                                            </tr>';
+                                                                } else {
+                                                                    echo '<tr>
+                                                                            <th style="min-width: 150px;">Song Title</th>
+                                                                            <th style="min-width: 150px;">Price</th>
+                                                                            <th style="min-width: 150px;">Downloads</th>
+                                                                            <th style="min-width:200px; padding-left:1.75rem">
+                                                                            Action
+                                                                            </th>
+                                                                        </tr>';
+                                                                }
+                                                                ?>
+
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
 
                                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                                     $songId = $row['id'];
@@ -513,7 +537,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                                             <i class='
                                                                                 fas fa-edit text-primary' aria-hidden='true'></i>
                                                                             </a>
-                                                                            <a href='pages/login_signup/star/deleteSong.php?songId=$songId&parentId=star&setStatus=$setStatus' title='$title' class='btn btn-icon btn-light btn-sm $hover '>
+                                                                            <a href='pages/login_signup/star/deleteSong.php?songId=$songId&setStatus=$setStatus' title='$title' class='btn btn-icon btn-light btn-sm $hover '>
                                                                             <i class='$icon' aria-hidden='true'></i>
                                                                             </a>
                                                                         </td>
@@ -537,7 +561,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                             <!-- End Main Container -->
 
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+                        <div class="tab-pane fade<?php echo $activeTab == '3' ? ' show active' : '' ?>" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
                                     <?php
@@ -633,7 +657,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_5">
+                        <div class="tab-pane fade <?php echo $activeTab == '4' ? ' show active ' : '' ?>" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_5">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12">
@@ -889,6 +913,17 @@ $eventData = mysqli_query($conn, $upComingEvents);
         resetBtn.addEventListener('click', () => {
             settingsForm.reset();
         });
+        // Read the query string
+        const queryString = window.location.search;
+
+        // Parse the query string into an object
+        const params = new URLSearchParams(queryString);
+
+        // Check if the "modal" parameter exists and has a value of "true"
+        if (params.has("activeModal") && params.get("activeModal") === "add") {
+            // Show the modal using jQuery
+            $("#newSong").modal("show");
+        }
     </script>
 
 

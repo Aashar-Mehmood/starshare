@@ -10,7 +10,7 @@
         position: absolute;
         top: 25px;
         left: 50%;
-        z-index: 100;
+        z-index: 1100;
         transform: translateX(-50%);
     }
 
@@ -29,12 +29,14 @@ $alert_description = '';
 if (!empty($_SESSION['error_msg'])) {
     $alert_type = 'alert-danger';
     $alert_description = $_SESSION['error_msg'];
-    unset($_SESSION['error_msg']);
 } else if (!empty($_SESSION['success_msg'])) {
     $alert_type = 'alert-success';
     $alert_description = $_SESSION['success_msg'];
-    unset($_SESSION['success_msg']);
 }
+
+unset($_SESSION['error_msg']);
+unset($_SESSION['success_msg']);
+
 ?>
 
 <!--begin::Alert-->
@@ -63,5 +65,9 @@ if (!empty($_SESSION['error_msg'])) {
         setTimeout(() => {
             alert_box.classList.contains('show') && alert_box.classList.remove('show');
         }, 2500);
+        setTimeout(() => {
+            alert_box.style.zIndex = '-1';
+        }, 2600);
+
     });
 </script>

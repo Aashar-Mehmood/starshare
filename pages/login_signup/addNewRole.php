@@ -2,6 +2,9 @@
 
 include_once('./checkUsersSession.php');
 include_once('./db_connection.php');
+include_once('../../functions/formDataInSession.php');
+
+
 
 $uId = $_SESSION['id'];
 $errorMsg = "";
@@ -24,6 +27,8 @@ if (!isset($_POST["submit"])) {
   $allowedImg = array("jpg", "jpeg", "png", "svg", "gif", "jfif");
   $extensionArr = explode('.', $profileName);
   $extension = end($extensionArr);
+
+
 
   if (
     empty($name) || empty($email) || empty($contact) ||
@@ -74,6 +79,7 @@ if (!empty($errorMsg)) {
   header("Location:./signupForRole.php?role=$role");
 } else if (!empty($successMsg)) {
   $_SESSION['success_msg'] = $successMsg;
+  unset($_SESSION['form_data']);
   header("Location:./$role/details.php");
 }
 

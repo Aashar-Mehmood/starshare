@@ -90,7 +90,14 @@ if (empty($yearlyEarnings)) {
 
         <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../partials/_asideForRoles.php"); ?>
+            <?php
+            include_once("../../../partials/_asideForRoles.php");
+            if (isset($_SESSION['success_msg']) || isset($_SESSION['error_msg'])) {
+
+                include_once("../../../components/Alert.php");
+            }
+
+            ?>
 
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
