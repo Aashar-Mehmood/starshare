@@ -1,9 +1,9 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
+$id = $_GET['organizerId'];
 include_once('./paypal/config.php');
 
-$id = $_GET['organizerId'];
 
 $upComingEvents = "SELECT * FROM `events` WHERE `organizer_id` = $id AND `date` >= DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY) LIMIT 6;";
 $eventData = mysqli_query($conn, $upComingEvents);
@@ -21,10 +21,10 @@ $sellerEmail = 'kiran3saba-facilitator@gmail.com';
 <!--begin::Head-->
 
 <head>
-    <base href="../../../">
-    <meta charset="utf-8" />
-    <title>Upcoming Events</title>
-    <?php include("../../../partials/csslinks.php"); ?>
+  <base href="../../../">
+  <meta charset="utf-8" />
+  <title>Upcoming Events</title>
+  <?php include("../../../partials/csslinks.php"); ?>
 
 </head>
 
@@ -33,27 +33,26 @@ $sellerEmail = 'kiran3saba-facilitator@gmail.com';
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  <!--begin::Main-->
 
-    <?php include("../../../partials/_header-mobile.php"); ?>
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
+  <?php include("../../../partials/_header-mobile.php"); ?>
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Page-->
+    <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../partials/_asideForRoles.php"); ?>
+      <?php include("../../../partials/_asideForRoles.php"); ?>
 
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+      <!--begin::Wrapper-->
+      <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                <?php include("../../../partials/_header.php"); ?>
+        <?php include("../../../partials/_header.php"); ?>
 
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <div class="container">
-                        <div class="row">
-                            <?php
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+          <div class="container">
+            <div class="row">
+              <?php
               if (mysqli_num_rows($eventData) == 0) {
                 echo '
                     <div class="w-60 mx-auto py-10">
@@ -228,41 +227,41 @@ $sellerEmail = 'kiran3saba-facilitator@gmail.com';
               }
               ?>
 
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <!--end::Content-->
-
-                <?php include("../../../partials/_footer.php"); ?>
             </div>
+          </div>
 
-            <!--end::Wrapper-->
+
         </div>
 
-        <!--end::Page-->
+        <!--end::Content-->
+
+        <?php include("../../../partials/_footer.php"); ?>
+      </div>
+
+      <!--end::Wrapper-->
     </div>
 
-    <!--end::Main-->
-    <?php
+    <!--end::Page-->
+  </div>
+
+  <!--end::Main-->
+  <?php
   include("../../../partials/_extras/offcanvas/quick-user.php");
   include("../../../partials/jslinks.php"); ?>
-    <script>
+  <script>
     const enteredQuantity = document.getElementById('enteredQuantity');
     const setQuantity = document.getElementById('setQuantity');
     window.addEventListener('load', () => {
-        enteredQuantity.setAttribute('value', '');
+      enteredQuantity.setAttribute('value', '');
 
     });
 
     enteredQuantity.addEventListener('change', () => {
-        var enteredVal = enteredQuantity.value;
-        setQuantity.setAttribute('value', enteredVal);
-        document.cookie = `totalTicketsBought = ${enteredVal}`;
+      var enteredVal = enteredQuantity.value;
+      setQuantity.setAttribute('value', enteredVal);
+      document.cookie = `totalTicketsBought = ${enteredVal}`;
     });
-    </script>
+  </script>
 
 
 </body>

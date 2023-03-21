@@ -210,7 +210,7 @@ $limitResult = mysqli_query($conn, $limitSelect);
                           <!--end::Item-->
                           <!--begin::Item-->
                           <div class="d-flex justify-content-center">' .
-                  "<a href='pages/login_signup/star/songs.php?starId=$sId'>" .
+                  "<a href='pages/login_signup/star/songs.php?starId=$sId&parentId=star'>" .
                   '<button class="btn btn-primary">
                                 View Profile
                               </button>

@@ -130,7 +130,7 @@ if (!isset($_GET['starId'])) {
                       <a href="javascript;" data-target="#' . $songId . '" data-toggle="modal" class="btn btn-primary font-weight-bolder font-size-sm py-3">
                       Play Sample
                       </a >
-                      <a href="pages/login_signup/star/paypal/preview.php?sId=' . $songArr['id'] . '">
+                      <a href="pages/login_signup/star/paypal/preview.php?sId=' . $songArr['id'] . '&parentId=star">
                               <button
                                   class="btn btn-primary font-weight-bolder font-size-sm py-3">
                                   Buy Song

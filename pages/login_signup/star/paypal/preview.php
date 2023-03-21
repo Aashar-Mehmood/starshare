@@ -1,10 +1,10 @@
 <?php
 include_once('../../checkUsersSession.php');
 include_once('../../db_connection.php');
-include_once('./config.php');
 
 $sId = $_GET['sId'];
 $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
+include_once('./config.php');
 ?>
 <!DOCTYPE html>
 
@@ -13,10 +13,10 @@ $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
 <!--begin::Head-->
 
 <head>
-    <base href="../../../../">
-    <meta charset="utf-8" />
-    <title>Buy Song</title>
-    <?php include("../../../../partials/csslinks.php"); ?>
+  <base href="../../../../">
+  <meta charset="utf-8" />
+  <title>Buy Song</title>
+  <?php include("../../../../partials/csslinks.php"); ?>
 
 </head>
 
@@ -24,74 +24,68 @@ $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-    <!--begin::Main-->
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+  <!--begin::Main-->
 
-    <?php include("../../../../partials/_header-mobile.php"); ?>
-    <div class="d-flex flex-column flex-root">
+  <?php include("../../../../partials/_header-mobile.php"); ?>
+  <div class="d-flex flex-column flex-root">
 
-        <!--begin::Page-->
-        <div class="d-flex flex-row flex-column-fluid page">
+    <!--begin::Page-->
+    <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../../partials/_asideForRoles.php"); ?>
+      <?php include("../../../../partials/_asideForRoles.php"); ?>
 
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+      <!--begin::Wrapper-->
+      <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                <div id="kt_header" class="header header-fixed">
+        <div id="kt_header" class="header header-fixed">
 
-                    <!--begin::Container-->
-                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+          <!--begin::Container-->
+          <div class="container-fluid d-flex align-items-stretch justify-content-between">
 
-                        <!--begin::Header Menu Wrapper-->
-                        <!--begin::Header Menu-->
+            <!--begin::Header Menu Wrapper-->
+            <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+            <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
 
-                        </ul>
-                        <!--end::Header Menu-->
+            </ul>
+            <!--end::Header Menu-->
 
-                        <!--end::Header Menu Wrapper-->
+            <!--end::Header Menu Wrapper-->
 
-                        <!--begin::Topbar-->
-                        <div class="topbar">
-                            <!--begin::User-->
-                            <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-                                        <?php echo $_SESSION['name'] ?>
-                                    </span>
-                                    <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                        <span class="symbol-label font-size-h5 font-weight-bold">
-                                            <?php echo substr($_SESSION['name'], 0, 1)  ?>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!--end::User-->
-                        </div>
-
-                        <!--end::Topbar-->
-                    </div>
-
-                    <!--end::Container-->
+            <!--begin::Topbar-->
+            <div class="topbar">
+              <!--begin::User-->
+              <div class="topbar-item">
+                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                  <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                  <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                    <?php echo $_SESSION['name'] ?>
+                  </span>
+                  <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+                    <span class="symbol-label font-size-h5 font-weight-bold">
+                      <?php echo substr($_SESSION['name'], 0, 1)  ?>
+                    </span>
+                  </span>
                 </div>
+              </div>
 
-                <!--begin::Content-->
-                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                    <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
+              <!--end::User-->
+            </div>
 
-                        <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_2">
-                            <div class="container">
-                                <?php
+            <!--end::Topbar-->
+          </div>
+
+          <!--end::Container-->
+        </div>
+
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+          <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
+
+            <div class="tab-pane fade show active" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+              <div class="container">
+                <?php
                 $songArr = mysqli_fetch_assoc($songData);
 
                 $banner = $songArr['banner'];
@@ -99,8 +93,8 @@ $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
                 $starId = $songArr['star_id'];
                 $sellerData = mysqli_query($conn, "SELECT `email` FROM `stars` WHERE `u_id` = $starId;");
                 $sellerArr = mysqli_fetch_assoc($sellerData);
-                $sellerEmail = $sellerArr['email'];
-
+                // $sellerEmail = $sellerArr['email'];
+                $sellerEmail = 'kiran3saba-facilitator@gmail.com';
                 // store values in session to be inserted in transaction table
                 $_SESSION['songId'] = $sId;
                 $_SESSION['songBuyerId'] = $_SESSION['id'];
@@ -221,14 +215,7 @@ $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
                                       </div>
                                       <!--eng::Container-->
                                       <!--begin::Footer-->
-                                      <div class="d-flex flex-center">
-                                        
-                                        <button id="submitBtn"
-                                            class="btn btn-primary font-weight-bolder font-size-sm py-3 px-12">
-                                            Pay Now
-                                        </button>
-                                            
-                                      </div>
+                                      
                                       <!--end::Footer-->
                                     </div>' . "
                                     <form class='form' id = 'paypalForm' action='$PAYPAL_URL' method='POST'>
@@ -239,41 +226,36 @@ $songData = mysqli_query($conn, "SELECT * FROM `songs` WHERE `id` = $sId");
                                       <input type='hidden' name='amount' value='$price'>
                                       <input type='hidden' name='currency_code' value='USD'>
                                       <input type='hidden' name='return' value = '$PAYPAL_RETURN_URL'>
+                                      <input type='hidden' name='cancel_return' value = '$PAYPAL_CANCEL_URL'>
+
+                                      <div class='d-flex flex-center'>
+                                        <input type ='submit' class='btn btn-primary font-weight-bolder font-size-sm py-3 px-12' value='Pay with PayPal'/>  
+                                      </div>
                                     </form>
                                     <!--end::Wrapper-->
                                   </div>
                                   <!--end::Body-->
                                 </div>
                               </div>";
-
                 echo '</div>';
-
                 ?>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!--end::Wrapper-->
+              </div>
             </div>
-
-            <!--end::Page-->
+          </div>
         </div>
 
-        <!--end::Main-->
-        <?php
+        <!--end::Wrapper-->
+      </div>
+
+      <!--end::Page-->
+    </div>
+
+    <!--end::Main-->
+    <?php
     include("../../../../partials/_extras/offcanvas/quick-user.php");
     include("../../../../partials/jslinks.php");
     ?>
-        <script>
-        const submitBtn = document.getElementById('submitBtn');
-        const paypalForm = document.getElementById('paypalForm');
-        submitBtn.addEventListener('click', () => {
-            paypalForm.submit();
-        });
-        </script>
+
 </body>
 
 <!--end::Body-->
