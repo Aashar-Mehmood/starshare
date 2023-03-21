@@ -29,25 +29,27 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
 
 </head>
 <style>
-@media screen and (max-width:425px) {
-    .form-group.row {
-        margin-bottom: 0 !important;
-    }
+    @media screen and (max-width:425px) {
+        .form-group.row {
+            margin-bottom: 0 !important;
+        }
 
-    div.col-lg-6 {
-        padding: 1rem;
+        div.col-lg-6 {
+            padding: 1rem;
+        }
     }
-}
 </style>
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Main-->
 
-    <?php include("../../../partials/_header-mobile.php"); ?>
+    <?php
+    include_once("../../../partials/_header-mobile.php");
+
+    ?>
     <div class="d-flex flex-column flex-root">
 
         <!--begin::Page-->
@@ -84,12 +86,9 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
 
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION["organizer_name"]; ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -99,24 +98,24 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
                                     </span>
                                 </div>
                             </div>
-
                             <!--end::User-->
                         </div>
-
                         <!--end::Topbar-->
                     </div>
-
                     <!--end::Container-->
                 </div>
-
                 <!--end::Header-->
-
-
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center pr">
+                            <?php
+                            if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+                                include_once("../../../components/Alert.php");
+                            }
+                            ?>
                             <div class="col-md-8 col-xl-6">
+
                                 <div class="card card-custom">
                                     <div class="card-header">
                                         <h2 class="card-title">
@@ -124,24 +123,20 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
                                         </h2>
                                     </div>
                                     <!--begin::Form-->
-                                    <form id="quoteForm" action="pages/login_signup/organizer/processQuote.php"
-                                        method="POST">
+                                    <form id="quoteForm" action="pages/login_signup/organizer/processQuote.php" method="POST">
                                         <div class="card-body">
                                             <input type="hidden" name="event_id" value="<?php echo $eventId ?>">
                                             <div class="form-group">
                                                 <label>Event Title</label>
-                                                <input type="text" name="event_title" class="form-control" disabled
-                                                    value="<?php echo $eventTitle; ?>">
+                                                <input type="text" name="event_title" class="form-control" disabled value="<?php echo $eventTitle; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>Date</label>
-                                                <input type="text" name="event_date" class="form-control" disabled
-                                                    value="<?php echo $eventDate; ?>">
+                                                <input type="text" name="event_date" class="form-control" disabled value="<?php echo $eventDate; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label>Select Supplier</label>
                                                 <select class="form-control form-control-solid" name="supplier_id">
-                                                    <option style="visibility: hidden;"></option>
                                                     <?php
                                                     while ($supplierArr = mysqli_fetch_assoc($supplierData)) {
                                                         $supplierName = $supplierArr["name"];
@@ -159,22 +154,18 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
                                             </div>
                                             <div class="form-group">
                                                 <label>Quote Amount :</label>
-                                                <input name="amount" type="number" class="form-control"
-                                                    placeholder="Enter quote Amount" />
+                                                <input name="amount" type="number" class="form-control" placeholder="Enter quote Amount" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Description :</label>
-                                                <textarea name="description" id="editor" class="form-control"
-                                                    id="description" rows="6"></textarea>
+                                                <textarea name="description" id="editor" class="form-control" id="description" rows="6"></textarea>
                                             </div>
 
                                         </div>
                                     </form>
                                     <div class="card-footer">
-                                        <button type="submit" id="submit"
-                                            class="btn btn-primary mr-2 px-12">Send</button>
-                                        <a href="pages/login_signup/organizer/editEvent.php?eventId=<?php echo $eventId; ?>"
-                                            class="btn btn-secondary">
+                                        <button type="submit" id="submit" class="btn btn-primary mr-2 px-12">Send</button>
+                                        <a href="pages/login_signup/organizer/editEvent.php?eventId=<?php echo $eventId; ?>&parentId=organizer&activeTab=2" class="btn btn-secondary">
                                             Cancel
                                         </a>
                                     </div>
@@ -201,11 +192,11 @@ $supplierData = mysqli_query($conn, "SELECT `u_id`, `name` FROM suppliers LIMIT 
     <?php include("../../../partials/_extras/offcanvas/quick-organizer.php") ?>
     <?php include("../../../partials/jslinks.php"); ?>
     <script>
-    document.getElementById('submit').addEventListener('click', () => {
-        document.getElementById('quoteForm').submit();
-    });
-    ClassicEditor
-        .create(document.querySelector('#editor'))
+        document.getElementById('submit').addEventListener('click', () => {
+            document.getElementById('quoteForm').submit();
+        });
+        ClassicEditor
+            .create(document.querySelector('#editor'))
     </script>
 </body>
 

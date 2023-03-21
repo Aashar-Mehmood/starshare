@@ -1,11 +1,14 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
+include_once('../../../functions/formDataInSession.php');
+$successMsg = '';
+$errorMsg = '';
 if (!isset($_POST['add_event'])) {
-  echo "<script>alert('Form not submitted')</script>";
+  $errorMsg = 'Form not submitted';
 } else {
-  $organizerId = $_SESSION['id'];
-  $starId = $_POST['star_performing'];
+  (int)$organizerId = $_SESSION['id'];
+  (int)$starId = $_POST['star_performing'];
   $title = $_POST['title'];
   $desc = $_POST['description'];
   $location = $_POST['location'];
@@ -21,12 +24,13 @@ if (!isset($_POST['add_event'])) {
     empty($title) || empty($desc) || empty($location) ||
     empty($totalSeats) || empty($date) || empty($time) ||
     empty($starId) || empty($bannerName) || empty($ticketPrice)
+
   ) {
-    echo "<script>alert('Fill all Fields')</script>";
+    $errorMsg = 'Fill all Fields';
   } else if (filesize($_FILES['banner']['tmp_name']) > 1100000) {
-    echo "<script>alert('Files upto 1 Mb are allowed')</script>";
+    $errorMsg = 'Image too large, max 1MB allowed';
   } else if (!in_array($extension, $allowedFiles)) {
-    echo "<script>alert('Only jpg, png, jpeg, svg, gif and jfif files are allowed');</script>";
+    $errorMsg = 'Only jpg, png, jpeg, svg, gif and jfif files are allowed';
   } else {
     $random = rand(1, 1000);
     $path = "assets/media/banners/" . $random . $bannerName;
@@ -39,12 +43,12 @@ if (!isset($_POST['add_event'])) {
     mysqli_stmt_prepare($stmt1, $eventInsert);
     mysqli_stmt_bind_param($stmt1, "iissssss", $organizerId, $starId, $title, $desc, $location, $date, $time, $path);
     $executed1 = mysqli_stmt_execute($stmt1);
+    if ($executed1) {
 
-    if (!$executed1) {
-      echo "<script>alert('Failed to create new Event')</script>";
-    } else {
       // get the id of currently created event to be inserted in tickets
-      $result2 = mysqli_query($conn, "SELECT `id` FROM `events` WHERE `star_id` = $starId AND `title`= '$title';");
+      $selectEventQuery = "SELECT id FROM events WHERE star_id = $starId AND title= '$title';";
+
+      $result2 = mysqli_query($conn, $selectEventQuery);
 
       $record  = mysqli_fetch_assoc($result2);
       $eventId = $record['id'];
@@ -54,8 +58,18 @@ if (!isset($_POST['add_event'])) {
       for ($i = 1; $i <= $totalSeats; $i++) {
         mysqli_query($conn, $ticketInsert);
       }
-      echo "<script>alert('Event Created Successfully')</script>";
+      $successMsg = 'Event Created Successfully';
     }
   }
 }
-header("Refresh:0; URL=./details.php");
+
+$redirect = "./details.php?parentId=organizer&activeTab=2";
+
+if (!empty($successMsg)) {
+  $_SESSION['success_msg'] = $successMsg;
+  unset($_SESSION['form_data']);
+} else if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+  $redirect .= "&activeModal=add";
+}
+header("Location:$redirect");

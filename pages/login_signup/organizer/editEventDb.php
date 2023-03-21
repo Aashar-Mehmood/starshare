@@ -2,11 +2,12 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
-if (!isset($_POST['updateEvent'])) {
-  echo "<script>alert('Form not submitted')</script>";
-} else {
+$successMsg = '';
+$errorMsg = 'empty';
 
-  $message = "";
+if (!isset($_POST['updateEvent'])) {
+  $errorMsg = 'Form not submitted';
+} else {
   $title = $_POST['title'];
   $description = $_POST['description'];
   $location = $_POST['location'];
@@ -16,53 +17,59 @@ if (!isset($_POST['updateEvent'])) {
   $banner = $_FILES['banner']['name'];
   $organizerId = $_SESSION['id'];
   $eventId = $_GET['eventId'];
+  if (empty(array_filter([$title, $description, $location, $ticketPrice, $date, $time, $banner]))) {
+    $errorMsg = 'Fill any field to update it\'s value';
+  } else {
 
-  if (!empty($title)) {
-    updateEvent('title', $title);
-  }
-  if (!empty($description)) {
-    updateEvent('description', $description);
-  }
-  if (!empty($location)) {
-    updateEvent('$location', $location);
-  }
-  if (!empty($date)) {
-    updateEvent('date', $date);
-  }
-  if (!empty($time)) {
-    updateEvent('time', $time);
-  }
-  if (!empty($ticketPrice)) {
-    $ticketUpdate = mysqli_query($conn, "UPDATE `tickets` SET `price` = $ticketPrice WHERE `event_id` = $eventId AND `buyer_id`=NULL;");
-    if ($ticketUpdate) {
-      $message .= "ticketPrice, ";
+    if (!empty($title)) {
+      updateEvent('title', $title);
     }
-  }
-  if (!empty($banner)) {
-    handleFiles();
+    if (!empty($description)) {
+      updateEvent('description', $description);
+    }
+    if (!empty($location)) {
+      updateEvent('location', $location);
+    }
+    if (!empty($date)) {
+      updateEvent('date', $date);
+    }
+    if (!empty($time)) {
+      updateEvent('time', $time);
+    }
+    if (!empty($ticketPrice)) {
+      $ticketUpdate = mysqli_query($conn, "UPDATE `tickets` SET `price` = $ticketPrice WHERE `event_id` = $eventId AND `buyer_id`=NULL;");
+      if ($ticketUpdate) {
+        $successMsg .= "ticket Price, ";
+      }
+    }
+    if (!empty($banner)) {
+      handleFiles();
+    }
   }
 }
 
+
 function updateEvent($column, $value)
 {
-  global $conn, $eventId, $organizerId, $message;
+  global $conn, $eventId, $organizerId, $successMsg;
   $updateQuery = "UPDATE `events` SET `$column` = '$value' WHERE `id` = $eventId AND `organizer_id` = $organizerId;";
   $result = mysqli_query($conn, $updateQuery);
   if ($result) {
-    $message .= $column . ", ";
+    $successMsg .= $column . ", ";
   }
 }
 
 function handleFiles()
 {
-  global $banner;
+  global $banner, $errorMsg;
+
   $allowedFiles = array("jpg", "png", "jpeg", "svg", "gif", "jfif");
   $extensionArr = explode('.', $banner);
   $extension = end($extensionArr);
   if (filesize($_FILES['banner']['tmp_name']) > 1100000) {
-    echo "<script>alert('Files upto 1 Mb are allowed')</script>";
+    $errorMsg = 'Banner image too large, maximum 1MB allowed';
   } else if (!in_array($extension, $allowedFiles)) {
-    echo "<script>alert('Only jpg, png, jpeg, svg, gif and jfif files are allowed');</script>";
+    $errorMsg = 'Only jpg, png, jpeg, svg, gif and jfif files are allowed';
   } else {
     global $conn, $eventId, $organizerId;
     $getOldBanner = mysqli_query($conn, "SELECT `banner` FROM `events` WHERE `id` = $eventId AND `organizer_id` = $organizerId;");
@@ -76,6 +83,14 @@ function handleFiles()
     updateEvent('banner', $path);
   }
 }
-$alert = $message . "udated";
-echo "<script>alert('$alert')</script>";
-header("Refresh:0; URL=./editEvent.php?eventId=$eventId");
+
+if (!empty($successMsg)) {
+  $successMsg = rtrim($successMsg, ', ');
+  $successMsg .= " upated successfully.";
+  $_SESSION['success_msg'] = $successMsg;
+} else if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+}
+
+
+header("Location:./editEvent.php?eventId=$eventId&parentId=organizer");

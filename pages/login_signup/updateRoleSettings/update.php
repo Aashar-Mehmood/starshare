@@ -3,18 +3,28 @@ session_start();
 session_regenerate_id();
 include_once("../db_connection.php");
 
-$message = "";
+$errorMsg = "";
+$successMsg = "";
 $name = $_POST['fullName'];
 $email = $_POST['email'];
 $contact = $_POST['contact'];
 $address = $_POST['address'];
 $description = $_POST['description'];
 
-if (
-  empty($name) && empty($email) && empty($contact) &&
-  empty($address) && empty($description) && empty($_FILES['profile_avatar']['name'])
-) {
-  $message = "Enter a value in any field to update.";
+$newPwd = $_POST['newPwd'];
+$confirmNewPwd = $_POST['confirmNewPwd'];
+
+
+
+
+if (empty(array_filter(
+  [
+    $name, $email, $contact, $address,
+    $description, $_FILES['profile_avatar']['name'],
+    $newPwd
+  ]
+))) {
+  $errorMsg = "Enter a value in any field to update.";
 } else {
 
   if (!empty($_FILES['profile_avatar']['name'])) {
@@ -26,9 +36,9 @@ if (
     $extension = strtolower(pathinfo($profileImg, PATHINFO_EXTENSION));
     $size = filesize($_FILES['profile_avatar']['tmp_name']);
     if (!in_array($extension, $allowedImg)) {
-      $message = "Only jpg, jpeg, png, svg and gif files are allowed";
+      $errorMsg = "Only jpg, jpeg, png, svg and gif files are allowed";
     } else if ($size > 1100000) {
-      $message = "Files upto 1.1 Mb are allowed only";
+      $errorMsg = "Files upto 1.1 Mb are allowed only";
     } else {
       $uploaded = move_uploaded_file($_FILES['profile_avatar']['tmp_name'], $destination);
       $profileVal = "assets/media/profiles/" . $profileImg;
@@ -54,10 +64,19 @@ if (
 
     updateField($conn, 'description', $description);
   }
+
+  if (!empty($newPwd) && !empty($confirmNewPwd)) {
+    if ($confirmNewPwd !== $newPwd) {
+      $errorMsg = "The password and its confirm are not same";
+    } else {
+      $hashedPwd = password_hash($newPwd, PASSWORD_DEFAULT);
+      updateField($conn, 'password', $hashedPwd);
+    }
+  }
 }
 function updateField($conn, $column, $val)
 {
-  global $message;
+  global $successMsg;
   $tableName = $_GET['role'] . "s";
   $uId = $_SESSION['id'];
   $query = "UPDATE `$tableName` SET `$column`= ? WHERE `u_id`= ? ; ";
@@ -65,14 +84,21 @@ function updateField($conn, $column, $val)
   mysqli_stmt_prepare($statement, $query);
   mysqli_stmt_bind_param($statement, "ss", $val, $uId);
   $executed = mysqli_stmt_execute($statement);
-  if (!$executed) {
-    $message = "Update Failed";
-  } else {
-    $message .= $column . " Updated. ";
+  if ($executed) {
+    $successMsg .= $column . ", ";
     $sessionVariable = $_GET['role'] . "_" . $column;
     $_SESSION[$sessionVariable] = $val;
   }
 }
-echo "<script>alert('$message')</script>";
+
+if (!empty($successMsg)) {
+  $successMsg = rtrim($successMsg, ', ');
+  $successMsg .= " Updated Successfully";
+  $_SESSION['success_msg'] = $successMsg;
+} else if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+}
+
+
 $userRole = $_GET['role'];
-header("Refresh:0; URL=../$userRole/details.php");
+header("Location:../$userRole/details.php?parentId=$userRole&activeTab=4");

@@ -2,7 +2,8 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
-$message = "";
+$successMsg = "";
+$errorMsg = "";
 $star_id = $_SESSION['id'];
 $song_id = $_GET['songId'];
 $title = $_POST['title'];
@@ -11,12 +12,12 @@ $sampleSize = $_FILES['sample']['size'];
 $bannerSize = $_FILES['banner']['size'];
 
 if (!isset($_POST['editSong'])) {
-  $message = "Form not submitted";
+  $errorMsg = "Form not submitted";
 } else if (
   empty($title) && $originalSize == 0 &&
   $sampleSize == 0 && $bannerSize == 0
 ) {
-  $message = "Fill any field to update";
+  $errorMsg = "Fill any field to update";
 } else {
 
   if (!empty($title)) {
@@ -42,24 +43,27 @@ if (!isset($_POST['editSong'])) {
   }
 }
 
-if (!empty($message)) {
-  alertMessage($message);
+if (!empty($errorMsg)) {
+  $_SESSION['error_msg'] = $errorMsg;
+} else if (!empty($successMsg)) {
+  $successMsg = rtrim($successMsg, "and");
+  $successMsg .= "updated successfully";
+  $_SESSION['success_msg'] = $successMsg;
 }
 
-header("Refresh:0; URL=./editSong.php?parentId=star&songId=$song_id");
+
+
+header("Location:./editSong.php?parentId=star&songId=$song_id");
 
 
 
-function alertMessage($msg)
-{
-  echo "<script>alert('$msg')</script>";
-}
+
 
 
 
 function handleAudio($fileArray)
 {
-  global $message;
+  global $errorMsg;
   $path = "assets/media/songs/" . rand(10, 1000) . $fileArray['name'];
 
   $allowedAudio = array("mp3", "mp4", "ogg", "webm", "aac", "wav");
@@ -68,7 +72,7 @@ function handleAudio($fileArray)
   $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
 
   if (!in_array($extension, $allowedAudio)) {
-    $message = "Only mp3, mp4, ogg, webm, aac, and wav files are allowed";
+    $errorMsg = "Only mp3, mp4, ogg, webm, aac, and wav files are allowed";
   } else {
     $uploaded = move_uploaded_file($fileArray['tmp_name'], $destination);
     if (!$uploaded) {
@@ -81,7 +85,7 @@ function handleAudio($fileArray)
 
 function handleBanner($fileArray)
 {
-  global $message;
+  global $errorMsg;
   $path = "assets/media/banners/" . rand(10, 1000)  . $_FILES['banner']['name'];
 
   $allowedImg = array("jpg", "jpeg", "png", "svg", "gif", "jfif");
@@ -91,9 +95,9 @@ function handleBanner($fileArray)
   $size = filesize($fileArray['tmp_name']);
 
   if (!in_array($extension, $allowedImg)) {
-    $message = "Only jpg, jpeg, png, svg, jfif and gif files are allowed";
+    $errorMsg = "Only jpg, jpeg, png, svg, jfif and gif files are allowed";
   } else if ($size > 1100000) {
-    $message = "Files upto 1 MB are allowed only";
+    $errorMsg = "Files upto 1 MB are allowed only";
   } else {
     $uploaded = move_uploaded_file($fileArray['tmp_name'], $destination);
     if (!$uploaded) {
@@ -107,8 +111,8 @@ function handleBanner($fileArray)
 function updateField($conn, $column, $val)
 {
 
-  global $message, $star_id, $song_id;
-  if ($column == "original" || $column == "sample" || $column == "banner") {
+  global $successMsg, $star_id, $song_id;
+  if (preg_match("/original|sample|banner/", $column)) {
     $query = "SELECT `$column` FROM `songs` WHERE `id`= $song_id AND `star_id`= $star_id;";
     $result = mysqli_query($conn, $query);
     $record = mysqli_fetch_assoc($result);
@@ -122,6 +126,12 @@ function updateField($conn, $column, $val)
 
   $result1 = mysqli_query($conn, $query1);
   if ($result1) {
-    $message .= "Updated " . $column . ". ";
+    if (preg_match("/orginal|sample/", $column)) {
+      $successMsg .= " " . $column . " song and";
+    } else if ($column == "banner") {
+      $successMsg .= " " . $column . " image and";
+    } else {
+      $successMsg .= " " . $column . " and";
+    }
   }
 }

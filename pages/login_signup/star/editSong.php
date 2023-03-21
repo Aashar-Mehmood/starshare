@@ -25,18 +25,18 @@ $prevBanner = $dataArr['banner'];
         Edit Song
     </title>
     <?php
-  include("../../../partials/csslinks.php");
-  ?>
+    include("../../../partials/csslinks.php");
+    ?>
     <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
     <link rel="stylesheet" href="assets/css/custom/user_details.css">
     <style>
-    @media screen and (max-width: 355px) {
+        @media screen and (max-width: 355px) {
 
-        ul.nav li:nth-child(4),
-        ul.nav li:nth-child(4) a {
-            margin-left: 0 !important;
+            ul.nav li:nth-child(4),
+            ul.nav li:nth-child(4) a {
+                margin-left: 0 !important;
+            }
         }
-    }
     </style>
 </head>
 
@@ -44,11 +44,11 @@ $prevBanner = $dataArr['banner'];
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <?php
-  include("../../../partials/_header-mobile.php");
-  ?>
+    include_once("../../../partials/_header-mobile.php");
+
+    ?>
 
     <div class="d-flex flex-column flex-root">
 
@@ -67,8 +67,7 @@ $prevBanner = $dataArr['banner'];
                         <!--begin::Header Menu Wrapper-->
                         <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
 
                         </ul>
                         <!--end::Header Menu-->
@@ -79,12 +78,9 @@ $prevBanner = $dataArr['banner'];
                         <div class="topbar">
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION['star_name'] ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -107,8 +103,7 @@ $prevBanner = $dataArr['banner'];
                 <!-- Modals to play previous song and demo -->
 
                 <!-- play original song modal -->
-                <div class="modal fade" id="previousOriginal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="previousOriginal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -121,8 +116,7 @@ $prevBanner = $dataArr['banner'];
                             </div>
                             <div class="modal-body">
                                 <audio controls>
-                                    <source src="<?php echo $prevOriginal ?>"
-                                        type="<?php echo mime_content_type("../../../" . $prevOriginal) ?>">
+                                    <source src="<?php echo $prevOriginal ?>" type="<?php echo mime_content_type("../../../" . $prevOriginal) ?>">
                                     Your browser does not support the audio element.
                                 </audio>
                             </div>
@@ -132,8 +126,7 @@ $prevBanner = $dataArr['banner'];
                 <!-- End play original song modal -->
 
                 <!-- play demo song modal -->
-                <div class="modal fade" id="previousSample" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="previousSample" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -144,8 +137,7 @@ $prevBanner = $dataArr['banner'];
                             </div>
                             <div class="modal-body">
                                 <audio controls>
-                                    <source src="<?php echo $prevSample ?>"
-                                        type="<?php echo mime_content_type("../../../" . $prevSample) ?>">
+                                    <source src="<?php echo $prevSample ?>" type="<?php echo mime_content_type("../../../" . $prevSample) ?>">
                                     Your browser does not support the audio element.
                                 </audio>
                             </div>
@@ -156,8 +148,7 @@ $prevBanner = $dataArr['banner'];
                 <!-- End play demo song modal -->
 
                 <!-- View Previous Banner -->
-                <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -181,32 +172,34 @@ $prevBanner = $dataArr['banner'];
                     <div class="container">
                         <div class="row flex flex-center">
                             <div class="col-md-6 ">
+
                                 <div class="card card-rounded">
+                                    <?php
+                                    if (isset($_SESSION['success_msg']) || isset($_SESSION['error_msg'])) {
+                                        include_once("../../../components/Alert.php");
+                                    }
+                                    ?>
                                     <div class="card-header">
                                         <h2 class="card-title">Edit Song</h2>
                                     </div>
                                     <div class="card-body">
                                         <?php $action = "pages/login_signup/star/editSongDb.php?songId=" . $songId ?>
-                                        <form class="form" action="<?php echo $action ?>" method="POST"
-                                            enctype="multipart/form-data">
+                                        <form class="form" action="<?php echo $action ?>" method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label>Change Title :</label>
-                                                <input placeholder="<?php echo $prevTitle; ?>" type="text" name="title"
-                                                    class="form-control form-control-solid" />
+                                                <input placeholder="<?php echo $prevTitle; ?>" type="text" name="title" class="form-control form-control-solid" />
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="d-flex justify-content-between pr-2">
                                                     Change Song
-                                                    <span><a href="javascript;" data-target="#previousOriginal"
-                                                            data-toggle="modal">
+                                                    <span><a href="javascript;" data-target="#previousOriginal" data-toggle="modal">
                                                             Play Previous Song
                                                         </a></span>
                                                 </label>
                                                 <div></div>
                                                 <div class="custom-file">
-                                                    <input name="original" type="file" class="custom-file-input"
-                                                        id="customFile" />
+                                                    <input name="original" type="file" class="custom-file-input" id="customFile" />
                                                     <label class="custom-file-label" for="customFile">Choose
                                                         Song</label>
                                                 </div>
@@ -214,15 +207,13 @@ $prevBanner = $dataArr['banner'];
                                             <div class="form-group">
                                                 <label class="d-flex justify-content-between pr-2">
                                                     Change Sample
-                                                    <span><a href="javascript;" data-target="#previousSample"
-                                                            data-toggle="modal">
+                                                    <span><a href="javascript;" data-target="#previousSample" data-toggle="modal">
                                                             Play Previous Sample
                                                         </a></span>
                                                 </label>
                                                 <div></div>
                                                 <div class="custom-file">
-                                                    <input name="sample" type="file" class="custom-file-input"
-                                                        id="customFile" />
+                                                    <input name="sample" type="file" class="custom-file-input" id="customFile" />
                                                     <label class="custom-file-label" for="customFile">Choose
                                                         Sample</label>
                                                 </div>
@@ -230,25 +221,21 @@ $prevBanner = $dataArr['banner'];
                                             <div class="form-group">
                                                 <label class="d-flex justify-content-between pr-2">
                                                     Change Banner
-                                                    <span><a href="javascript;" data-target="#previousBanner"
-                                                            data-toggle="modal">
+                                                    <span><a href="javascript;" data-target="#previousBanner" data-toggle="modal">
                                                             View Previous Banner
                                                         </a></span>
                                                 </label>
                                                 <div></div>
                                                 <div class="custom-file">
-                                                    <input name="banner" type="file" class="custom-file-input"
-                                                        id="customFile" />
+                                                    <input name="banner" type="file" class="custom-file-input" id="customFile" />
                                                     <label class="custom-file-label" for="customFile">Choose
                                                         Banner</label>
                                                 </div>
                                             </div>
                                             <div class="d-flex w-md-50 justify-content-between mt-12">
-                                                <input type="submit" name="editSong" value="Update"
-                                                    class="btn btn-primary">
+                                                <input type="submit" name="editSong" value="Update" class="btn btn-primary">
                                                 <a href="pages/login_signup/star/details.php?parentId=star">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                 </a>
                                             </div>
 
@@ -279,8 +266,8 @@ $prevBanner = $dataArr['banner'];
     </div>
     <?php include("../../../partials/_extras/offcanvas/quick-star.php") ?>
     <?php
-  include("../../../partials/jslinks.php");
-  ?>
+    include("../../../partials/jslinks.php");
+    ?>
 
 
 

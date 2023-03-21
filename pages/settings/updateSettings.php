@@ -13,6 +13,9 @@ $newPwd = $_POST['newPwd'];
 $confirmNewPwd = $_POST['confirmNewPwd'];
 
 
+
+
+
 if (!empty($_FILES['profile_avatar']['name'])) {
   $random = rand(10, 1000);
   $profileImg = $random . $_FILES['profile_avatar']['name'];

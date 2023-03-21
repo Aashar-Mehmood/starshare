@@ -2,6 +2,8 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 
+
+$activeTab = $_GET['activeTab'] ?? '1';
 $eventId = $_GET['eventId'];
 $organizerId = $_SESSION['id'];
 
@@ -34,22 +36,21 @@ $banner = $recordArr['banner'];
 
 </head>
 <style>
-@media screen and (max-width:425px) {
-    .form-group.row {
-        margin-bottom: 0 !important;
-    }
+    @media screen and (max-width:425px) {
+        .form-group.row {
+            margin-bottom: 0 !important;
+        }
 
-    div.col-lg-6 {
-        padding: 1rem;
+        div.col-lg-6 {
+            padding: 1rem;
+        }
     }
-}
 </style>
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Main-->
 
     <?php include("../../../partials/_header-mobile.php"); ?>
@@ -58,7 +59,12 @@ $banner = $recordArr['banner'];
         <!--begin::Page-->
         <div class="d-flex flex-row flex-column-fluid page">
 
-            <?php include("../../../partials/_asideForRoles.php"); ?>
+            <?php
+            include_once("../../../partials/_asideForRoles.php");
+            if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+                include_once("../../../components/Alert.php");
+            }
+            ?>
 
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
@@ -71,13 +77,12 @@ $banner = $recordArr['banner'];
                         <!--begin::Header Menu Wrapper-->
                         <!--begin::Header Menu-->
 
-                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8"
-                            style="border: none; font-size: 1.12rem;">
+                        <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Edit Event</a>
+                                <a class="nav-link <?php echo $activeTab == '1' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_1">Edit Event</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Quotes</a>
+                                <a class="nav-link <?php echo $activeTab == '2' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_2">Quotes</a>
                             </li>
                         </ul>
                         <!--end::Header Menu-->
@@ -88,12 +93,9 @@ $banner = $recordArr['banner'];
                         <div class="topbar">
                             <!--begin::User-->
                             <div class="topbar-item">
-                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                    id="kt_quick_user_toggle">
-                                    <span
-                                        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                                    <span
-                                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+                                <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
                                         <?php echo $_SESSION['organizer_name']; ?>
                                     </span>
                                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
@@ -112,8 +114,7 @@ $banner = $recordArr['banner'];
                 </div>
 
                 <!-- modal to show previous banner of event -->
-                <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="previousBanner" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -130,8 +131,7 @@ $banner = $recordArr['banner'];
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel"
-                            aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade <?php echo $activeTab == '1' ? 'show active' : '' ?>" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-12">
@@ -143,68 +143,55 @@ $banner = $recordArr['banner'];
                                             </div>
                                             <!--begin::Form-->
 
-                                            <form
-                                                action="<?php echo "pages/login_signup/organizer/editEventDb.php?eventId=" . $eventId ?>"
-                                                method="POST" enctype="multipart/form-data">
+                                            <form action="<?php echo "pages/login_signup/organizer/editEventDb.php?eventId=" . $eventId ?>" method="POST" enctype="multipart/form-data">
 
                                                 <div class="card-body">
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>Title :</label>
-                                                            <input name="title" type="text"
-                                                                class="form-control form-control-solid"
-                                                                placeholder="<?php echo $title ?>" />
+                                                            <input name="title" type="text" class="form-control form-control-solid" placeholder="<?php echo $title ?>" />
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Description :</label>
-                                                            <textarea name="description"
-                                                                class="form-control form-control-solid" rows="3"
-                                                                placeholder="<?php echo $description ?>"></textarea>
+                                                            <textarea name="description" class="form-control form-control-solid" rows="3" placeholder="<?php echo $description ?>"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
                                                             <label>New Location :</label>
-                                                            <input name="location" type="text"
-                                                                class="form-control form-control-solid"
-                                                                placeholder="<?php echo $location ?>" />
+                                                            <input name="location" type="text" class="form-control form-control-solid" placeholder="<?php echo $location ?>" />
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <label>Ticket Price :</label>
-                                                            <input name="ticket_price" type="number" name="ticketPrice"
-                                                                class="form-control form-control-solid"
-                                                                placeholder="<?php echo $ticketPrice ?>" />
+                                                            <input name="ticket_price" type="number" name="ticketPrice" class="form-control form-control-solid" placeholder="<?php echo $ticketPrice ?>" />
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group row">
                                                         <div class="col-lg-6">
-                                                            <label for="eventDate">New Date :</label>
-                                                            <input name="date" class="form-control form-control-solid"
-                                                                type="date" id="eventDate"
-                                                                value="<?php echo $date ?>" />
+                                                            <label for="eventDate" class="d-flex justify-content-between">
+                                                                New Date :
+                                                                <span class="text-primary">(Old <?php echo $date ?>)</span>
+                                                            </label>
+                                                            <input name="date" class="form-control form-control-solid" type="date" id="eventDate" />
                                                         </div>
                                                         <div class="col-lg-6">
-                                                            <label for="eventTime">New Time :</label>
-                                                            <input name="time" class="form-control form-control-solid"
-                                                                type="time" id="eventTime"
-                                                                value="<?php echo $time ?>" />
+                                                            <label for="eventTime" class="d-flex justify-content-between">
+                                                                New Time :
+                                                                <span class="text-primary">(Old <?php echo $time ?>)</span>
+                                                            </label>
+                                                            <input name="time" class="form-control form-control-solid" type="time" id="eventTime" />
                                                         </div>
-
                                                     </div>
                                                     <div class="form-group row">
-
                                                         <div class="col-lg-6">
                                                             <label class="d-flex justify-content-between pr-2">
                                                                 New Banner Image
-                                                                <a href="javascript;" data-target="#previousBanner"
-                                                                    data-toggle="modal">View
+                                                                <a href="javascript;" data-target="#previousBanner" data-toggle="modal">View
                                                                     Previous</a>
                                                             </label>
                                                             <div></div>
                                                             <div class="custom-file">
-                                                                <input name="banner" type="file"
-                                                                    class="custom-file-input" id="customFile" />
+                                                                <input name="banner" type="file" class="custom-file-input" id="customFile" />
                                                                 <label class="custom-file-label" for="customFile">Choose
                                                                     Image</label>
                                                             </div>
@@ -212,8 +199,7 @@ $banner = $recordArr['banner'];
                                                     </div>
                                                 </div>
                                                 <div class="card-footer ml-6">
-                                                    <input type="submit" name="updateEvent" value="Save Changes"
-                                                        class="btn btn-primary" />
+                                                    <input type="submit" name="updateEvent" value="Save Changes" class="btn btn-primary" />
                                                     <input type="reset" value="Reset" class="btn btn-secondary ml-10" />
                                                 </div>
                                             </form>
@@ -223,7 +209,7 @@ $banner = $recordArr['banner'];
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                        <div class="tab-pane fade <?php echo $activeTab == '2' ? 'show active' : '' ?>" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xl-10">
@@ -234,10 +220,8 @@ $banner = $recordArr['banner'];
                                                 <h2 class="card-title">
                                                     Sent Quotes
                                                 </h2>
-                                                <a
-                                                    href="pages/login_signup/organizer/requestQuote.php?eventId=<?php echo $eventId ?>">
-                                                    <button class="btn btn-primary btn-large" data-target="#newProduct"
-                                                        data-toggle="modal">
+                                                <a href="pages/login_signup/organizer/requestQuote.php?eventId=<?php echo $eventId ?>&parentId=organizer">
+                                                    <button class="btn btn-primary btn-large">
                                                         Request a Quote
                                                     </button>
                                                 </a>
@@ -249,36 +233,40 @@ $banner = $recordArr['banner'];
                                                     <div class="table-responsive">
                                                         <table class="table table-vertical-center table-bordered">
                                                             <thead class="thead-dark">
-                                                                <tr>
-                                                                    <th style="min-width: 150px;">Event Title</th>
-                                                                    <th style="min-width: 150px;">Supplier Name</th>
-                                                                    <th style="min-width: 150px;">Quote Amount</th>
-                                                                    <th style="min-width: 200px;">Status</th>
-                                                                </tr>
-
-                                                            </thead>
-                                                            <tbody>
                                                                 <?php
                                                                 $query = "SELECT event_id, organizer_quotation_amount AS quoteAmount, status, name FROM quotations
-                                                                INNER JOIN suppliers ON quotations.supplier_id = suppliers.u_id WHERE quotations.organizer_id = $organizerId;";
+                                                                    INNER JOIN suppliers ON quotations.supplier_id = suppliers.u_id WHERE quotations.organizer_id = $organizerId;";
                                                                 $sentQuotes = mysqli_query($conn, $query) or die(mysqli_error($conn));
                                                                 if (mysqli_num_rows($sentQuotes) < 1) {
                                                                     echo
                                                                     '<tr>
-                                                                        <td colspan="4">
-                                                                            <a
-                                                                                class="text-dark-75 font-weight-bolder mb-1 font-size-lg">
+                                                                            <th colspan="4" class="text-center text-lg">
                                                                                 No Quotes Sent Yet
-                                                                            </a>
-                                                                        </td>
+                                                                            </th>
                                                                         </tr>';
                                                                 } else {
-                                                                    while ($quotesArr = mysqli_fetch_assoc($sentQuotes)) {
-                                                                        $eId = $quotesArr['event_id'];
-                                                                        $eData = mysqli_query($conn, "SELECT title FROM events WHERE `id` = $eId;") or die(mysqli_error($conn));
-                                                                        $eArr = mysqli_fetch_assoc($eData);
+                                                                    echo
+                                                                    '
+                                                                        <tr>
+                                                                            <th style="min-width: 150px;">Event Title</th>
+                                                                            <th style="min-width: 150px;">Supplier Name</th>
+                                                                            <th style="min-width: 150px;">Quote Amount</th>
+                                                                            <th style="min-width: 200px;">Status</th>
+                                                                        </tr>
+                                                                        ';
+                                                                }
+                                                                ?>
 
-                                                                        echo '<tr>
+
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+                                                                while ($quotesArr = mysqli_fetch_assoc($sentQuotes)) {
+                                                                    $eId = $quotesArr['event_id'];
+                                                                    $eData = mysqli_query($conn, "SELECT title FROM events WHERE `id` = $eId;") or die(mysqli_error($conn));
+                                                                    $eArr = mysqli_fetch_assoc($eData);
+
+                                                                    echo '<tr>
                                                                         <td>
                                                                             <a
                                                                                 class="text-dark-75 font-weight-bolder mb-1 font-size-lg">
@@ -304,7 +292,6 @@ $banner = $recordArr['banner'];
                                                                             </span>
                                                                         </td>
                                                                     </tr>';
-                                                                    }
                                                                 }
                                                                 ?>
 

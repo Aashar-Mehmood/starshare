@@ -76,11 +76,11 @@ mysqli_close($conn);
 
 if (!empty($errorMsg)) {
   $_SESSION['error_msg'] = $errorMsg;
-  header("Location:./signupForRole.php?role=$role");
+  header("Location:./signupForRole.php?role=$role&parentId=$role");
 } else if (!empty($successMsg)) {
   $_SESSION['success_msg'] = $successMsg;
   unset($_SESSION['form_data']);
-  header("Location:./$role/details.php");
+  header("Location:./$role/details.php?parentId=$role");
 }
 
 

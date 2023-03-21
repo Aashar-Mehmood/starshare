@@ -2,6 +2,7 @@
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
 $uId = $_SESSION['id'];
+$activeTab  = $_GET['activeTab'] ?? '1';
 
 $totalEvents = mysqli_num_rows(
     mysqli_query(
@@ -52,6 +53,16 @@ if (empty($yearlyEarnings)) {
     $yearlyEarnings = '0';
 }
 
+
+// select the quotes with status = responded
+$quotesData = mysqli_query(
+    $conn,
+    "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,`title`, `banner`, `date`
+              FROM quotations INNER JOIN events ON quotations.event_id = events.id 
+              WHERE `status` = 'responded' AND `quotations`.`organizer_id` = $uId;"
+) or die(mysqli_error($conn));
+
+$formData = $_SESSION['form_data'] ?? [];
 
 ?>
 
@@ -112,16 +123,16 @@ if (empty($yearlyEarnings)) {
 
                         <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
+                                <a class="nav-link <?php echo $activeTab == '1' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Events</a>
+                                <a class="nav-link <?php echo $activeTab == '2' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_2">Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Quote Responses</a>
+                                <a class="nav-link <?php echo $activeTab == '3' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_3">Quote Responses</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
+                                <a class="nav-link <?php echo $activeTab == '4' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
                             </li>
 
                         </ul>
@@ -154,8 +165,13 @@ if (empty($yearlyEarnings)) {
                 </div>
                 <!-- Begin Content -->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <?php
+                    if (isset($_SESSION['error_msg']) || isset($_SESSION['success_msg'])) {
+                        include_once('../../../components/Alert.php');
+                    }
+                    ?>
                     <div class="tab-content mt-5" id="myTabContent">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade <?php echo $activeTab == '1' ? ' show active' : '' ?>" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -257,7 +273,7 @@ if (empty($yearlyEarnings)) {
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 py-5" style="background-color: #24bd76;">
-                                                <h2 class="font-weight-bolder text-dark">Total Events Organized</h2>
+                                                <h2 class="font-weight-bolder text-dark">Events Organized</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
@@ -364,7 +380,7 @@ if (empty($yearlyEarnings)) {
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                        <div class="tab-pane fade <?php echo $activeTab == '2' ? ' show active' : '' ?>" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                             <div class="modal fade" id="newEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                     <div class="modal-content">
@@ -375,42 +391,35 @@ if (empty($yearlyEarnings)) {
                                             </button>
                                         </div>
                                         <div class="modal-body">
-
                                             <form class="form" action="pages/login_signup/organizer/addEvent.php" method="POST" enctype="multipart/form-data">
-
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label>Title :</label>
-                                                        <input type="text" name="title" class="form-control form-control-solid" />
+                                                        <input value="<?php echo htmlspecialchars($formData['title'] ?? '', ENT_QUOTES); ?>" type="text" name="title" class="form-control form-control-solid" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label>Description :</label>
-                                                        <textarea name="description" class="form-control form-control-solid" rows="3">
-                            </textarea>
+                                                        <textarea name="description" class="form-control form-control-solid" rows="3"><?php echo htmlspecialchars($formData['description'] ?? '', ENT_QUOTES); ?></textarea>
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label>Location :</label>
-                                                        <input name="location" type="text" class="form-control form-control-solid" />
+                                                        <input value="<?php echo htmlspecialchars($formData['location'] ?? '', ENT_QUOTES); ?>" name="location" type="text" class="form-control form-control-solid" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label>Total Seats :</label>
-                                                        <input name="total_seats" type="number" class="form-control form-control-solid" />
+                                                        <input value="<?php echo htmlspecialchars($formData['total_seats'] ?? '', ENT_QUOTES); ?>" name="total_seats" type="number" class="form-control form-control-solid" />
                                                     </div>
-
                                                 </div>
-
-
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label for="eventDate">Date :</label>
-                                                        <input name="date" class="form-control form-control-solid" type="date" id="eventDate" />
+                                                        <input value="<?php echo htmlspecialchars($formData['date'] ?? '', ENT_QUOTES); ?>" name="date" class="form-control form-control-solid" type="date" id="eventDate" />
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <label for="eventTime">Time :</label>
-                                                        <input name="time" class="form-control form-control-solid" type="time" id="eventTime" />
+                                                        <input value="<?php echo htmlspecialchars($formData['time'] ?? '', ENT_QUOTES); ?>" name="time" class="form-control form-control-solid" type="time" id="eventTime" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -418,9 +427,7 @@ if (empty($yearlyEarnings)) {
                                                         <label for="selectStar">
                                                             Select Star
                                                         </label>
-
-                                                        <select name="star_performing" class="form-control form-control-solid" id="selectStar">
-                                                            <option selected></option>
+                                                        <select value="<?php echo htmlspecialchars($formData['star_performing'] ?? '', ENT_QUOTES); ?>" name="star_performing" class="form-control form-control-solid" id="selectStar">
                                                             <?php
                                                             $currentUserId = $_SESSION['id'];
                                                             $selectStars = "SELECT `u_id`, `name` FROM `stars` WHERE NOT `u_id` = $currentUserId LIMIT 20";
@@ -430,10 +437,12 @@ if (empty($yearlyEarnings)) {
                                                                 $sName = $row['name'];
                                                                 $rating = rand(1, 5);
                                                                 $reviews = rand(1, 100);
-                                                                echo "
-                                  <option value='$sId'>
-                                    $sName &nbsp;&nbsp;&nbsp; Rating : $rating stars &nbsp;&nbsp;&nbsp; Total Reviews : $reviews    
-                                  </option>";
+                                                                echo
+                                                                "
+                                                                <option value=$sId>
+                                                                    $sName &nbsp;&nbsp;&nbsp; Rating : $rating stars &nbsp;&nbsp;&nbsp; Total Reviews : $reviews    
+                                                                </option>
+                                                                ";
                                                             }
                                                             ?>
                                                         </select>
@@ -443,30 +452,25 @@ if (empty($yearlyEarnings)) {
                                                         <div></div>
                                                         <div class="custom-file">
                                                             <input name="banner" type="file" class="custom-file-input" id="customFile" />
-                                                            <label class="custom-file-label" for="customFile">Choose
-                                                                Image</label>
+                                                            <label class="custom-file-label" for="customFile">
+                                                                Choose Image
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-lg-6">
                                                         <label for="ticketPrice">Ticket Price $ :</label>
-                                                        <input name="ticketPrice" class="form-control form-control-solid" type="number" id="ticketPrice" />
-
+                                                        <input value="<?php echo htmlspecialchars($formData['ticketPrice'] ?? '', ENT_QUOTES); ?>" name="ticketPrice" class="form-control form-control-solid" type="number" id="ticketPrice" />
                                                     </div>
                                                 </div>
-
                                                 <div class="d-flex col-md-6 mt-12 px-6">
                                                     <input type="submit" name="add_event" value="Add Event" class="btn btn-primary" />
-
                                                     <button type="button" class="btn btn-secondary ml-12" data-dismiss="modal">Close</button>
                                                 </div>
-
                                             </form>
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="container">
@@ -477,7 +481,7 @@ if (empty($yearlyEarnings)) {
                                             <div class="card-header d-flex align-items-center">
                                                 <h2 class="card-title">Events</h2>
                                                 <button class="btn btn-primary btn-large" data-target="#newEvent" data-toggle="modal">
-                                                    Add Event
+                                                    Create Event
                                                 </button>
                                             </div>
                                             <!--end::Header-->
@@ -487,20 +491,37 @@ if (empty($yearlyEarnings)) {
                                                     <div class="table-responsive">
                                                         <table class="table table-vertical-center table-bordered">
                                                             <thead class="thead-dark">
-                                                                <tr>
-                                                                    <th style="min-width: 150px;">Event Title</th>
-                                                                    <th style="min-width: 150px;">Location</th>
-                                                                    <th style="min-width: 150px;">Date</th>
-                                                                    <th style="min-width: 150px;">Time</th>
-                                                                    <th style="min-width:200px; padding-left:1.75rem">
-                                                                        Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
                                                                 <?php
                                                                 $organizerId = $_SESSION['id'];
                                                                 $selectEvents = "SELECT * FROM `events` WHERE `organizer_id` = $organizerId;";
                                                                 $eventResult = mysqli_query($conn, $selectEvents);
+                                                                if (mysqli_num_rows($eventResult) < 1) {
+                                                                    echo
+                                                                    '
+                                                                        <tr>
+                                                                            <th colspan="5" class="text-center">No Events Created Yet</th>
+                                                                        </tr>
+                                                                        ';
+                                                                } else {
+                                                                    echo
+                                                                    '
+                                                                        <tr>
+                                                                            <th style="min-width: 150px;">Event Title</th>
+                                                                            <th style="min-width: 150px;">Location</th>
+                                                                            <th style="min-width: 150px;">Date</th>
+                                                                            <th style="min-width: 150px;">Time</th>
+                                                                            <th style="min-width:200px; padding-left:1.75rem">
+                                                                                Action
+                                                                            </th>
+                                                                        </tr>
+                                                                        ';
+                                                                }
+                                                                ?>
+
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php
+
                                                                 while ($record = mysqli_fetch_assoc($eventResult)) {
                                                                     $eventId = $record['id'];
                                                                     echo '<tr>
@@ -526,7 +547,7 @@ if (empty($yearlyEarnings)) {
                                   </span>
                                   </td>
                                   <td>
-                                    <a href="pages/login_signup/organizer/editEvent.php?eventId=' . $eventId . '" title="Edit Event"
+                                    <a href="pages/login_signup/organizer/editEvent.php?parentId=organizer&eventId=' . $eventId . '" title="Edit Event"
                                       class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                       <span class="svg-icon svg-icon-md svg-icon-primary">
                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
@@ -570,16 +591,7 @@ if (empty($yearlyEarnings)) {
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        // select the quotes with status = responded
-                        $quotesData = mysqli_query(
-                            $conn,
-                            "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,`title`, `banner`, `date`
-              FROM quotations INNER JOIN events ON quotations.event_id = events.id 
-              WHERE `status` = 'responded' AND `quotations`.`organizer_id` = $uId;"
-                        ) or die(mysqli_error($conn));
-                        ?>
-                        <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+                        <div class="tab-pane fade <?php echo $activeTab == '3' ? ' show active' : '' ?>" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
                                     <?php
@@ -691,7 +703,7 @@ if (empty($yearlyEarnings)) {
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+                        <div class="tab-pane fade <?php echo $activeTab == '4' ? ' show active' : '' ?>" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12">
@@ -915,29 +927,20 @@ if (empty($yearlyEarnings)) {
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <!-- End content -->
-
         </div>
-
     </div>
     </div>
     <!--Content area here-->
-
     </div>
-
     <!--end::Content-->
-
     <?php include("../../../partials/_footer.php"); ?>
     </div>
-
     <!--end::Wrapper-->
     </div>
-
     </div>
     <?php include("../../../partials/_extras/offcanvas/quick-organizer.php") ?>
     <?php
@@ -953,6 +956,14 @@ if (empty($yearlyEarnings)) {
         resetBtn.addEventListener('click', () => {
             settingsForm.reset();
         });
+        const queryString = window.location.search;
+        // Parse the query string into an object
+        const params = new URLSearchParams(queryString);
+        // Check if the "modal" parameter exists and has a value of "true"
+        if (params.has("activeModal") && params.get("activeModal") === "add") {
+            // Show the modal using jQuery
+            $("#newEvent").modal("show");
+        }
     </script>
 
 </body>

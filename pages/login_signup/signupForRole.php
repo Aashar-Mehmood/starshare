@@ -77,30 +77,30 @@ $actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
                     <div class="card-body">
                       <div class="form-group">
                         <label>Name <span class="text-danger">*</span></label>
-                        <input type="text" name="fullName" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['fullName'] ?? '', ENT_QUOTES); ?>" placeholder="Enter full name" />
+                        <input required type="text" name="fullName" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['fullName'] ?? '', ENT_QUOTES); ?>" placeholder="Enter full name" />
                       </div>
                       <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
-                        <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? '', ENT_QUOTES); ?>" placeholder="Enter email" />
+                        <input required type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? '', ENT_QUOTES); ?>" placeholder="Enter email" />
                       </div>
                       <div class="form-group">
                         <label>Contact <span class="text-danger">*</span></label>
-                        <input type="number" name="contact" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['contact'] ?? '', ENT_QUOTES); ?>" placeholder="Enter phone number" />
+                        <input required type="number" name="contact" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['contact'] ?? '', ENT_QUOTES); ?>" placeholder="Enter phone number" />
                       </div>
 
                       <div class="form-group">
                         <label>Address <span class="text-danger">*</span></label>
-                        <input type="text" name="address" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['address'] ?? '', ENT_QUOTES); ?>" placeholder="Enter your address" />
+                        <input required type="text" name="address" class="form-control" value="<?php echo htmlspecialchars($_SESSION['form_data']['address'] ?? '', ENT_QUOTES); ?>" placeholder="Enter your address" />
                       </div>
                       <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
-                        <textarea name="description" class="form-control" id="description" rows="3"><?php echo htmlspecialchars($_SESSION['form_data']['description'] ?? '', ENT_QUOTES); ?></textarea>
+                        <textarea required name="description" class="form-control" id="description" rows="3"><?php echo htmlspecialchars($_SESSION['form_data']['description'] ?? '', ENT_QUOTES); ?></textarea>
                       </div>
                       <div class="form-group">
                         <label>Profile Image <span class="text-danger">*</span></label>
                         <div></div>
                         <div class="custom-file">
-                          <input name="profile_img" type="file" accept=".png, .jpg, .jpeg" class="custom-file-input" id="customFile" />
+                          <input required name="profile_img" type="file" accept="image/*" class="custom-file-input" id="customFile" />
                           <label class="custom-file-label" for="customFile">Choose Image</label>
                         </div>
                       </div>

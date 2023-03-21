@@ -24,6 +24,9 @@ $description = $_SESSION['star_description'];
 $upComingEvents = "SELECT * FROM `events` WHERE `star_id` = $star_id AND `date` >= DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY) LIMIT 6;";
 $eventData = mysqli_query($conn, $upComingEvents);
 
+$formData = $_SESSION['form_data'] ?? [];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -285,7 +288,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-danger py-5">
-                                                <h2 class="font-weight-bolder text-dark">Total Songs Uploaded</h2>
+                                                <h2 class="font-weight-bolder text-dark">Songs Uploaded</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
@@ -327,7 +330,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                         <div class="card card-custom bg-gray-100 card-stretch-half gutter-b">
                                             <!--begin::Header-->
                                             <div class="card-header border-0 bg-warning py-5">
-                                                <h2 class="font-weight-bolder text-dark">Total Events Performed</h2>
+                                                <h2 class="font-weight-bolder text-dark">Events Performed</h2>
                                             </div>
                                             <!--end::Header-->
                                             <!--begin::Body-->
@@ -405,11 +408,11 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                             <form class="form" action="pages/login_signup/star/addSong.php" method="POST" enctype="multipart/form-data">
                                                 <div class="form-group">
                                                     <label>Title :</label>
-                                                    <input type="text" name="title" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($_SESSION['form_data']['title'] ?? '', ENT_QUOTES); ?>" />
+                                                    <input type="text" name="title" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($formData['title'] ?? '', ENT_QUOTES); ?>" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Price :</label>
-                                                    <input type="number" name="price" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($_SESSION['form_data']['price'] ?? '', ENT_QUOTES); ?>" />
+                                                    <input type="number" name="price" required class="form-control form-control-solid" value="<?php echo htmlspecialchars($formData['price'] ?? '', ENT_QUOTES); ?>" />
                                                 </div>
 
                                                 <div class="form-group">
@@ -422,7 +425,7 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Upload Sample</label>
+                                                    <label>Upload Sample Song</label>
                                                     <div></div>
                                                     <div class="custom-file">
                                                         <input name="sample" type="file" accept="audio/*" class="custom-file-input" id="Sample" required />
@@ -818,7 +821,6 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Group-->
-
                                                                     <!--begin::Group-->
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-3">Description
@@ -848,7 +850,6 @@ $eventData = mysqli_query($conn, $upComingEvents);
                                                                         </div>
                                                                     </div>
                                                                     <!--end::Row-->
-
                                                                     <!--begin::Group-->
                                                                     <div class="form-group row">
                                                                         <label class="col-form-label col-md-3  ">New
@@ -915,10 +916,8 @@ $eventData = mysqli_query($conn, $upComingEvents);
         });
         // Read the query string
         const queryString = window.location.search;
-
         // Parse the query string into an object
         const params = new URLSearchParams(queryString);
-
         // Check if the "modal" parameter exists and has a value of "true"
         if (params.has("activeModal") && params.get("activeModal") === "add") {
             // Show the modal using jQuery

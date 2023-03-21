@@ -1,9 +1,8 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
-
+$activeTab  = $_GET['activeTab'] ?? '1';
 $id = $_SESSION['id'];
-$_SESSION["message"] = 'Product Created';
 
 $productData = mysqli_query($conn, "SELECT * FROM `products` WHERE `supplier_id` = $id;");
 $totalProducts = mysqli_num_rows($productData);
@@ -38,6 +37,22 @@ $totalEvents = mysqli_num_rows(
     )
 );
 
+
+$quotesData = mysqli_query(
+    $conn,
+    "SELECT `quotations`.`id`, `organizer_quotation`, `organizer_quotation_amount` AS `amount`,`title`, `banner`, `date`
+    FROM quotations INNER JOIN events ON quotations.event_id = events.id 
+    WHERE `supplier_id` = $id AND `status` = 'pending';"
+) or die(mysqli_error($conn));
+
+$sentQuotes = mysqli_query(
+    $conn,
+    "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,
+    `organizer_quotation_amount` AS `organizer_amount`,`title`, `banner`, `date`
+    FROM quotations INNER JOIN events ON quotations.event_id = events.id 
+    WHERE `supplier_id` = $id AND `status` = 'responded';"
+) or die(mysqli_error($conn));
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +68,6 @@ $totalEvents = mysqli_num_rows(
     <?php
     include("../../../partials/csslinks.php");
     ?>
-    <link rel="stylesheet" href="assets/css/custom/responsive_nav.css">
     <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
     <link rel="stylesheet" href="assets/css/custom/user_details.css">
     <style>
@@ -112,16 +126,16 @@ $totalEvents = mysqli_num_rows(
 
                         <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
+                                <a class="nav-link <?php echo $activeTab == '1' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_1">Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_2">Products</a>
+                                <a class="nav-link <?php echo $activeTab == '2' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_2">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_3">Quotations</a>
+                                <a class="nav-link <?php echo $activeTab == '3' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_3">Quotations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
+                                <a class="nav-link <?php echo $activeTab == '4' ? ' active' : '' ?>" data-toggle="tab" href="#kt_tab_pane_4">Settings</a>
                             </li>
 
                         </ul>
@@ -156,7 +170,7 @@ $totalEvents = mysqli_num_rows(
 
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
                     <div class="tab-content mt-5" id="myTabContent" style="overflow-x: hidden;">
-                        <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
+                        <div class="tab-pane fade <?php echo $activeTab == '1' ? ' show active' : '' ?> " id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_1">
                             <div class="container">
                                 <div class="row align-items-center">
                                     <div class="col-md-6 col-xl-4">
@@ -359,8 +373,8 @@ $totalEvents = mysqli_num_rows(
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
-                            <div class="modal fade" id="newStarCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="tab-pane fade <?php echo $activeTab == '2' ? ' show active' : '' ?>" id="kt_tab_pane_2" role="tabpanel" aria-labelledby="kt_tab_pane_2">
+                            <div class="modal fade" id="newProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -381,7 +395,7 @@ $totalEvents = mysqli_num_rows(
                                                     <input type="number" name="price" class="form-control form-control-solid" />
                                                 </div>
                                                 <div class="d-flex w-md-50 justify-content-between mt-12">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                     <input type="submit" name="create" value="Create" class="btn btn-primary" />
 
                                                 </div>
@@ -393,7 +407,6 @@ $totalEvents = mysqli_num_rows(
                                 </div>
                             </div>
                             <!-- End New Star Category Form -->
-
                             <!-- Start Main Container -->
                             <div class="container">
                                 <div class="col-12 col-lg-10 col-xl-8 px-0 px-md-10 pt-md-8">
@@ -401,7 +414,7 @@ $totalEvents = mysqli_num_rows(
                                         <!--begin::Header-->
                                         <div class="card-header d-flex align-items-center">
                                             <h2 class="card-title">Products</h2>
-                                            <button class="btn btn-primary btn-large" data-target="#newStarCategory" data-toggle="modal">
+                                            <button class="btn btn-primary btn-large" data-target="#newProduct" data-toggle="modal">
                                                 Add Product
                                             </button>
                                         </div>
@@ -528,26 +541,8 @@ $totalEvents = mysqli_num_rows(
                                 </div>
                             </div>
                             <!-- End Main Container -->
-
                         </div>
-                        <?php
-                        // all quotations
-                        $quotesData = mysqli_query(
-                            $conn,
-                            "SELECT `quotations`.`id`, `organizer_quotation`, `organizer_quotation_amount` AS `amount`,`title`, `banner`, `date`
-                            FROM quotations INNER JOIN events ON quotations.event_id = events.id 
-                            WHERE `supplier_id` = $id AND `status` = 'pending';"
-                        ) or die(mysqli_error($conn));
-
-                        $sentQuotes = mysqli_query(
-                            $conn,
-                            "SELECT `quotations`.`id`, `supplier_quotation`, `supplier_quotation_amount` AS `amount`,
-                            `organizer_quotation_amount` AS `organizer_amount`,`title`, `banner`, `date`
-                            FROM quotations INNER JOIN events ON quotations.event_id = events.id 
-                            WHERE `supplier_id` = $id AND `status` = 'responded';"
-                        ) or die(mysqli_error($conn));
-                        ?>
-                        <div class="tab-pane fade" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
+                        <div class="tab-pane fade <?php echo $activeTab == '3' ? ' show active' : '' ?>" id="kt_tab_pane_3" role="tabpanel" aria-labelledby="kt_tab_pane_3">
                             <div class="container">
                                 <div class="row">
                                     <?php
@@ -778,7 +773,7 @@ $totalEvents = mysqli_num_rows(
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_5">
+                        <div class="tab-pane fade <?php echo $activeTab == '4' ? ' show active' : '' ?>" id="kt_tab_pane_4" role="tabpanel" aria-labelledby="kt_tab_pane_5">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12">
@@ -834,7 +829,7 @@ $totalEvents = mysqli_num_rows(
                                                         <button id="editSettings" type="button" class="btn btn-primary font-weight-bold
                               btn-sm px-3 font-size-base
                               ml-14 ml-md-0 mb-6 mb-md-0">
-                                                            Create
+                                                            Save Changes
                                                         </button>
                                                     </div>
                                                     <!--end::Dropdown-->
@@ -1036,6 +1031,13 @@ $totalEvents = mysqli_num_rows(
         resetBtn.addEventListener('click', () => {
             settingsForm.reset();
         });
+        const queryString = window.location.search;
+        // Parse the query string into an object
+        const params = new URLSearchParams(queryString);
+        if (params.has("activeModal") && params.get("activeModal") === "add") {
+            // Show the modal using jQuery
+            $("#newProduct").modal("show");
+        }
     </script>
 
 </body>
