@@ -3,7 +3,7 @@ session_start();
 
 $errorMsg = '';
 $successMsg = '';
-
+include_once("../../functions/formDataInSession.php");
 if (!isset($_POST["signup"])) {
   $errorMsg = "Error occured while submitting form";
 } else {

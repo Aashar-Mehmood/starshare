@@ -633,7 +633,7 @@ $sentQuotes = mysqli_query(
                                                         <!--begin::Footer-->
                                                         <div class="d-flex align-items-center justify-content-between">
     
-                                                            <a href="pages/login_signup/supplier/responseToQuote.php?quoteId=' . $quotesArr["id"] . '">
+                                                            <a href="pages/login_signup/supplier/responseToQuote.php?quoteId=' . $quotesArr["id"] . '&parentId=supplier">
                                                                 <button class="btn btn-primary font-weight-bolder font-size-sm py-3 px-8">
                                                                     Respond
                                                                 </button>
@@ -724,7 +724,7 @@ $sentQuotes = mysqli_query(
                                                                         </p>
                                                                     </div>
                                                                     <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                                                        ' . $sentQuotesArr['organizer_amount'] . ' $
+                                                                        ' . $sentQuotesArr['organizer_amount'] . '
                                                                     </span>
                                                                     <!--end::Text-->
                                                                 </div>
@@ -744,7 +744,7 @@ $sentQuotes = mysqli_query(
                                                                         </p>
                                                                     </div>
                                                                     <span class=" font-weight-bolder label label-xl label-light-success label-inline px-3 py-5 min-w-45px">
-                                                                        ' . $sentQuotesArr['amount'] . ' $
+                                                                        ' . $sentQuotesArr['amount'] . '
                                                                     </span>
                                                                     <!--end::Text-->
                                                                 </div>

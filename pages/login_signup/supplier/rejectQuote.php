@@ -1,6 +1,6 @@
 <?php
 include_once('../db_connection.php');
-include_once('../checkUsersSession.php.php');
+include_once('../checkUsersSession.php');
 $quoteId = $_GET["quoteId"];
 $supplierId = $_SESSION['id'];
 
@@ -11,11 +11,10 @@ $execute = mysqli_query(
 ) or die(mysqli_error($conn));
 
 if (!$execute) {
-    $message = "Unable to process request.";
+    $_SESSION['error_msg'] = "Quote Rejection Failed.";
 } else {
-    $message = "Quote Rejected Successfully.";
+    $_SESSION['success_msg'] = "Quote Rejected Successfully.";
 }
 
-echo "<script>alert('$message')</script>";
 
-header("Refresh:0 URL=./details.php");
+header("Location:./details.php?parentId=supplier&activeTab=3");

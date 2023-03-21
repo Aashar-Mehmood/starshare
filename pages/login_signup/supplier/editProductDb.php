@@ -6,24 +6,32 @@ $supplierId = $_SESSION['id'];
 
 $name = $_POST['name'];
 $price = $_POST['price'];
-$message = "";
-
-if (!empty($name)) {
-    $updateName = mysqli_query($conn, "UPDATE `products` SET `name` = '$name' WHERE `id` = $productId AND `supplier_id` = $supplierId");
-    if (!$updateName) {
-        $message = mysqli_error($conn);
-    } else {
-        $message .= "Name updated. ";
+$successMsg = '';
+if (empty($name) && empty($price)) {
+    $_SESSION['error_msg'] = 'Fill any field to update it\'s value';
+} else {
+    if (!empty($name)) {
+        $updateName = mysqli_query($conn, "UPDATE `products` SET `name` = '$name' WHERE `id` = $productId AND `supplier_id` = $supplierId");
+        if (!$updateName) {
+            $_SESSION['error_msg'] = mysqli_error($conn);
+        } else {
+            $successMsg .= "Name, ";
+        }
+    }
+    if (!empty($price)) {
+        $updatePrice = mysqli_query($conn, "UPDATE `products` SET `price` = $price WHERE `id` = $productId AND `supplier_id` = $supplierId");
+        if (!$updatePrice) {
+            $_SESSION['error_msg'] = mysqli_error($conn);
+        } else {
+            $successMsg .= "Price, ";
+        }
     }
 }
-if (!empty($price)) {
-    $updatePrice = mysqli_query($conn, "UPDATE `products` SET `price` = $price WHERE `id` = $productId AND `supplier_id` = $supplierId");
-    if (!$updatePrice) {
-        $message = mysqli_error($conn);
-    } else {
-        $message .= "Price updated.";
-    }
+
+if (!empty($successMsg)) {
+    $successMsg = rtrim($successMsg, ', ');
+    $successMsg .= ' updated successfully';
+    $_SESSION['success_msg'] = $successMsg;
 }
 
-echo "<script>alert('$message')</script>";
-header("Refresh:0; URL=./editProduct.php?pId=$productId");
+header("Refresh:0; URL=./editProduct.php?pId=$productId&parentId=supplier");

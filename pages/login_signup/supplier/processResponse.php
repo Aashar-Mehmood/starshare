@@ -1,23 +1,30 @@
 <?php
 include_once('../checkUsersSession.php');
 include_once('../db_connection.php');
+include_once('../../../functions/formDataInSession.php');
 
 $supplierId = $_SESSION['id'];
 $quoteId = $_POST['quoteId'];
 $supplierQuoteAmount = $_POST['supplierQuoteAmount'];
 $supplierQuote = $_POST['supplierQuote'];
 
-$execute = mysqli_query(
-    $conn,
-    "UPDATE quotations SET supplier_quotation = '$supplierQuote', supplier_quotation_amount = $supplierQuoteAmount, status = 'responded'
-    WHERE id = $quoteId AND supplier_id = $supplierId"
-) or die(mysqli_error($conn));
+$redirect = "Location:./responseToQuote.php?quoteId=$quoteId&parentId=supplier";
 
-if (!$execute) {
-    $message = "Error while submitting response!";
+if (empty($supplierQuote) || empty($supplierQuoteAmount)) {
+    $_SESSION['error_msg'] = 'Both quote amount and description are required';
 } else {
-    $message = "Response sent successfully";
-}
+    $execute = mysqli_query(
+        $conn,
+        "UPDATE quotations SET supplier_quotation = '$supplierQuote', supplier_quotation_amount = $supplierQuoteAmount, status = 'responded'
+    WHERE id = $quoteId AND supplier_id = $supplierId"
+    );
 
-echo "<script>alert('$message')</script>";
-header("Refresh:0; URL=./details.php");
+    if (!$execute) {
+        $_SESSION['error_msg'] = "Error while submitting response!";
+    } else {
+        $_SESSION['success_msg'] = "Response sent successfully";
+        unset($_SESSION['form_data']);
+        $redirect = "Location:./details.php?parentId=supplier&activeTab=3";
+    }
+}
+header($redirect);

@@ -569,10 +569,10 @@ $formData = $_SESSION['form_data'] ?? [];
                                         <!--end::Svg Icon-->
                                       </span>
                                     </a>
-                                    <a href="#" title="Close Event"
+                                    <span title="Close Event"
                                       class="btn btn-icon btn-light btn-hover-danger btn-sm">
                                       <i class="far fa-calendar-times text-danger"></i>
-                                    </a>
+                                    </span>
                                   </td>
                                 </tr>';
                                                                 }

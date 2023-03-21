@@ -125,22 +125,22 @@ if (isset($_GET['signUpActive']) && $_GET['signUpActive'] == 'true') {
             <!--end::Title-->
             <!--begin::Form group-->
             <div class="form-group">
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="text" placeholder="Fullname" name="fullname" autocomplete="off" id="registerName" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" value="<?php echo htmlspecialchars($_SESSION['form_data']['fullname'] ?? '', ENT_QUOTES); ?>" type="text" placeholder="Fullname" name="fullname" autocomplete="off" id="registerName" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
             <div class="form-group">
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="email" placeholder="Email" name="email" autocomplete="off" id="registerEmail" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" value="<?php echo htmlspecialchars($_SESSION['form_data']['email'] ?? '', ENT_QUOTES); ?>" type="email" placeholder="Email" name="email" autocomplete="off" id="registerEmail" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
             <div class="form-group">
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="password" placeholder="Password" name="password" autocomplete="off" id="registerPassword" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" value="<?php echo htmlspecialchars($_SESSION['form_data']['password'] ?? '', ENT_QUOTES); ?>" type="password" placeholder="Password" name="password" autocomplete="off" id="registerPassword" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->
             <div class="form-group">
-              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="password" placeholder="Confirm password" name="cpassword" autocomplete="off" id="registerCPassword" />
+              <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" value="<?php echo htmlspecialchars($_SESSION['form_data']['cpassword'] ?? '', ENT_QUOTES); ?>" type="password" placeholder="Confirm password" name="cpassword" autocomplete="off" id="registerCPassword" />
             </div>
             <!--end::Form group-->
             <!--begin::Form group-->

@@ -234,8 +234,8 @@ $prevBanner = $dataArr['banner'];
                                             </div>
                                             <div class="d-flex w-md-50 justify-content-between mt-12">
                                                 <input type="submit" name="editSong" value="Update" class="btn btn-primary">
-                                                <a href="pages/login_signup/star/details.php?parentId=star">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a href="pages/login_signup/star/details.php?parentId=star&activeTab=2">
+                                                    <button type="button" class="btn btn-secondary">Cancel</button>
                                                 </a>
                                             </div>
 
