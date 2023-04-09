@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_regenerate_id();
 include_once("../db_connection.php");
 
 $errorMsg = "";
@@ -13,7 +12,7 @@ $description = $_POST['description'];
 
 $newPwd = $_POST['newPwd'];
 $confirmNewPwd = $_POST['confirmNewPwd'];
-
+$uId = $_SESSION['id'];
 
 
 
@@ -70,15 +69,17 @@ if (empty(array_filter(
       $errorMsg = "The password and its confirm are not same";
     } else {
       $hashedPwd = password_hash($newPwd, PASSWORD_DEFAULT);
-      updateField($conn, 'password', $hashedPwd);
+      $result = mysqli_query($conn, "UPDATE users SET password = '$hashedPwd' WHERE id = $uId");
+      if ($result) {
+        $successMsg .=  "Password, ";
+      }
     }
   }
 }
 function updateField($conn, $column, $val)
 {
-  global $successMsg;
+  global $successMsg, $uId;
   $tableName = $_GET['role'] . "s";
-  $uId = $_SESSION['id'];
   $query = "UPDATE `$tableName` SET `$column`= ? WHERE `u_id`= ? ; ";
   $statement = mysqli_stmt_init($conn);
   mysqli_stmt_prepare($statement, $query);

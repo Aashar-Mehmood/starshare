@@ -14,41 +14,40 @@ include_once('../db_connection.php');
   <meta charset="utf-8" />
   <title>Fan Settings</title>
   <?php
-  include("../../../partials/csslinks.php");
+  include_once("../../../partials/csslinks.php");
   ?>
   <link rel="stylesheet" href="assets/css/custom/bordered_inputs.css">
 
   <style>
-  div.col-xl-6 {
-    padding: 5rem 3rem;
-  }
-
-  div.col-xl-6:nth-child(3) {
-    padding-top: 0;
-  }
-
-  @media screen and (max-width:600px) {
-    div.form-group.row {
-      flex-flow: column !important;
+    div.col-xl-6 {
+      padding: 5rem 3rem;
     }
 
-    #kt_user_edit_tab_3>div.card-body {
-      padding: 0 !important;
+    div.col-xl-6:nth-child(3) {
+      padding-top: 0;
     }
 
-    .card.card-custom>.card-header.card-header-tabs-line .nav .nav-link {
-      padding-top: 1rem !important;
-      padding-bottom: 0.5rem !important;
-      margin-bottom: 2rem !important;
-    }
-  }
+    @media screen and (max-width:600px) {
+      div.form-group.row {
+        flex-flow: column !important;
+      }
 
-  @media screen and (max-width:354px) {
-    .card-header {
-      padding: 8px;
-    }
-  }
+      #kt_user_edit_tab_3>div.card-body {
+        padding: 0 !important;
+      }
 
+      .card.card-custom>.card-header.card-header-tabs-line .nav .nav-link {
+        padding-top: 1rem !important;
+        padding-bottom: 0.5rem !important;
+        margin-bottom: 2rem !important;
+      }
+    }
+
+    @media screen and (max-width:354px) {
+      .card-header {
+        padding: 8px;
+      }
+    }
   </style>
 </head>
 
@@ -56,22 +55,25 @@ include_once('../db_connection.php');
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <?php
-  include("../../../partials/_header-mobile.php");
+  include_once("../../../partials/_header-mobile.php");
+  if (isset($_SESSION['success_msg']) || isset($_SESSION['error_msg'])) {
+    include_once("../../../components/Alert.php");
+  }
   ?>
 
   <div class="d-flex flex-column flex-root">
 
     <div class="d-flex flex-row flex-column-fluid page">
 
-      <?php include("../../../partials/_asideForRoles.php"); ?>
+      <?php include_once("../../../partials/_asideForRoles.php");
+      ?>
 
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-        <?php include("../../../partials/_header.php"); ?>
+        <?php include_once("../../../partials/_header.php"); ?>
 
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid px-8 py-12" id="kt_content">
@@ -90,16 +92,11 @@ include_once('../db_connection.php');
                         <span class="nav-icon">
                           <span class="svg-icon">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                              width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                <path
-                                  d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z"
-                                  fill="#000000" fill-rule="nonzero"></path>
-                                <path
-                                  d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z"
-                                  fill="#000000" opacity="0.3"></path>
+                                <path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" fill="#000000" fill-rule="nonzero"></path>
+                                <path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" fill="#000000" opacity="0.3"></path>
                               </g>
                             </svg>
                             <!--end::Svg Icon-->
@@ -145,8 +142,7 @@ include_once('../db_connection.php');
               <!--end::Card header-->
               <!--begin::Card body-->
               <div class="card-body">
-                <form autocomplete="off" class="form" id="kt_form" action="pages/settings/updateSettings.php"
-                  method="POST" enctype="multipart/form-data">
+                <form autocomplete="off" class="form" id="kt_form" action="pages/settings/updateSettings.php" method="POST" enctype="multipart/form-data">
                   <div class="tab-content">
                     <!--begin::Tab-->
                     <div class="tab-pane show px-md-7 active" id="kt_user_edit_tab_1" role="tabpanel">
@@ -165,25 +161,17 @@ include_once('../db_connection.php');
                           <div class="form-group row">
                             <label class="col-form-label col-md-3  ">Profile Picture</label>
                             <div class="col-md-9">
-                              <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar"
-                                style="background-image: url(<?php echo $_SESSION['profile_img'] ?>)">
+                              <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url(<?php echo $_SESSION['profile_img'] ?>)">
                                 <div class="image-input-wrapper"></div>
-                                <label
-                                  class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                  data-action="change" data-toggle="tooltip" title=""
-                                  data-original-title="Change avatar">
+                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                   <i class="fa fa-pen icon-sm text-muted"></i>
                                   <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
                                   <input type="hidden" name="profile_avatar_remove">
                                 </label>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                  data-action="cancel" data-toggle="tooltip" title=""
-                                  data-original-title="Cancel avatar">
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
                                   <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
-                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                  data-action="remove" data-toggle="tooltip" title=""
-                                  data-original-title="Remove avatar">
+                                <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
                                   <i class="ki ki-bold-close icon-xs text-muted"></i>
                                 </span>
                               </div>
@@ -194,8 +182,7 @@ include_once('../db_connection.php');
                           <div class="form-group row">
                             <label class="col-form-label col-md-3  ">Full Name</label>
                             <div class="col-md-9">
-                              <input name="fullName" class="form-control form-control-lg form-control-solid" type="text"
-                                placeholder="<?php echo $_SESSION["name"] ?>">
+                              <input name="fullName" class="form-control form-control-lg form-control-solid" type="text" placeholder="<?php echo $_SESSION["name"] ?>">
                             </div>
                           </div>
                           <!--end::Group-->
@@ -209,9 +196,7 @@ include_once('../db_connection.php');
                                     <i class="la la-at"></i>
                                   </span>
                                 </div>
-                                <input name="email" type="email" autocomplete="FALSE"
-                                  class="form-control form-control-lg form-control-solid"
-                                  placeholder="<?php echo $_SESSION["email"] ?>">
+                                <input name="email" type="email" autocomplete="FALSE" class="form-control form-control-lg form-control-solid" placeholder="<?php echo $_SESSION["email"] ?>">
                               </div>
                             </div>
                           </div>
@@ -226,8 +211,7 @@ include_once('../db_connection.php');
                                     <i class="la la-phone"></i>
                                   </span>
                                 </div>
-                                <input name="contact" type="text"
-                                  class="form-control form-control-lg form-control-solid" placeholder="Phone">
+                                <input name="contact" type="text" class="form-control form-control-lg form-control-solid" placeholder="Phone">
                               </div>
                             </div>
                           </div>
@@ -242,8 +226,7 @@ include_once('../db_connection.php');
                                     <i class="fa fa-map-marker-alt"></i>
                                   </span>
                                 </div>
-                                <input name="address" type="text"
-                                  class="form-control form-control-lg form-control-solid" placeholder="Address">
+                                <input name="address" type="text" class="form-control form-control-lg form-control-solid" placeholder="Address">
                               </div>
                             </div>
                           </div>
@@ -271,15 +254,13 @@ include_once('../db_connection.php');
                           <div class="form-group row">
                             <label class="col-form-label col-md-3  ">New Password</label>
                             <div class="col-md-9">
-                              <input name="newPwd" class="form-control form-control-lg form-control-solid"
-                                type="password" autocomplete="new-password">
+                              <input name="newPwd" class="form-control form-control-lg form-control-solid" type="password" autocomplete="new-password">
                             </div>
                           </div>
                           <div class="form-group row">
                             <label class="col-form-label col-md-3  ">Confirm Password</label>
                             <div class="col-md-9">
-                              <input name="confirmNewPwd" class="form-control form-control-lg form-control-solid"
-                                type="password">
+                              <input name="confirmNewPwd" class="form-control form-control-lg form-control-solid" type="password">
                             </div>
                           </div>
                           <!--end::Group-->
@@ -303,28 +284,24 @@ include_once('../db_connection.php');
 
     </div>
     <?php
-    include("../../../partials/_extras/offcanvas/quick-user.php");
-    include("../../../partials/_footer.php");
-    include("../../../partials/jslinks.php");
-    if (isset($_SESSION['message']) && $_SESSION['message'] !== "") {
-      $msg = $_SESSION['message'];
-      echo "<script>alert('$msg')</script>";
-      unset($_SESSION['message']);
-    }
+    include_once("../../../partials/_extras/offcanvas/quick-user.php");
+    include_once("../../../partials/_footer.php");
+    include_once("../../../partials/jslinks.php");
+
 
     ?>
 
     <script>
-    const saveBtn = document.getElementById("saveBtn");
-    const resetBtn = document.getElementById("resetBtn");
+      const saveBtn = document.getElementById("saveBtn");
+      const resetBtn = document.getElementById("resetBtn");
 
-    const form = document.getElementById("kt_form");
-    saveBtn.addEventListener('click', () => {
-      form.submit();
-    });
-    resetBtn.addEventListener('click', () => {
-      form.reset();
-    });
+      const form = document.getElementById("kt_form");
+      saveBtn.addEventListener('click', () => {
+        form.submit();
+      });
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+      });
     </script>
 </body>
 
