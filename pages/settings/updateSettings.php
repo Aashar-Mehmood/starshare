@@ -96,8 +96,8 @@ if (!empty($successMsg)) {
 
 
 if ($_SESSION['is_admin']) {
-  $location = "Location: ./settings.php";
+  $location = "Location: ./settings.php?activeLinkId=settings";
 } else {
-  $location = "Location: ../login_signup/settings/settings.php";
+  $location = "Location: ../login_signup/settings/settings.php?activeLinkId=settings";
 }
 header($location);

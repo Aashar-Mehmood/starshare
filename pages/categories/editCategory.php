@@ -17,26 +17,24 @@ $row = mysqli_fetch_assoc($result);
   <title>Edit Category</title>
   <?php include("../../partials/csslinks.php"); ?>
   <style>
-  @media screen and (max-width:768px) {
-    div.container {
-      margin-top: 8rem;
+    @media screen and (max-width:768px) {
+      div.container {
+        margin-top: 8rem;
+      }
     }
-  }
 
-  @media screen and (max-width:375px) {
-    div.w-50 {
-      width: 75% !important;
+    @media screen and (max-width:375px) {
+      div.w-50 {
+        width: 75% !important;
+      }
     }
-  }
-
   </style>
 </head>
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <!--begin::Main-->
 
   <?php include("../../partials/_header-mobile.php"); ?>
@@ -68,13 +66,12 @@ $row = mysqli_fetch_assoc($result);
                   <form method="POST" action='<?php echo "pages/categories/edited.php?id=" . $id ?>'>
                     <div class="card-body">
                       <div class="form-group">
-                        <label>Name :</label>
-                        <input name="newName" type="text" class="form-control form-control-solid" placeholder="Star"
-                          value="<?php echo $row['child'] ?>" />
+                        <label>Update Name :</label>
+                        <input name="newName" type="text" class="form-control form-control-solid" placeholder="Star" value="<?php echo $row['child'] ?>" />
                       </div>
 
                       <div class="form-group">
-                        <label>Select Parent :</label>
+                        <label>Update Parent :</label>
                         <select name="parentCategory" id="parentCategory" class="form-control form-control-solid">
                           <option <?php
                                   if ($row['parent_category'] == "Star") echo 'selected';
@@ -95,8 +92,8 @@ $row = mysqli_fetch_assoc($result);
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button type="reset" class="btn btn-secondary">Cancel</button>
+                      <input type="submit" value="Submit" name="submit" class="btn btn-primary mr-4" />
+                      <a href="pages/categories/categories.php?activeLinkId=categories" class="btn btn-secondary">Cancel</a>
                     </div>
                   </form>
                   <!--end::Form-->

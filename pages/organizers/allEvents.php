@@ -71,13 +71,13 @@ if (!isset($_GET['organizerId'])) {
 
             <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link" href="pages/organizers/organizer_details.php?organizerId=<?php echo $id ?>">Overview</a>
+                <a class="nav-link" href="pages/organizers/organizer_details.php?activeLinkId=organizers&organizerId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="pages/organizers/allEvents.php?organizerId=<?php echo $id ?>">Events</a>
+                <a class="nav-link active" href="pages/organizers/allEvents.php?activeLinkId=organizers&organizerId=<?php echo $id ?>">Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="pages/organizers/transactions.php?organizerId=<?php echo $id ?>">Transactions</a>
+                <a class="nav-link" href="pages/organizers/transactions.php?activeLinkId=organizers&organizerId=<?php echo $id ?>">Transactions</a>
               </li>
             </ul>
             <!--end::Header Menu-->

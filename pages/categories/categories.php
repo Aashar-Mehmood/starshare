@@ -12,48 +12,50 @@ include_once("../login_signup/db_connection.php");
   <base href="../../">
   <meta charset="utf-8" />
   <title>Categories</title>
-  <?php include("../../partials/csslinks.php"); ?>
+  <?php include_once("../../partials/csslinks.php"); ?>
   <style>
-  @media screen and (max-width:768px) {
-    div.container {
-      margin-top: 8rem;
+    @media screen and (max-width:768px) {
+      div.container {
+        margin-top: 8rem;
+      }
     }
-  }
 
-  @media screen and (max-width:375px) {
-    div.w-50 {
-      width: 75% !important;
+    @media screen and (max-width:375px) {
+      div.w-50 {
+        width: 75% !important;
+      }
     }
-  }
-
   </style>
 </head>
 <!--end::Head-->
 
 <!--begin::Body-->
 
-<body id="kt_body"
-  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
   <!--begin::Main-->
 
-  <?php include("../../partials/_header-mobile.php"); ?>
+  <?php
+  include_once("../../partials/_header-mobile.php");
+  if (isset($_SESSION['success_msg']) || isset($_SESSION['error_msg'])) {
+    include_once("../../components/Alert.php");
+  }
+  ?>
   <div class="d-flex flex-column flex-root">
 
     <!--begin::Page-->
     <div class="d-flex flex-row flex-column-fluid page">
 
-      <?php include("../../partials/_aside.php"); ?>
+      <?php include_once("../../partials/_aside.php"); ?>
 
       <!--begin::Wrapper-->
       <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-        <?php include("../../partials/_header.php"); ?>
+        <?php include_once("../../partials/_header.php"); ?>
 
         <!--begin::Content-->
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
           <!-- Start New Star Category Form -->
-          <div class="modal fade" id="newCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
+          <div class="modal fade" id="newCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -63,19 +65,19 @@ include_once("../login_signup/db_connection.php");
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form class="form" action="pages/categories/addCategory.php" method="POST"
-                    enctype="multipart/form-data">
+                  <form class="form" action="pages/categories/addCategory.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                       <label>Name :</label>
-                      <input type="text" name="child" class="form-control form-control-solid" />
+                      <input type="text" name="child" class="form-control form-control-solid" value="<?php echo htmlspecialchars($_SESSION['form_data']['child'] ?? '', ENT_QUOTES); ?>" />
                     </div>
 
                     <div class="form-group">
-                      <label>Select Parent :</label>
+                      <label>Parent Category :</label>
                       <select name="parent" class="form-control form-control-solid">
-                        <option>Star</option>
-                        <option>Organizer</option>
-                        <option>Supplier</option>
+                        <option value="null">---Select Parent---</option>
+                        <option value="star" <?php echo isset($_SESSION['form_data']['parent']) && $_SESSION['form_data']['parent'] == "star" ? "selected" : "" ?>>Star</option>
+                        <option value="organizer" <?php echo isset($_SESSION['form_data']['parent']) && $_SESSION['form_data']['parent'] == "organizer" ? "selected" : "" ?>>Organizer</option>
+                        <option value="supplier" <?php echo isset($_SESSION['form_data']['parent']) && $_SESSION['form_data']['parent'] == "supplier" ? "selected" : "" ?>>Supplier</option>
                       </select>
                     </div>
                     <div class="d-flex w-50 justify-content-between mt-12">
@@ -137,7 +139,7 @@ include_once("../login_signup/db_connection.php");
                                 "</span>
                                   </td>" .
                                 "<td>
-                                    <a href='pages/categories/editCategory.php?id=$categoryId' title='Edit'
+                                    <a href='pages/categories/editCategory.php?id=$categoryId&activeLinkId=categories' title='Edit'
                                       class='btn btn-icon btn-light btn-hover-primary btn-sm ml-5 mr-10'>
                                       <i class='
                                         fas fa-edit text-primary' aria-hidden='true'></i>
@@ -167,7 +169,7 @@ include_once("../login_signup/db_connection.php");
         </div>
         <!--end::Content-->
 
-        <?php include("../../partials/_footer.php"); ?>
+        <?php include_once("../../partials/_footer.php"); ?>
       </div>
 
       <!--end::Wrapper-->
@@ -178,13 +180,8 @@ include_once("../login_signup/db_connection.php");
 
   <!--end::Main-->
   <?php
-  include("../../partials/_extras/offcanvas/quick-user.php");
-  include("../../partials/jslinks.php");
-  if (isset($_SESSION['message']) && $_SESSION['message'] !== "") {
-    $msg = $_SESSION['message'];
-    echo "<script>alert('$msg')</script>";
-    unset($_SESSION['message']);
-  }
+  include_once("../../partials/_extras/offcanvas/quick-user.php");
+  include_once("../../partials/jslinks.php");
   ?>
 </body>
 

@@ -42,44 +42,44 @@
 
       <!--begin::Menu Nav-->
       <ul class="menu-nav">
-        <li id="index" class="menu-item" aria-haspopup="true">
-          <a href="index.php" class="menu-link">
+        <li data-id="dashboard" class="menu-item" aria-haspopup="true">
+          <a href="index.php?activeLinkId=dashboard" class="menu-link">
             <i class="menu-icon flaticon2-architecture-and-city"></i>
             <span class="menu-text">Dashboard</span>
           </a>
         </li>
-        <li id="categories" class="menu-item" aria-haspopup="true">
-          <a href="pages/categories/categories.php" class="menu-link">
+        <li data-id="categories" class="menu-item" aria-haspopup="true">
+          <a href="pages/categories/categories.php?activeLinkId=categories" class="menu-link">
             <i class="menu-icon fas fa-list-ul"></i>
             <span class="menu-text">Categories</span>
           </a>
         </li>
-        <li id="stars" class="menu-item menu-item" aria-haspopup="true">
-          <a href="pages/stars/stars.php" class="menu-link">
+        <li data-id="stars" class="menu-item menu-item" aria-haspopup="true">
+          <a href="pages/stars/stars.php?activeLinkId=stars" class="menu-link">
             <i class="fas fa-music menu-icon"></i>
             <span class="menu-text">Stars</span>
           </a>
         </li>
-        <li id="organizers" class="menu-item " aria-haspopup="true">
-          <a href="pages/organizers/organizers.php" class="menu-link">
+        <li data-id="organizers" class="menu-item " aria-haspopup="true">
+          <a href="pages/organizers/organizers.php?activeLinkId=organizers" class="menu-link">
             <i class="fab fa-elementor menu-icon"></i>
             <span class="menu-text">Organizers</span>
           </a>
         </li>
-        <li id="suppliers" class="menu-item " aria-haspopup="true">
-          <a href="pages/suppliers/suppliers.php" class="menu-link">
+        <li data-id="suppliers" class="menu-item " aria-haspopup="true">
+          <a href="pages/suppliers/suppliers.php?activeLinkId=suppliers" class="menu-link">
             <i class="fa fa-fill-drip menu-icon"></i>
             <span class="menu-text">Suppliers</span>
           </a>
         </li>
-        <li id="transactions" class="menu-item" aria-haspopup="true">
-          <a href="pages/transactions/transactions.php" class="menu-link">
+        <li data-id="transactions" class="menu-item" aria-haspopup="true">
+          <a href="pages/transactions/transactions.php?activeLinkId=transactions" class="menu-link">
             <i class="fas fa-th-list menu-icon"></i>
             <span class="menu-text">Transactions</span>
           </a>
         </li>
-        <li id="settings" class="menu-item " aria-haspopup="true">
-          <a href="pages/settings/settings.php" class="menu-link">
+        <li data-id="settings" class="menu-item " aria-haspopup="true">
+          <a href="pages/settings/settings.php?activeLinkId=settings" class="menu-link">
             <i class="flaticon2-gear menu-icon"></i>
 
             <span class="menu-text">Settings</span>
@@ -107,11 +107,20 @@
 <script>
   const queryString = window.location.search;
   const params = new URLSearchParams(queryString);
-  var parentId = 'dashboard';
-
-  if (params.has('parentId')) {
-    parentId = params.get('parentId');
+  var activeLinkId = '';
+  var activeLink = '';
+  if (params.has('activeLinkId')) {
+    activeLinkId = params.get('activeLinkId');
+  } else {
+    activeLinkId = 'dashboard';
   }
-  var parentItem = document.getElementById(`${parentId}`);
-  parentItem.classList.add("menu-item-active");
+  activeLink = document.querySelectorAll(`[data-id="${activeLinkId}"]`)[0];
+  activeLink?.classList.add("menu-item-active");
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (params.has('activeModal')) {
+      let modalId = params.get('activeModal');
+      $(`#${modalId}`).modal('show');
+    }
+  })
 </script>

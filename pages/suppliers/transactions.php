@@ -67,13 +67,13 @@ if (!isset($_GET['supplierId'])) {
 
             <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link" href="pages/suppliers/supplier_details.php?supplierId=<?php echo $id ?>">Overview</a>
+                <a class="nav-link" href="pages/suppliers/supplier_details.php?activeLinkId=suppliers&supplierId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="pages/suppliers/products.php?supplierId=<?php echo $id ?>">Products</a>
+                <a class="nav-link" href="pages/suppliers/products.php?activeLinkId=suppliers&supplierId=<?php echo $id ?>">Products</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="pages/suppliers/transactions.php?supplierId=<?php echo $id ?>">Transactions</a>
+                <a class="nav-link active" href="pages/suppliers/transactions.php?activeLinkId=suppliers&supplierId=<?php echo $id ?>">Transactions</a>
               </li>
 
             </ul>

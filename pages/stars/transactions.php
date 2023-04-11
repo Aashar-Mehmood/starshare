@@ -69,16 +69,16 @@ $data1 = mysqli_query(
 
             <ul class="nav nav-tabs nav-tabs-line nav-bold nav-tabs-line-2x d-flex align-items-center ml-2 ml-md-8" style="border: none; font-size: 1.12rem;">
               <li class="nav-item">
-                <a class="nav-link " href="pages/stars/star_details.php?starId=<?php echo $id ?>">Overview</a>
+                <a class="nav-link " href="pages/stars/star_details.php?activeLinkId=stars&starId=<?php echo $id ?>">Overview</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="pages/stars/allSongs.php?starId=<?php echo $id ?>">Songs</a>
+                <a class="nav-link " href="pages/stars/allSongs.php?activeLinkId=stars&starId=<?php echo $id ?>">Songs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="pages/stars/eventsPerformed.php?starId=<?php echo $id ?>">Events Performed</a>
+                <a class="nav-link " href="pages/stars/eventsPerformed.php?activeLinkId=stars&starId=<?php echo $id ?>">Events Performed</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="pages/stars/transactions.php?starId=<?php echo $id ?>">Transactions</a>
+                <a class="nav-link active" href="pages/stars/transactions.php?activeLinkId=stars&starId=<?php echo $id ?>">Transactions</a>
               </li>
             </ul>
             <!--end::Header Menu-->

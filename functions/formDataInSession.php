@@ -1,4 +1,3 @@
-$formData = array();
 <?php
 $formData = array();
 function formDataInSession($name, $value)
@@ -16,3 +15,6 @@ foreach ($_POST as $key => $value) {
 if (!empty($formData)) {
     $_SESSION['form_data'] = $formData;
 }
+
+// print_r($_SESSION['form_data']);
+// exit();

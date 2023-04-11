@@ -88,7 +88,7 @@ include_once("../login_signup/check_session.php");
           <div class="container">
             <div class="row flex flex-center my-8">
               <div class="col-lg-12">
-                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                <form action="pages/suppliers/suppliers.php?activeLinkId=suppliers" method="POST">
                   <div class="input-group input-group-sm input-group-solid bg-white" style="height: 46px; box-shadow:0 1px 6px 0 rgb(32 33 36 / 70%)">
                     <input required type="text" name="searchedText" class="form-control pl-4" placeholder="Search by Name, Email, or Phone Number">
                     <div class="input-group-append">
@@ -108,7 +108,7 @@ include_once("../login_signup/check_session.php");
                     </div>
                   </div>
                   <input type="submit" name="search" value="Search" class="btn btn-primary btn-lg my-8">
-                  <a href="<?php echo $_SERVER['PHP_SELF'] ?>" class="btn btn-primary btn-lg ml-8">
+                  <a href="pages/suppliers/suppliers.php?activeLinkId=suppliers" class="btn btn-primary btn-lg ml-8">
                     Reset Filter
                   </a>
                 </form>
@@ -198,7 +198,7 @@ include_once("../login_signup/check_session.php");
                               </td>
                               
                               <td class="pr-0 justify-content-between">
-                                ' . "<a href='pages/suppliers/supplier_details.php?supplierId=$id'
+                                ' . "<a href='pages/suppliers/supplier_details.php?activeLinkId=suppliers&supplierId=$id'
                                   class='btn btn-light-success font-weight-bolder font-size-sm'>" . '
                                   View
                                 </a>

@@ -106,8 +106,8 @@ $actionPath = "pages/login_signup/addNewRole.php?role=" . $role;
                       </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button type="reset" class="btn btn-secondary">Cancel</button>
+                      <input type="submit" value="Submit" name="submit" class="btn btn-primary mr-2" />
+                      <input type="reset" value="Reset" class="btn btn-secondary" />
                     </div>
                   </form>
                   <!--end::Form-->
